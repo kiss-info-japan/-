@@ -1,0 +1,368 @@
+/* 全体のスタイル */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body { 
+    font-family: 'Poppins', 'Noto Sans JP', sans-serif; /* Poppinsを優先 */
+    background-color: #f6f9ff; /* 柔らかい明るい水色 */
+    color: #333;
+    display: flex;
+    flex-direction: column;
+    padding: 0 20px;
+    min-width: 320px;
+    width: 100%;
+    box-sizing: border-box;
+    line-height: 1.6;
+}
+
+/* ヘッダー */
+.header {
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    padding: 40px 20px;
+}
+
+.logo img {
+    max-width: 90px;
+    margin-bottom: 10px;
+}
+
+.main-title {
+    font-size: 2.8rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    color: #333;
+    background-color: #D4FF00; /* ハイライト色として背景に適用 */
+    margin-top: 10px;
+}
+
+.catchphrase {
+    font-size: 1.2rem;
+    font-weight: 400;
+    margin-top: 20px;
+    color: #000000; /* 蛍光に近い黄緑色 */
+    padding: 5px;
+    border-radius: 5px;
+}
+
+/* ヒーローセクション */
+.hero-section {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 60px;
+    position: relative;
+    width: 100%;
+}
+
+.hero-post {
+    display: flex;
+    align-items: center;
+    width: 100%;
+    position: relative;
+}
+
+/* 画像を画面幅いっぱいに表示 */
+.hero-image {
+    width: 100%;
+    border-radius: 12px;
+}
+
+.hero-section::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 5%;
+    background: linear-gradient(to right, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 1) 100%);
+    pointer-events: none;
+}
+
+/* テキストとボタン */
+.hero-text {
+    flex: 1;
+    padding: 20px;
+    color: #333;
+    font-size: 1.2em;
+    border-radius: 12px;
+    position: absolute;
+    right: 0;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 45%;
+    z-index: 1;
+}
+
+.hero-text h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+}
+
+.hero-text p {
+    font-size: 1.1em;
+    margin: 20px 0;
+}
+
+.hero-text .btn {
+    background-color: #FFFB00;
+    color: #333;
+    padding: 10px 20px;
+    text-align: center;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: bold;
+    transition: background-color 0.3s ease;
+}
+
+.hero-text .btn:hover {
+    background-color: #d8d800;
+    color: #fff;
+}
+
+.post-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #333;
+    margin-top: 20px;
+}
+
+.read-more { 
+    display: inline-block;
+    margin-top: 15px;
+    padding: 14px 35px;
+    background-color: #D4FF00;
+    color: rgb(86, 86, 86);
+    text-decoration: none;
+    border-radius: 50px;
+    border: 1px solid #333;
+    transition: background 0.3s, transform 0.3s ease-in-out, box-shadow 0.3s ease-in-out;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
+.read-more:hover {
+    background-color: #C4FF00;
+    transform: scale(1.05);
+}
+
+/* ダイナミックなコンテンツ */
+.dynamic-content {
+    margin-top: 60px;
+}
+
+/* 横スクロール可能なコンテンツ */
+.content-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
+    gap: 20px;
+    padding: 15px;
+    width: 100%;
+    scroll-behavior: smooth;
+    scroll-snap-type: x mandatory;
+}
+
+/* 各ポスト */
+.post {
+    width: 320px;
+    background: #ffffff;
+    border-radius: 12px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    text-align: center;
+    padding: 20px;
+    min-width: 300px;
+    cursor: pointer;
+    scroll-snap-align: start;
+}
+
+.post:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.1);
+}
+
+.post-image {
+    width: 100%;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* モーダル */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(5px);
+    padding: 20px;
+}
+
+.modal-content {
+    background-color: #fff;
+    margin: 2% auto 0;
+    padding: 20px;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 600px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    font-family: 'Noto Sans JP', sans-serif;
+    color: #333;
+    animation: fadeIn 0.3s ease-in-out;
+}
+
+.modal-content h2 {
+    font-size: 1.8rem;
+    margin-bottom: 15px;
+    color: #222;
+    border-bottom: 2px solid #ccc;
+    padding-bottom: 10px;
+}
+
+.modal-content p {
+    font-size: 1rem;
+    line-height: 1.6;
+    margin-bottom: 15px;
+}
+
+.modal-image {
+    max-width: 600px;
+    height: 220px;
+    object-fit: cover;
+    border-radius: 8px;
+}
+
+/* 閉じるボタン */
+.close-btn {
+    position: absolute;
+    top: 10px;
+    right:40px;
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: #666;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close-btn:hover {
+    color: #D4FF00;
+}
+
+.modal.show {
+    display: flex;
+    opacity: 1;
+}
+
+.modal-content img {
+    width: 100%;
+    height: auto;
+    border-radius: 8px;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 10px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #D4FF00;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #C4FF00;
+}
+
+/* フッター */
+.footer {
+    background-color: #ffffff;
+    color: #333;
+    text-align: center;
+    padding: 20px;
+    margin-top: 60px;
+    border-top: 2px solid #ddd;
+    font-size: 0.9em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.footer .social-links {
+    display: flex;
+    justify-content: center;
+    gap: 15px;
+    margin-bottom: 15px;
+}
+
+.footer .social-links a {
+    color: #333;
+    text-decoration: none;
+    font-size: 1em;
+    transition: color 0.3s ease;
+}
+
+.footer .social-links a:hover {
+    color: #D4FF00;
+}
+
+.footer p {
+    margin-top: 10px;
+}
+
+/* モバイル表示用のスタイル */
+@media (max-width: 768px) {
+    .hero-text {
+        width: 80%; /* モバイルではテキストが画面いっぱいになるように */
+        left: 0;
+        right: 0;
+        padding: 20px;
+    }
+
+    .post {
+        width: 100%; /* モバイルではカードが横幅いっぱいに表示されるように */
+    }
+
+    .content-slider {
+        gap: 15px; /* アイテム間の隙間を縮小 */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0 10px; /* モバイルでのパディング調整 */
+    }
+
+    .hero-text h1 {
+        font-size: 1.5em; /* タイトルの文字サイズ調整 */
+    }
+
+    .hero-text p {
+        font-size: 1em; /* 説明文の文字サイズ調整 */
+    }
+
+    .main-title {
+        font-size: 2rem; /* メインタイトルの文字サイズ調整 */
+    }
+
+    .catchphrase {
+        font-size: 1rem; /* キャッチフレーズの文字サイズ調整 */
+    }
+
+    .modal-content {
+        width: 95%; /* モバイルでモーダルが広すぎないように */
+    }
+}

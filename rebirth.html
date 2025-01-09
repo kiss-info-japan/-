@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Rebirth</title>
+    <link rel="stylesheet" href="rebirth.css">
+    <style>
+        
+    </style>
+</head>
+<body>
+    
+  
+    <!-- 流れるテキスト -->
+    <div class="scrolling-text">
+        <span>Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth </span>
+        <span>Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth &nbsp;&nbsp;&nbsp;&nbsp; Rebirth </span>
+    </div>
+
+    <div class="content">
+        <nav class="toc">
+        <h2>目次</h2>
+        <a href="#intro-section">Rebirthとは</a>
+        <a href="#belief-section">教義</a>
+        <a href="#testimonials-section">成員の声</a>
+        <a href="#ritual-section">活動内容</a>
+        <a href="#next-event-section">説明会</a>
+    </nav>
+    <div class="image-section">
+        <img src="rebirth.png" alt="Sample Image">
+    </div>
+</div>
+
+    <div class="scrolling-text2"> 
+        <span>Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse </span> 
+        <span>Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse &nbsp;&nbsp;&nbsp;&nbsp; Reverse </span>
+    </div>
+
+    <section id="intro-section" class="intro-section">
+        <h2>Rebirthとは</h2>
+        <p>「心皮」を肉体に置き換えてみましょう。</p>
+        <p>皮膚は脱皮するものではなく、再生するものです。</p>
+        <p>そして生命も同じく再生しています。</p>
+        <p>生命の再生、出発地点への逆行。それが輪廻です。</p>
+      
+    </section>
+
+    <section id="belief-section" class="belief-section">
+        <h2>教義</h2>
+        <p>輪廻の回数が多い者は、より深層に近いところにいる高位の存在です。<br>
+        それを見定める方法として、わたしたちは入会者にテストを課しています。</p>
+
+    </section>
+
+    <section id="testimonials-section" class="testimonials-section">
+        <h2>成員の声</h2>
+        <div class="testimonial">
+            <p>「深層に近づいているという感覚がはっきりとあります。」</p>
+            <span>--Ａさん (輪廻数:8回)</span>
+        </div>
+        <div class="testimonial">
+            <p>「心皮を剥がして残った肉の部分が深層なのではなく、再生した心皮が任値を重ねて成熟することで深層へと近づいていくのだという教えに感銘を受けました。」</p>
+            <span>-- Bさん (輪廻数:17回)</span>
+        </div>
+    </section>
+
+    <section id="ritual-section" class="ritual-section">
+        <h2>活動内容</h2>
+        <p>Rebirthでは、新たな輪廻に導くための儀式を行っています。<br>
+           具体的な儀式の内容は入会時にご説明いたします。</p>
+      
+    </section>
+
+    <section id="next-event-section" class="next-event-section">
+        <h2>説明会</h2>
+        <p>入会前にまずテストをご希望の方は、こちらよりお申し込みください。</p>
+        <h3>次回開催日: 未定</h3>
+        <a href="javascript:void(0);" class="show-details" onclick="toggleDetails('ritual-details')">詳細を見る</a>
+        <div id="ritual-details" class="detail-section">
+            <p>儀式は、精神的な成長と再生を促す重要な活動です。深層に近づくための一歩として、会員の皆様には必ずご参加をお願いしております。
+            </p>
+        </div>
+    </section>
+
+    <footer class="footer">
+        <p>&copy; 2024 深層研究会. All rights reserved.</p>
+        <p>お問い合わせ: kiss.info.japan@gmai.com</p>
+        <p><a href="../kiss/kiss.genealogy.html" class="footer-link">架空 委員会 宗教 宗教</a></p>
+    </footer>
+
+    <script>
+        function toggleDetails(id) {
+            var details = document.getElementById(id);
+            if (details.style.display === "none" || details.style.display === "") {
+                details.style.display = "block";
+            } else {
+                details.style.display = "none";
+            }
+        }
+
+         // ページ内リンクのクリックイベントを取得
+    document.querySelectorAll('.toc a').forEach(anchor => {
+        anchor.addEventListener('click', function(e) {
+            e.preventDefault(); // デフォルトのリンク動作をキャンセル
+
+            // スムーズにスクロール
+            document.querySelector(this.getAttribute('href')).scrollIntoView({
+                behavior: 'smooth'
+            });
+        });
+    });
+    </script>
+
+</body>
+</html>

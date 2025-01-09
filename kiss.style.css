@@ -1,0 +1,237 @@
+/* Body全体のスタイル */
+body {
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #ffffff 80%, #d8d8d8, #7d7d7d, #000000); /* 上白80%、下黒20% */
+    background-attachment: fixed; /* 背景を固定 */
+    background-size: cover; /* 背景画像が画面サイズに合わせて拡大・縮小される */
+    color: #333;
+    padding: 20px;
+    font-family: 'Hiragino Mincho Pro', serif; /* 明朝体を優先的に指定 */
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    height: 100vh; /* ビューポートの高さに合わせる */
+    overflow: hidden; /* ページ全体でスクロールを無効化 */
+}
+
+/* リンクのスタイル */
+a {
+    color: #f7f7f7; /* 文字色を変更 */
+    padding: 8px 16px; /* 内側の余白 */
+    border-radius: 20px; /* 角を丸くする */
+    text-decoration: none; /* 下線を消す */
+    font-weight: normal; /* 太字を解除 */
+}
+
+/* nav-linkのスタイル */
+.nav-link {
+    font-size: 1em; /* フォントサイズを大きく */
+    display: inline-block;
+    color: #000000; /* リンクの文字色 */
+    text-decoration: none; /* 下線を消す */
+    border-radius: 10px; /* 角を丸くする */
+    transition: all 0.3s ease; /* すべての変化にアニメーション */
+}
+
+/* ホバー時の拡大効果 */
+.nav-link:hover {
+    color: #fff; /* 文字色を白に */
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 70%); /* 強いぼやけ */
+    transform: scale(1.05); /* リンクを少し拡大 */
+    text-decoration: none; /* 下線を消す */
+}
+
+/* ヘッダーのスタイル */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Hiragino Mincho Pro', serif; /* 明朝体を適用 */
+    position: fixed; /* 固定 */
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 10; /* ヘッダーが他の要素より上に表示されるように */
+}
+
+/* ヘッダーリンク */
+header nav a {
+    color: #454545;
+    text-decoration: none;
+    font-weight: normal;
+    padding: 8px 16px;  /* 内側の余白 */
+}
+
+/* ヘッダーリンクホバー */
+header nav a:hover {
+    color: #fff; /* 文字色を白に */
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 70%); /* 強いぼやけ */
+    text-decoration: none; /* 下線を消す */
+}
+
+/* メインコンテンツ */
+.main-content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;  /* 垂直中央揃え */
+    height: 100vh;
+    width: 100%;
+    margin-top: 80px; /* ヘッダーの高さ分調整 */
+}
+
+/* 左側の画像部分 */
+.center-image {
+    width: 60%;
+    display: flex;
+    justify-content: center;
+    align-items: center; /* 垂直中央揃え */
+    height: 100%; /* 高さ100% */
+}
+
+.center-image img {
+    width: 70%;
+    height: auto;
+    max-width: 100%;
+    transition: transform 0.3s ease; 
+}
+
+/* 訪問者カウンター */
+.visitor-counter {
+    position: absolute;
+    top: 10px;
+    right: 20px;
+    color: #454545;
+    padding: 5px 10px;
+    border: 1px solid #888; /* 目立たせるための枠線 */
+    border-radius: 5px;
+    background: rgba(255, 255, 255, 0.7); /* 背景を薄く白に */
+    font-size: 0.7em;
+    z-index: 10; /* ヘッダーの上に表示 */
+}
+
+/* 右側のAbout部分 */
+.description {
+    width: 35%;
+    display: flex;
+    flex-direction: column;  /* コンテンツを縦に並べる */
+    justify-content: center;  /* 垂直中央揃え */
+    align-items: flex-start; /* 左寄せに配置 */
+    height: 100%; /* 高さ100% */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+.description p {
+    font-size: 1em;  /* フォントサイズ */
+    margin: 10px 0;
+    line-height: 1.6;
+    color: #333;
+    text-align: left;  /* 横書き */
+}
+
+/* フッター */
+footer {
+    color: #dcdcdc;
+    font-size: 0.1em; /* サイズを調整 */
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 20px;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+/* Webkitブラウザ（Chrome, Safari）用 */
+::-webkit-scrollbar {
+    width: 4px;  /* 横スクロールバーの太さ */
+    height: 4px; /* 縦スクロールバーの太さ */
+}
+
+/* スクロールバーのつまみ（ドラッグ部分） */
+::-webkit-scrollbar-thumb {
+    background: #a0a0a0; /* つまみの色 */
+    border-radius: 10px; /* 角を丸く */
+}
+
+/* ホバー時のスクロールバーのつまみ */
+::-webkit-scrollbar-thumb:hover {
+    background: #b7b7b7; /* ホバー時の色 */
+}
+
+/* フェードイン効果 */
+.fade-in {
+    display: block;
+    opacity: 0;
+    animation: fadeIn 1s forwards;
+}
+
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        font-size: 0.9em;
+        overflow: auto;
+    }
+
+    header {
+        padding: 10px 0;
+        font-size: 0.9em;
+    }
+
+    .main-content {
+        flex-direction: column;
+        height: auto;
+        margin-top: 120px;
+    }
+
+    .center-image {
+        width: 100%;
+        height: auto;
+        margin-bottom: 20px;
+    }
+
+    .center-image img {
+        width: 90%;
+    }
+
+    .description {
+        width: 100%;
+        padding: 10px;
+    }
+
+    .visitor-counter {
+        top: 5px;
+        right: 10px;
+        font-size: 0.6em;
+    }
+
+    a {
+        font-size: 0.9em;
+        padding: 6px 12px;
+    }
+
+    footer {
+        font-size: 0.8em;
+        padding: 20px 0;
+    }
+}
+
+@media (max-width: 480px) {
+    .center-image img {
+        width: 100%;
+    }
+
+    .description {
+        padding: 5px;
+    }
+
+    .visitor-counter {
+        font-size: 0.5em;
+    }
+}

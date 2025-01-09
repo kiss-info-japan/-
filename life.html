@@ -1,0 +1,189 @@
+<!DOCTYPE html> 
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Life Expectancy</title>
+    <link rel="stylesheet" href="life.css">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;700&family=Noto+Sans+JP:wght@400;700&family=Poppins:wght@400;700&display=swap');
+
+    </style>
+</head>
+
+<body>
+    <!-- ヘッダー -->
+    <header class="header">
+        <div class="logo">
+            <img src="life.png" alt="Life Expectancy Logo">
+        </div>
+        <h1 class="main-title">Life Expectancy</h1>
+        <p class="catchphrase">"寿命の共鳴" - 未来を知る哲学</p>
+    </header>
+
+    <!-- ファーストビュー -->
+    <section class="hero-section">
+        <article class="hero-post">
+            <img src="top.webp" alt="活動紹介" class="hero-image">
+            <div class="hero-text">
+                <h2 class="post-title">活動の紹介: Life Expectancyの哲学</h2>
+                <p class="post-excerpt">死期はうつる</p>
+                <button class="read-more" data-target="modal1">詳しく見る</button>
+            </div>
+        </article>
+    </section>
+
+    <!-- ダイナミックコンテンツ -->
+    <div class="dynamic-content">
+        <div class="posts-container">
+            <div class="post">
+                <img src="lifeexpectancy.jpg" class="post-image" alt="Life Expectancyとは">
+                <h3 class="post-title">Life Expectancy とは</h3>
+                <p class="post-excerpt">「Life Expectancy」の活動ついて。</p>
+                <button class="read-more" data-target="modal3">詳しく見る</button>
+            </div>
+            <div class="post">
+                <img src="sougi.jpg" class="post-image" alt="集団生前葬">
+                <h3 class="post-title">集団葬儀について</h3>
+                <p class="post-excerpt">私たちは64歳で命を終わらせます。</p>
+                <button class="read-more" data-target="modal2">詳しく見る</button>
+            </div>
+           
+            <div class="post">
+                <img src="candlee.jpg" class="post-image" alt="グッズ紹介">
+                <h3 class="post-title">グッズの紹介</h3>
+                <p class="post-excerpt">Life Expectancyオリジナルグッズ</p>
+                <button class="read-more" data-target="modal4">詳しく見る</button>
+            </div>
+            <div class="post">
+                <img src="2.jpg" class="post-image" alt="ファクトリー紹介">
+                <h3 class="post-title">ファクトリーについて</h3>
+                <p class="post-excerpt">Life Expectancyが運営する「ファクトリー」について。</p>
+                <button class="read-more" data-target="modal5">詳しく見る</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- モーダルウィンドウ -->
+    <div id="modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>活動の紹介</h2>
+            <p>
+                Life Expectancyは、独自の哲学的仮説である「集団寿命理論」を通じて、皆さんが自身の人生を見つめ直すためのきっかけを提供しています。  
+            </p>
+            <p>
+                「死」は恐れるものではなく、人生をより豊かにするための光である——。
+
+            </p>
+            <p>皆さんも、Life Expectancyで楽しい人生にしましょう。
+            </p>
+            <img src="smilee.jpg" class="modal-image" alt="活動の紹介">
+
+            
+                    </div>
+
+    </div>
+    <div id="modal3" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>Life Expectancy とは</h2>
+            <p>
+                <ul> 寿命を考える時、その人が属する集団や社会の影響を無視することはできません。私たちは「生きる意味」「死を迎える準備」をテーマにしたプログラムやイベントを通して、未来をデザインする活動をしています。</ul>   
+                    <br><li>つながりが健康を作る: あなたが誰とどんなふうに関わっているか、それが健康にも大きな影響を与えます。</li> 
+                    <li>遺伝と環境の関係: 生まれつきの要素と育ってきた環境がどう影響し合うかを探ります。                    
+                    <br>
+            <p>
+                
+                より豊かな未来を、一緒に造りあげていきませんか？
+            </p>
+
+            <img src="kaigou.jpg" class="modal-image" alt="life Expectancyとは">
+
+        </div>
+    </div>
+
+    <div id="modal2" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>集団葬儀について</h2>
+            <p>
+                集団葬儀は、私たちの寿命である64歳を迎えた会員のみなさまを弔うイベントです。
+                ファクトリーで各々が制作してきた「魂のかたち」をみなさまの身体と共にコフィンに入れ、来世での幸福を祈ります。
+            </p>
+            <br></br>
+            <img src="3.jpg" class="modal-image" alt="集団葬儀について">
+
+        </div>
+    </div>
+
+    
+    <div id="modal4" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>グッズの紹介</h2>
+            <p>
+
+                <ul>
+                    <li>「キャンドル」：バディとして寿命が尽きるまで灯し続けるキャンドルです。</li>
+                    <li>「記憶ノート」：自分の近い未来を思い描いて記録し、それが達成できたかを振り返るというワークショップで用いる専用ノートブックです。</li> 
+                    <br></br>
+                </ul>
+                <img src="candlee.jpg" class="modal-image" alt="グッズの紹介">
+
+            </p>
+            
+        </div>
+    </div>
+
+    <div id="modal5" class="modal">
+        <div class="modal-content">
+            <span class="close-btn">&times;</span>
+            <h2>ファクトリーについて</h2>
+            <p>
+                「ファクトリー」は、会員のみなさまに魂のかたちを寿命が尽きるまで模索し、可視化していただくための設備が整った施設です。 
+            </p>
+        <br></br>
+            <img src="1.jpg" class="modal-image" alt="ファクトリー紹介">
+
+        </div>
+    </div>
+
+    <!-- フッター -->
+    <footer class="footer">
+        <p>&copy; 2024 深層研究会. All rights reserved.</p>
+        <p>お問い合わせ: kiss.info.japan@gmai.com</p>
+        <p><a href="../kiss/kiss.genealogy.html" class="footer-link">架空 委員会 宗教 宗教</a></p>
+    </footer>
+
+    <script>
+        const buttons = document.querySelectorAll('.read-more');
+        const modals = document.querySelectorAll('.modal');
+        const closeButtons = document.querySelectorAll('.close-btn');
+
+        buttons.forEach(button => {
+            button.addEventListener('click', () => {
+                const targetModal = document.getElementById(button.dataset.target);
+                targetModal.style.display = 'block';
+            });
+        });
+
+        closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                button.closest('.modal').style.display = 'none';
+            });
+        });
+
+        window.addEventListener('click', (event) => {
+            modals.forEach(modal => {
+                if (event.target === modal) {
+                    modal.style.display = 'none';
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
+
