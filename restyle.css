@@ -1,0 +1,249 @@
+/* ===== リセット & ベーススタイル ===== */
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+html, body {
+    width: 100%;
+    overflow-x: hidden; /* 横スクロール禁止 */
+}
+
+body {
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #ffffff 80%, #d8d8d8, #7d7d7d, #000000);
+    background-attachment: fixed;
+    background-size: cover;
+    color: #333;
+    padding: 20px;
+    font-family: 'Hiragino Mincho Pro', serif;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+}
+
+/* ===== ヘッダー ===== */
+header {
+    background: linear-gradient(to bottom, #ffffff 0%, #ffffff 50%,#e0f7ff00 98%);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    text-align: center;
+    font-weight: bold;
+    z-index: 10;
+    font-family: 'Hiragino Mincho Pro', serif;
+}
+
+header h1 {
+    font-size: 2em;
+    color: #333;
+}
+
+header nav a {
+    color: #454545;
+    text-decoration: none;
+    font-weight: normal;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-image 0.6s ease, color 0.3s, transform 0.3s;
+}
+
+header nav a:hover {
+    color: #fff;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 70%);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+/* ===== メインコンテンツ ===== */
+main {
+    flex-grow: 1;
+    width: 90%;
+    max-width: 1200px;
+    margin: 120px auto 0; /* headerの下に空間 */
+    padding: 20px;
+    text-align: center;
+    overflow-x: hidden;
+}
+
+/* ===== リンクスタイル ===== */
+a {
+    color: #646464;
+    padding: 8px 16px;
+    border-radius: 20px;
+    font-weight: normal;
+    text-decoration: none;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a:hover {
+    color: #999;
+    text-decoration: underline;
+}
+
+a.nav-link {
+    color: #000;
+    position: relative;
+}
+
+a.nav-link:hover {
+    color: #fff;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 80%);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+/* ===== 画像センター配置 ===== */
+.center-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 160px;
+}
+
+.center-image img {
+    width: 30%;
+    height: auto;
+}
+
+/* ===== 記事カード ===== */
+.article {
+    width: 100%;
+    padding: 10px;
+    margin: 5px auto;
+    border-radius: 10px;
+    font-weight: bold;
+    font-size: 0.9em;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.article:hover {
+    color: #fff;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 10%, rgba(0, 0, 0, 0) 25%);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+.article h2 {
+    font-size: 0.9em;
+    padding: 10px;
+    border-radius: 5px;
+    font-weight: normal;
+}
+
+.article p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: #f7f7f7;
+}
+
+/* ===== フッター ===== */
+footer {
+    color: #dcdcdc;
+    font-size: 0.1em;
+    text-align: center;
+    padding: 30px 0;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+/* ===== フェードイン効果 ===== */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+/* ===== モーダル ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+    transition: opacity 0.3s ease;
+}
+
+.modal-content {
+    background-color: rgba(255, 255, 255, 0.9);
+    padding: 20px 40px;
+    border-radius: 12px;
+    width: 500px;
+    height: 500px;
+    overflow-y: auto;
+    position: relative;
+    font-size: 0.85em;
+    animation: fadeIn 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+.modal-content img {
+    display: block;
+    margin: 20px auto 0;  /* ← 上に余白、左右中央寄せ */
+    max-width: 50%;
+    height: auto;
+    border-radius: 5px;
+}
+
+.modal-content h2 {
+    margin-bottom: 20px; /* タイトルと本文の間の余白 */
+    font-size: 1.5em;    /* タイトルのフォントサイズ */
+    color: #333;         /* タイトルの色 */
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.close {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #333;
+    cursor: pointer;
+    transition: color 0.3s ease;
+}
+
+.close:hover {
+    color: #acacac;
+}
+
+/* ===== アニメーション ===== */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.9);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+/* ===== カスタムスクロールバー ===== */
+::-webkit-scrollbar {
+    width: 0.5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #585858;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 10px;
+}
