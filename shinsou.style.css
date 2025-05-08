@@ -1,0 +1,174 @@
+/* 基本スタイル */
+body {
+    font-family: 'Hiragino Mincho Pro', serif; /* 明朝体を優先的に指定 */
+    margin: 0;
+    padding: 0;
+    background-color: white; /* 初期の背景色を白に設定 */
+    transition: background-color 0.5s ease; /
+}
+
+h2 {
+    text-align: center;
+    padding: 20px 0;
+}
+
+
+.intro-section {
+    text-align: center; /* 中央揃え */
+    padding: 20px;
+}
+
+.intro-section h2 {
+    margin-bottom: 10px; /* h2 と p の間にスペースを確保 */
+}
+
+.intro-section p {
+    margin: 0 auto;
+    max-width: 800px; /* 読みやすさのための最大幅設定 */
+}
+
+
+/* トップセクション */
+.top-section {
+    position: relative;
+    width: 50%;
+    height: 50%;
+    overflow: hidden;
+    display: block; /* 画像をブロック要素に */
+    margin: auto;
+    margin-top: 80px; /* 左右中央配置 */
+    margin-bottom: 80px;
+    max-width: 40%;
+}
+
+/* トップ画像のスタイル */
+.top-section img {
+    width: 70%;
+    height: 70%;
+    object-fit: cover;   
+    height: auto;
+    border-radius: 5px;
+    display: block; /* 画像をブロック要素に */
+    margin: auto;
+    margin-top: 80px; /* 左右中央配置 */
+    margin-bottom: 80px;
+}
+
+
+/* ビデオセクションのスタイル */
+.video-section {
+    display: flex;
+    flex-direction: column; /* タイトルと動画を縦並びに */
+    justify-content: center;
+    align-items: center;
+    padding: 40px 20px;
+    background-color: #f9f9f9; /* 背景色を明るい色に設定 */
+    border-radius: 10px; /* セクション全体の角を丸く */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* セクションの影 */
+}
+
+/* ビデオプレイヤー（YouTube iframe）のスタイル */
+.video-player {
+    width: 80%; /* 動画の幅をセクションに合わせる */
+    max-width: 800px; /* 最大幅を設定 */
+    height: auto; /* 高さを自動調整 */
+    aspect-ratio: 16 / 9; /* アスペクト比を維持 */
+    border-radius: 15px; /* 動画の角を丸くする */
+    border: 2px solid #ddd; /* 境界線を追加 */
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影を追加 */
+    margin-top: 20px; /* タイトルとの間隔 */
+}
+
+/* ビデオセクションのタイトル */
+.video-section h2 {
+    font-size: 2rem;
+    color: #333;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+/* 初期状態 */
+.fade-section {
+    opacity: 0;
+    transform: translateY(20px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+}
+
+/* スクロール後に表示する状態 */
+.fade-in {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+
+/* グッズセクションのレイアウト */
+.goods-section {
+    text-align: center;
+}
+
+.goods-item {
+    display: inline-block;
+    margin: 20px;
+}
+
+.goods-item img {
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+}
+.experience-section, .next-event-section {
+    text-align: center;
+    padding: 20px;
+    margin-top: 30px;
+}
+
+.experience-section h2, .next-event-section h2 {
+    font-size: 1.5em;
+    margin-bottom: 10px;
+}
+
+.experience-section p, .next-event-section p {
+    font-size: 1em;
+    color: #fff;
+    line-height: 1.6;
+}
+.experience-image {
+    display: block;
+    margin: 20px auto;
+    max-width: 80%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* 影をつける */
+}
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 4px;
+}
+
+::-webkit-scrollbar-track {
+    background: #e0e0e0;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #020202;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #ffffff;
+}
+/* フッター */
+.footer {
+    text-align: center;
+    margin-top: 80px;
+    padding: 10px ;
+    background-color: #000000;
+    color: #8a8a8a;
+    font-size: 0.9rem;
+}
+
+.footer-link {
+    color: #ffffff; /* 目立つ青色 */
+    text-decoration: u;
+   
+}
+.footer-link:hover {
+    color: #808080; /* ホバー時に濃い色へ変更 */
+}

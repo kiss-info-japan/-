@@ -1,0 +1,219 @@
+/* グローバルスタイル */
+body {
+    margin: 0;
+    font-family: 'Times New Roman', serif;
+    color: #ccc; /* 文字色を薄いグレーに */
+    background: linear-gradient(135deg, #222, #555); /* 背景グラデーションをグレーに */
+    background-color: #121212;
+    scrollbar-width: thin;
+    overflow-x: hidden; /* 横スクロールバーを非表示にする */
+    scrollbar-color: #888 #333; /* スクロールバーをグレー系に */
+}
+
+/* contentセクションのデザイン */
+.content {
+    display: flex;
+    justify-content: space-between;
+    align-items: center; /* 目次を上下中央に配置 */
+    padding: 0 10%;
+    background: linear-gradient(135deg, #555, #aaa); /* グレー系グラデーション */
+}
+
+/* .toc（目次）のデザイン */
+.toc {
+    width: 35%;
+    color: #dcdcdc; /* 目次文字色を明るいグレーに */
+    padding: 20px;
+    text-shadow: 0 0 8px rgba(128, 128, 128, 0.6); /* 薄いグレーのぼかし */
+}
+
+/* 目次リンク */
+.toc a {
+    display: block;
+    margin: 8px 0;
+    color: #b1b1b1; /* グレー系リンク色 */
+    font-size: 1.1rem;
+    text-decoration: none;
+    padding: 5px;
+    border-radius: 4px;
+    transition: color 0.3s, background 0.3s;
+}
+
+.toc a:hover {
+    color: #ffffff; /* ホバー時に白に変化 */
+    background-color: rgba(128, 128, 128, 0.3); /* 背景を薄いグレーに */
+    box-shadow: 0 0 10px rgba(128, 128, 128, 0.6); /* ぼやけたグレーの影 */
+    text-shadow: 0 0 8px #ffffff; /* ホバー時の文字に白いぼかし */
+}
+
+/* 画像セクション（透過画像）のデザイン */
+.image-section {
+    width: 55%;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    box-shadow: none; /* 不要な黒い線が出ないようにbox-shadowを削除 */
+}
+
+/* 透過画像の設定 */
+.image-section img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* スクロール時に画像がパララックス効果を発揮 */
+.image-section img {
+    transition: transform 0.2s ease-out;
+}
+
+/* セクションデザイン */
+section {
+    padding: 40px 10%;
+    text-align: center;
+    background-color: #333; /* 深いグレー */
+    color: #ddd; /* 明るいグレーの文字色 */
+    transition: transform 0.3s, box-shadow 0.3s;
+    box-shadow: 0 0 30px rgba(128, 128, 128, 0.4); /* グレー系の影 */
+    background-image: linear-gradient(to right, rgba(128, 128, 128, 0.7), rgba(75, 75, 75, 0.7)); /* グレー系のグラデーション */
+}
+
+section:hover {
+    transform: scale(1.02);
+    box-shadow: 0 0 30px rgba(128, 128, 128, 0.6); /* ホバー時にグレーの影 */
+}
+
+/* 詳細を見るボタンのスタイル */
+.show-details {
+    display: inline-block;
+    padding: 10px 20px;
+    color: rgb(169, 169, 169); /* グレー系ボタン */
+    text-align: center;
+    text-decoration: none;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.show-details:hover {
+   color: #ffffff; /* ホバー時に文字が白に変化 */
+}
+
+/* 詳細情報セクションのスタイル */
+.detail-section {
+    display: none;
+    margin-top: 20px;
+    padding: 20px;
+    color: white;
+}
+
+/* セクションのフェードイン・アウトのスタイル */
+.fade-section {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.fade-section.show {
+    opacity: 1;
+}
+
+/* 流れるテキスト */
+.scrolling-text, .scrolling-text2 {
+    width: 100%;
+    overflow: hidden;
+    white-space: nowrap;
+    color: #dcdcdc; /* 優しいグレー */
+    font-size: 1.2rem;
+    padding: 10px 0;
+    position: relative;
+    background: linear-gradient(135deg, #888, #555); /* グレー系のグラデーション */
+    text-shadow: 0 0 10px #888, 0 0 30px #888; /* ぼかし効果 */
+}
+
+.scrolling-text span, .scrolling-text2 span {
+    display: inline-block;
+    padding-right: 2rem; /* 単語間のスペースを広げる */
+    animation: scrollText 25s linear infinite; /* スムーズな遅いアニメーション */
+}
+
+/* テキストの逆さま表示 */
+.scrolling-text2 {
+    transform: rotate(180deg);
+}
+
+/* アニメーションで不安定感を演出 */
+@keyframes scrollText {
+    0% { transform: translateX(0); }
+    50% { transform: translateX(-50%); }
+    100% { transform: translateX(-100%); }
+}
+
+
+
+
+h2 {
+    color: #ad86d0; /* 薄いグレーの文字 */
+    margin-bottom: 20px;
+    font-size: 2rem;
+    text-shadow: 0 0 15px rgba(128, 128, 128, 0.8); /* 文字にぼかし効果 */
+}
+
+
+.testimonials-section .testimonial {
+    margin: 30px 0;
+    padding: 15px;
+    background: rgba(75, 47, 93, 0.6); /* グレー系背景 */
+    border-radius: 8px;
+    font-style: italic;
+    box-shadow: 0 0 30px rgba(120, 7, 185, 0.3); /* ぼかし影 */
+}
+
+/* 次回テスト情報 */
+.next-event-section h3 {
+    color: #ad86d0;
+}
+
+/* フェードイン効果 */
+.fade-section {
+    opacity: 0;
+    animation: fadeIn 2s ease-in forwards;
+}
+
+@keyframes fadeIn {
+    to { opacity: 1; }
+}
+
+footer {
+    color: #dcdcdc;
+    font-size: 0.8em; /* フォントサイズを小さく */
+    text-align: center;
+    margin-top: 50px;
+    opacity: 0.8;
+    font-weight: normal;
+}
+
+.footer-link {
+    color: #ffffff; /* リンク色を目立たせる白 */
+    text-decoration: underline;
+    font-size: 0.9em; /* リンクのサイズを少し大きめにして目立たせる */
+}
+
+.footer-link:hover {
+    color: #808080; /* ホバー時に濃い灰色へ */
+}
+/* Chrome、Edge、Safari 用のスクロールバー */
+::-webkit-scrollbar {
+    width: 4px;
+    background-color: #333; /* スクロールバー背景 */
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: #888; /* スクロールバー色 */
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background-color: #666; /* ホバー時の色 */
+}
+
+::-webkit-scrollbar-track {
+    background-color: #222; /* スクロールトラックの色 */
+}
