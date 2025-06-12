@@ -162,6 +162,14 @@ body {
     align-items: center;
     justify-content: flex-start;
     overflow-x: auto; /* 横スクロールを有効にする */
+}
+
+/* 横スクロール可能なコンテンツ */
+.content-slider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow-x: auto;
     gap: 20px;
     padding: 15px;
     width: 100%;
@@ -187,6 +195,12 @@ body {
 .post {
     flex: 0 0 auto; /* 固定幅を保ちつつ、横並びに配置 */
     width: 320px; /* 固定のカード幅 */
+
+}
+
+/* 各ポスト */
+.post {
+    width: 320px;
     background: #ffffff;
     border-radius: 12px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
@@ -196,6 +210,10 @@ body {
     cursor: pointer;
     scroll-snap-align: start; /* スクロール位置を調整 */
     box-sizing: border-box; /* 幅に影響を与えないようにする */
+
+    min-width: 300px;
+    cursor: pointer;
+    scroll-snap-align: start;
 }
 
 .post:hover {
@@ -221,7 +239,6 @@ body {
     }
 }
 
-/* モーダル */
 .modal {
     display: none;
     position: fixed;
@@ -343,5 +360,53 @@ body {
 }
 
 .footer .social-links a:hover {
-color: #FFFB00;
+    color: #D4FF00;
+}
+
+.footer p {
+    margin-top: 10px;
+}
+
+/* モバイル表示用のスタイル */
+@media (max-width: 768px) {
+    .hero-text {
+        width: 80%; /* モバイルではテキストが画面いっぱいになるように */
+        left: 0;
+        right: 0;
+        padding: 20px;
+    }
+
+    .post {
+        width: 100%; /* モバイルではカードが横幅いっぱいに表示されるように */
+    }
+
+    .content-slider {
+        gap: 15px; /* アイテム間の隙間を縮小 */
+    }
+}
+
+@media (max-width: 480px) {
+    body {
+        padding: 0 10px; /* モバイルでのパディング調整 */
+    }
+
+    .hero-text h1 {
+        font-size: 1.5em; /* タイトルの文字サイズ調整 */
+    }
+
+    .hero-text p {
+        font-size: 1em; /* 説明文の文字サイズ調整 */
+    }
+
+    .main-title {
+        font-size: 2rem; /* メインタイトルの文字サイズ調整 */
+    }
+
+    .catchphrase {
+        font-size: 1rem; /* キャッチフレーズの文字サイズ調整 */
+    }
+
+    .modal-content {
+        width: 95%; /* モバイルでモーダルが広すぎないように */
+    }
 }
