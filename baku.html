@@ -1,12 +1,255 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ばく</title> 
-</head> 
-<body>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>ばく</title>
+<meta name="description" content="夢をIfの世界として読み解く架空の宗教『ばく』。夢分析、体験談、予約フォームなど。">
+<link href="https://fonts.googleapis.com/css2?family=M+PLUS+Rounded+1c:wght@400;700&display=swap" rel="stylesheet">
+<style>
+  body {
+    margin: 0;
+  font-family: 'M PLUS Rounded 1c', sans-serif;
+    background: linear-gradient(180deg, #fbc0e0 0%, #5b3399 100%);
+    color: #ffffff;
+    overflow-x: hidden;
+  }
+  header {
+    text-align: center;
+    padding: 4rem 1rem 2rem 1rem;
+    position: relative;
+  }
+  
+  header p.tagline {
+    font-size: 1.4rem;
+    margin-bottom: 1rem;
+  }
+  header img.mascot-large {
+    width: 220px;
+    display: block;
+    margin: 1rem auto 0 auto;
+    animation: float 4s ease-in-out infinite;
+  }
+  nav {
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+  nav a {
+    color: #ffe;
+    margin: 0 1rem;
+    text-decoration: none;
+    font-weight: bold;
+  }
+  nav a:hover { text-decoration: underline; }
+
+  .stars {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: -1;
+  }
+
+  .section {
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 2rem;
+    line-height: 1.8;
+  }
+  .section h2 {
+    text-align: center;
+    font-size: 2rem;
+    margin-bottom: 1rem;
+  }
+
+  /* カードラップ */
+  .cards {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 2rem;
+    padding: 2rem 0;
+  }
+
+  /* ゆがんだ横長円カード */
+  .card {
+background: linear-gradient(170deg, #fff 45%, #ff9aeb 100%);
+    padding: 2rem;
+    width: 380px;
+    min-height: 250px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border-radius: 50% 40% 55% 45% / 45% 50% 40% 55%;
+    color: #555; /* 文字グレー */
+  box-shadow: 0 5px 15px rgba(56,189,248,0.4), 0 2px 5px rgba(0,0,0,0.2) inset;
+
+  }
+
+
+  .card h3, .card p {
+    max-width: 340px;
+    text-align: center;
+    z-index: 1;
+    position: relative;
+  }
+
+  .card:hover { transform: translateY(-5px) scale(1.03); }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    margin-top: 1rem;
+  }
+  input, textarea, button {
+    padding: 0.8rem;
+    border: none;
+    border-radius: 8px;
+    font-size: 1rem;
+  }
+  textarea { min-height: 100px; }
+  button {
+background: linear-gradient(170deg, #ff9aeb 45%, #ffabf9 100%);
+  color: #6e6e6e;
+  font-weight: bold;
+  font-size: 1.1rem;
+  padding: 0.8rem 1.5rem;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  box-shadow: 0 5px 15px rgba(56,189,248,0.4), 0 2px 5px rgba(0,0,0,0.2) inset;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background: linear-gradient(145deg, #ff9aeb, #ff2cd5);
+    color: #ffffff;
+  transform: translateY(-3px) scale(1.05);
+  box-shadow: 0 8px 20px rgba(56,189,248,0.6), 0 2px 5px rgba(0,0,0,0.2) inset;
+}
+
+
+  footer {
+    text-align: center;
+    padding: 2rem;
+    margin-top: 3rem;
+    font-size: 0.9rem;
+    color: #ffffff;
+
+  }
+
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-15px); }
+  }
+
     
-        <p>近日公開</p>
+
+</style>
+</head>
+<body>
+  <div class="stars"></div>
+
+  <header>
+   
+    <img src="baku.png" alt="マスコットばく" class="mascot-large" />
+  </header>
+
+  <nav>
+    <a href="#about">理念</a>
+    <a href="#analysis">夢分析</a>
+    <a href="#testimonials">体験談</a>
+    <a href="#reservation">予約</a>
+  </nav>
+
+  <section id="about" class="section">
+    <h2>理念</h2>
+    <p style="text-align:left; max-width: 500px; margin:auto;">
+      ばくでは、夢を「もしあのとき別の選択をしていたなら」のIFの世界としてとらえ、その世界線を読み解く方法を伝授しています。<br>
+      強い後悔や迷いを抱える方に、夢を通して失われた可能性に触れ、報われていただく場所——それが「ばく」です。
+    </p>
+  </section>
+  
+
+  <section id="analysis" class="section">
+    <h2>夢分析</h2>
+    <div class="cards">
+      <div class="card" style="border-radius: 50% 40% 55% 45% / 45% 50% 40% 55%;">
+        <h3>キーワード解読</h3>
+        <p>夢に現れる象徴やキーワードを丁寧に読み解き、他の世界線について考察します。</p>
+      </div>
+      <div class="card" style="border-radius: 45% 50% 40% 50% / 50% 45% 55% 40%;">
+        <h3>IFの物語</h3>
+        <p>夢の断片をつなぎ合わせ、IFの世界を導き出します。</p>
+      </div>
+      <div class="card" style="border-radius: 50% 55% 45% 40% / 40% 50% 45% 50%;">
+        <h3>報い</h3>
+        <p>失われた選択肢を知ることで、今を生きる心に静かな報いを届けます。</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="testimonials" class="section">
+    <h2>体験談</h2>
+    <div class="cards">
+      <div class="card" style="border-radius: 45% 50% 50% 45% / 50% 45% 40% 55%;">
+        <p>「夢を分析してもらったあと、長年の後悔が薄れ、新しい一歩を踏み出せました。」<br><small>— 30代女性</small></p>
+      </div>
+      <div class="card" style="border-radius: 50% 45% 55% 40% / 45% 50% 45% 50%;">
+        <p>「夢が教えてくれた“もしも”が、今の人生をより大切に感じさせてくれます。」<br><small>— 20代男性</small></p>
+      </div>
+    </div>
+  </section>
+
+ <section id="reservation" class="section">
+  <h2>予約フォーム</h2>
+  <p>オンラインで夢分析を希望される方はこちらからご予約ください。</p>
+  
+  <form id="reservationForm">
+    <input type="text" name="name" placeholder="お名前" required>
+    <input type="email" name="email" placeholder="メールアドレス" required>
+    <textarea name="message" rows="6" placeholder="夢のキーワードやご相談内容"></textarea>
+    <button type="submit">予約する</button>
+  </form>
+</section>
+
+  <footer class="footer">
+        <p>&copy; 2025 ばく. All rights reserved.</p>
+        <p>お問い合わせ: kiss.info.japan@gmai.com</p>
+        <p><a href="kiss.genealogy.html" class="footer-link">架空 委員会 宗教 宗教</a></p>
+    </footer>
+<script>
+  const starsContainer = document.querySelector('.stars');
+  for (let i=0; i<80; i++) {
+    const star = document.createElement('div');
+    const size = Math.random()*6 + 3;
+    star.style.position = 'absolute';
+    star.style.width = size + 'px';
+    star.style.height = size + 'px';
+    star.style.background = 'rgba(255,255,150,0.5)';
+    star.style.borderRadius = '50%';
+    star.style.top = Math.random()*100+'%';
+    star.style.left = Math.random()*100+'%';
+    starsContainer.appendChild(star);
+      const form = document.getElementById('reservationForm');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault(); // 通常のフォーム送信を止める
+    
+    const name = encodeURIComponent(form.name.value);
+    const email = encodeURIComponent(form.email.value);
+    const message = encodeURIComponent(form.message.value);
+
+    const mailtoLink = `mailto:kiss.japan.info@gmail.com?subject=夢分析予約&body=お名前：${name}%0Aメールアドレス：${email}%0A夢のキーワードやご相談内容：${message}`;
+
+    window.location.href = mailtoLink; // メール作成画面を開く
+  });
+  }
+</script>
 </body>
 </html>
