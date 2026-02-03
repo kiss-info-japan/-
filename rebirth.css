@@ -159,13 +159,36 @@ h2 {
 
 
 .testimonials-section .testimonial {
-    margin: 30px 0;
-    padding: 15px;
-    background: rgba(75, 47, 93, 0.6); /* グレー系背景 */
-    border-radius: 8px;
+    margin: 40px auto;
+    padding: 32px 36px;
+
+    max-width: 560px;
+
+    /* 外側に溶ける楕円グラデーション */
+    background: radial-gradient(
+        ellipse at center,
+        rgba(120, 7, 185, 0.35) 0%,
+        rgba(120, 7, 185, 0.25) 40%,
+        rgba(120, 7, 185, 0.15) 60%,
+        rgba(120, 7, 185, 0.05) 75%,
+        rgba(120, 7, 185, 0.0) 100%
+    );
+
+    border-radius: 50%;
+
     font-style: italic;
-    box-shadow: 0 0 30px rgba(120, 7, 185, 0.3); /* ぼかし影 */
+    text-align: center;
+
+    /* 影も境界じゃなく「滲み」にする */
+    box-shadow:
+        0 0 40px rgba(120, 7, 185, 0.25),
+        0 0 80px rgba(120, 7, 185, 0.15);
+
+    /* 完全な境界を消す */
+    border: none;
 }
+
+
 
 /* 次回テスト情報 */
 .next-event-section h3 {
@@ -217,3 +240,40 @@ footer {
 ::-webkit-scrollbar-track {
     background-color: #222; /* スクロールトラックの色 */
 }
+
+.ritual-layout{
+  display: flex;
+  gap: 40px;
+  align-items: flex-start; /* ← ここが重要 */
+
+  max-width: 900px;     
+  margin: 20px auto 0; 
+}
+
+
+.ritual-text{
+  width:55%;
+  text-align:left;
+}
+.ritual-text p{
+  margin-top: 0;      /* ← 文章の上余白を消す */
+}
+
+/* 画像側 */
+.ritual-image{
+  width:45%;
+  margin:0;
+}
+
+
+.ritual-image .caption{
+  text-align:center;
+}
+
+/* スマホは縦並び */
+@media (max-width:800px){
+  .ritual-layout{ flex-direction:column; }
+  .ritual-text, .ritual-image{ width:100%; }
+  .ritual-text{ text-align:left; }  /* スマホでも文章は左が読みやすい */
+}
+

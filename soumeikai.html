@@ -1,0 +1,437 @@
+<!doctype html>
+<html lang="ja">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>双命会 — 起源とダイアド</title>
+  <style>
+    :root{
+      --paper-pink: #f9e8eb;
+      --paper-green: #eef9ec;
+      --accent: #c88a97;
+      --text: #3b2f2f;
+      --muted: #6b5a5a;
+      --container-width: 820px;
+    }
+    html,body{height:100%;}
+    body{
+      margin:0;
+      font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "MS Mincho", "Times New Roman", serif;
+      color:var(--text);
+background: linear-gradient(
+    180deg,
+    var(--paper-pink) 0%,
+    #f7f4f4 35%,
+    #f3f7f3 65%,
+    var(--paper-green) 100%
+  );      
+  -webkit-font-smoothing:antialiased;
+      line-height:1.9;
+      background-attachment: fixed; /* スクロールでも崩れにくい */
+    }
+
+    .wrap{
+      max-width:var(--container-width);
+      margin:48px auto;
+      background: rgba(255,255,255,0.86);
+      border:1px solid rgba(0,0,0,0.06);
+      box-shadow: 0 8px 30px rgba(30,30,30,0.06);
+      padding:56px 64px 80px 64px;
+      position:relative;
+    }
+
+
+.logo-wrap img{
+  width:100%;
+  height:100%;
+  object-fit:cover;
+  display:block;
+}
+.hero{
+  text-align:center;
+  padding: 20px 10px 6px;
+}
+
+.hero .mark{
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  overflow: hidden;
+  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
+}
+
+.hero .mark{
+  width: 200px;        /* ← 横幅を拡大 */
+  height: 300px;       /* ← 縦をさらに大きく（楕円） */
+  margin: 0 auto 18px;
+  border-radius: 50% / 60%;  /* ← 縦長楕円のキモ */
+  overflow: hidden;
+  box-shadow: 0 14px 32px rgba(0,0,0,0.16);
+}
+.hero .mark img{
+  width:100%;
+  height:100%;
+  object-fit: cover;
+  object-position: center center; /* ← まずは明示 */
+  display:block;
+}
+
+
+.hero h1{
+  font-size: 34px;
+  margin: 0;
+  letter-spacing: 6px;
+}
+
+.hero .lead{
+  margin: 6px 0 14px;
+  font-size: 14px;
+  color: var(--muted);
+  letter-spacing: 0.08em;
+}
+
+.hero nav{
+  margin: 18px auto 0;
+  padding-top: 18px;
+  border-top: 1px dashed rgba(0,0,0,0.10);
+  display:flex;
+  gap:10px;
+  justify-content:center;
+  flex-wrap:wrap;
+}
+
+.hero nav a{
+  text-decoration:none;
+  color: var(--accent);
+  font-weight: 700;
+  padding: 7px 12px;
+  background: rgba(255, 255, 255, 0.6);
+}
+
+/* ロゴ＋羽の並び */
+.mark-row{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  gap: 16px;                 /* ロゴと羽の間隔 */
+  margin: 0 auto 14px;
+}
+
+/* 羽 */
+.hane{
+  width: 160px;              /* 羽の大きさ */
+  height: auto;
+  display:block;
+  opacity: 0.95;
+  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
+}
+
+
+
+/* スマホでは羽を小さく（or 消す） */
+@media (max-width:700px){
+  .hane{ width: 110px; }
+  .mark-row{ gap: 10px; }
+}
+@media (max-width:520px){
+  .hane{ display:none; }     /* 小さすぎて窮屈になるので消す */
+}
+
+
+@media (max-width:600px){
+  .hero h1{font-size:30px; letter-spacing:4px;}
+  .hero .mark{width:120px;height:120px;}
+}
+
+   
+
+    .post{
+      margin-top:34px;
+      padding:22px;
+      background:linear-gradient(180deg, rgba(250,244,246,0.8), rgba(246,250,246,0.8));
+      border-:8px;
+      border:1px solid rgba(0,0,0,0.03);
+    }
+    .post h2{font-size:22px;margin:0 0 8px 0;}
+    .meta{font-size:13px;color:var(--muted);margin-bottom:12px;}
+
+    .hr{
+      margin:18px 0;
+      border:0;
+      border-top:1px dashed rgba(0,0,0,0.10);
+    }
+
+    footer{
+      margin-top:44px;
+      font-size:13px;
+      color:var(--muted);
+      border-top:1px solid rgba(0,0,0,0.04);
+      padding-top:18px;
+      text-align: center; /* ← これ追加 */
+    }
+
+    p, li{font-size:16px}
+    ul{padding-left:1.1em}
+    .note{font-size:14px;color:var(--muted)}
+    .quote{
+      padding:14px 16px;
+      border-left:3px solid rgba(200,138,151,0.45);
+      background:rgba(255,255,255,0.55);
+      margin:14px 0;
+      color:var(--text);
+    }
+    .smallcaps{letter-spacing:1px; font-size:13px; color:var(--muted)}
+    code.k{
+      font-family: inherit;
+      background: rgba(255,255,255,0.6);
+      border:1px solid rgba(0,0,0,0.06);
+      padding:1px 6px;
+      border-radius:6px;
+    }
+
+    @media (max-width:900px){
+      .wrap{padding:40px 26px; margin:28px 14px}
+      .logo-wrap{position:relative;left:auto;top:auto;margin:-90px auto 18px;display:block}
+      header h1, header p.lead, nav{padding-left:0;margin-left:0}
+    }
+    .image-pair{
+  margin: 22px 0 28px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.image-pair img{
+  width: 100%;
+  height: auto;
+  display: block;
+ 
+}
+
+/* スマホでは縦並び */
+@media (max-width:600px){
+  .image-pair{
+    grid-template-columns: 1fr;
+  }
+}
+.image-pair figure{
+  margin: 0;
+}
+
+.image-pair figcaption{
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color:#3b2f2f;
+  letter-spacing: 0.02em;
+}
+  </style>
+</head>
+
+<body>
+  <div class="wrap">
+    <header class="hero">
+  <div class="mark-row" aria-hidden="true">
+  <img class="hane hane-left" src="hane-left.png" alt="" />
+  
+  <div class="mark">
+    <img src="soumeikai.png" alt="双命会の紋章" />
+  </div>
+  
+  <img class="hane hane-right" src="hane-right.png" alt="" />
+</div>
+
+
+  <h1>双命会</h1>
+  <p class="lead">── ひとはみな、ふたりでひとつ ──</p>
+
+  <nav>
+    <a href="#origin">はじめに</a>
+    <a href="#doctrine">教義</a>
+    <a href="#method">片割れの定義</a>
+    <a href="#rituals">ダイアド</a>
+  </nav>
+</header>
+
+    <article class="post" id="origin">
+      <h2>はじめに</h2>
+      <div class="meta">ゆずヶ原牧場／三島泰久</div>
+
+      <p>
+        ある春、牧場に<strong>双頭の山羊</strong>が生まれました。
+        単なる奇形として処理されるはずだったにもかかわらず、
+        その山羊は異様なほどに聡明でした。
+      </p>
+
+      <p>
+        目を見て人間の行動を読む。簡単な仕分けを覚える。鍵の位置を記憶する。
+        牧場の作業が始まる時間の前に、柵の近くで待つ。
+        言葉にできないだけで、意志があるとしか思えないふるまいを繰り返しました。
+      </p>
+
+      <hr class="hr" />
+
+      <p>
+        そして、その一頭を皮切りに、牧場には双頭の動物が増えていきました。
+        羊、子牛、犬、鶏――確率の偏りでは片づけられない頻度で。
+        牧場は噂になり、見学希望者が押しかけ、地元の掲示板には「呪いだ」と書き込まれました。
+      </p>
+      <div class="image-pair">
+  <figure>
+    <img src="farm_record_01.jpg" alt="ゆずヶ原牧場で生まれた双頭の山羊　ルミ">
+    <figcaption>ゆずヶ原牧場で生まれた双頭の牛「ルミ」</figcaption>
+  </figure>
+
+  <figure>
+    <img src="farm_record_02.jpg" alt="双頭の鶏　増尾">
+    <figcaption>双頭の鶏「増尾」</figcaption>
+  </figure>
+</div>
+
+
+      <p>
+        私三島泰久は、若いころからギリシャ神話に取り憑かれていました。
+        とくに繰り返し読み返していたのが、こういう筋の話です。
+      </p>
+
+      <div class="quote">
+        かつて人間には三種がいた。<br>
+        女女、男女、男男。<br>
+        しかし神が怒り、二つに引き裂いた。<br>
+        それ以来、人は片割れを求めて彷徨い、恋愛をするようになった。
+      </div>
+
+      <p>
+        私は、ゆずヶ原牧場に現れた双頭の動物たちを見て、気づいたのです。
+        <strong>「これが、完璧な姿なのだ」</strong>と。
+      </p>
+
+    </article>
+
+    <article class="post" id="doctrine">
+      <h2>教義</h2>
+      <p>
+        双命会は、双頭を<strong>神意</strong>として捉えます。
+        それは「二人で一人」などの比喩ではなく、
+        <strong>もともと一つだったものが裂かれたという感覚</strong>を、事実として扱う態度です。
+      </p>
+
+      <p>
+        双頭の動物は、完璧さの徴です。
+        だから私たちに必要なのは、単なる相性ではなく、
+        <strong>裂け目の縫合</strong>――すなわち「片割れ」の特定です。
+      </p>
+    </article>
+
+    <article class="post" id="method">
+      <h2>三島式・三点照合</h2>
+      <p>
+        私は、片割れ探しが願望や物語に回収されていくことが嫌でした。
+        運命、直感、ロマン――そういうものは簡単に偽装できる。
+        そこで私は、片割れを定義するシステムを作りました。
+      </p>
+
+      <p class="smallcaps">三島式・三点照合（基礎）</p>
+      <ul>
+        <li><strong>誕生日</strong>：一致</li>
+        <li><strong>血液型</strong>：一致</li>
+        <li><strong>ほくろ</strong>：左右反転の位置に対応する点がある</li>
+      </ul>
+
+      <p>
+        とくに重要なのが <code class="k">ほくろ</code> です。
+        それは鏡像として現れます。
+        かつて片割れと結合していた部分が傷として残っているのです。
+      </p>
+      <div class="image-pair">
+       <img src="hokuro.jpg">
+  <img src="hokuro2.jpg.png">
+</div>
+
+      <p class="note">
+        ※ここでは概念だけを記述しています。細則（許容差、照合順序、証明手段など）は内部資料に準拠します。
+      </p>
+    </article>
+
+    <article class="post" id="rituals">
+      <h2>ダイアド</h2>
+
+<p>
+片割れが特定された者は、<strong>ダイアド</strong>を行います。
+ダイアドとは、二つに裂かれた存在が「一つであった状態」を再現するための、
+最終段階に位置づけられる儀式です。
+</p>
+
+<p>
+この儀式では、互いの血液を完全に交換し、
+肉体の境界を曖昧にすることで結合の準備に進みます。
+</p>
+
+<p>
+ダイアドは、以下の三段階から構成されます。
+</p>
+
+<ul>
+  <li>
+    <strong>分離の確認</strong><br>
+    儀式に先立ち、二者は互いを「別個の存在」として明確に認識します。
+    名前、利き手、身体的特徴を声に出して読み上げ、
+    自分が裂けた後の存在であることを再確認します。
+  </li>
+
+  <li>
+    <strong>交換</strong><br>
+    血液は「生命そのもの」ではなく、
+    記憶と傾向を運ぶ媒体として扱われます。
+    この段階で、自我の揺らぎや、
+    思考の重なりを感じるなどの効果を実感します。
+  </li>
+
+  <li>
+    <strong>同調</strong><br>
+    交換後、二者は一定時間、左右対称の姿勢で静止します。
+    呼吸、瞬き、体温の変化を互いに観察し、
+    差異が消えていく過程を確認します。
+    これをもって肉体の境界が曖昧になり、儀式が完了します。
+  </li>
+</ul>
+
+<p>
+ダイアドの目的は、永続的な融合ではありません。
+むしろ、<strong>かつて完全であったという感覚を一度だけ現実に出現させる</strong>ことにあります。
+この経験を経た者は、その後の生活において、
+自分が常に欠けた存在であることを明確に自覚するようになるのです。
+</p>
+<div class="image-pair">
+  <figure>
+    <img src="daiado.jpg">
+    <figcaption>ダイアドの様子</figcaption>
+  </figure>
+ <img src="daiado2.jpg">
+</div>
+
+    </article>
+
+    <footer>
+  <div>© 双命会</div>
+
+  <div style="margin-top:8px">
+    関連資料：
+    <a href="https://kiss-info-japan.github.io/-/index.html"
+       target="_blank"
+       rel="noopener noreferrer">
+      架空委員会宗教宗教
+    </a>
+  </div>
+
+  <div style="margin-top:8px">
+    お問い合わせ：
+    <a href="kiss.japan.info@gmail.com">kiss.japan.info@gmail.com</a>
+  </div>
+</footer>
+
+
+  </div>
+</body>
+</html>
