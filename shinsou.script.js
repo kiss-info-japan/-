@@ -1,35 +1,58 @@
-document.addEventListener("DOMContentLoaded", () => {
-    const fadeElements = document.querySelectorAll(".fade-section");
+(() => {
+  const video = document.getElementById("introVideo");
+  const btn = document.querySelector(".sound-toggle");
+  if (!video) return;
 
-    const handleScroll = () => {
-        fadeElements.forEach((element) => {
-            const rect = element.getBoundingClientRect();
-            const windowHeight = window.innerHeight;
+  const tryPlay = async () => {
+    try {
+      video.muted = true;        // autoplayのため必須
+      video.playsInline = true;
+      await video.play();
+    } catch {
+      // 自動再生が拒否されたらユーザー操作を待つ
+    }
+  };
 
-            if (rect.top < windowHeight - 100) {
-                element.classList.add("fade-in");
-            }
-        });
-    };
+  // 画面に入ったら再試行（モバイルで効く）
+  const io = new IntersectionObserver((entries) => {
+    for (const e of entries) if (e.isIntersecting) tryPlay();
+  }, { threshold: 0.25 });
+  io.observe(video);
 
-    window.addEventListener("scroll", handleScroll);
-    handleScroll(); // 初回に実行して、画面読み込み時にも要素が表示されるようにする
-});
+  document.addEventListener("visibilitychange", () => {
+    if (!document.hidden) tryPlay();
+  });
 
-// スクロールイベントで背景色と文字色を変更
-window.addEventListener('scroll', function () {
-    let scrollPosition = window.scrollY;  // 現在のスクロール位置
-    let maxScroll = document.documentElement.scrollHeight - window.innerHeight; // ページ全体の高さ
-    let scrollPercent = scrollPosition / maxScroll;  // スクロール位置の割合
+  const sync = () => {
+    const on = !video.muted;
+    if (btn) {
+      btn.textContent = on ? "Sound: On" : "Sound: Off";
+      btn.setAttribute("aria-pressed", on ? "true" : "false");
+    }
+  };
 
-    // 背景色を変更（最上部は白、下部は黒）
-    let colorValue = Math.min(scrollPercent, 1); // scrollPercent は 0 ~ 1 の範囲
-    let redGreenBlue = Math.floor((1 - colorValue) * 255); // スクロール位置に応じて値が変化
+  // ボタンで音切替（ユーザー操作なので通る）
+  if (btn) {
+    btn.addEventListener("click", async () => {
+      try {
+        video.muted = !video.muted;
+        if (!video.muted) video.volume = 1.0;
+        await video.play();
+      } catch {}
+      sync();
+    });
+  }
 
-    // 背景色を変更
-    document.body.style.backgroundColor = `rgb(${redGreenBlue}, ${redGreenBlue}, ${redGreenBlue})`; 
+  // 動画タップでも切替（スマホ向け）
+  video.addEventListener("click", async () => {
+    try {
+      video.muted = !video.muted;
+      if (!video.muted) video.volume = 1.0;
+      await video.play();
+    } catch {}
+    sync();
+  });
 
-    // 文字色を逆に変更（背景が白の場合文字は黒、背景が黒の場合文字は白）
-    let textColorValue = Math.floor(colorValue * 255); // 文字の色は背景と反対の色に
-    document.body.style.color = `rgb(${textColorValue}, ${textColorValue}, ${textColorValue})`;
-});
+  sync();
+  tryPlay();
+})();

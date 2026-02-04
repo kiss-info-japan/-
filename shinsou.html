@@ -1,83 +1,189 @@
-<!DOCTYPE html>
+<!-- index.html -->
+<!doctype html>
 <html lang="ja">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>深層研究会</title>
-    <link rel="stylesheet" href="shinsou.style.css">
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover" />
+  <meta name="color-scheme" content="dark" />
+  <title>深層研究会</title>
+
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link rel="stylesheet" href="shinsou.style.css" />
 </head>
+
 <body>
-    <!-- トップ画像セクション -->
-    <section class="top-section">
-        <img src="shinsou_touka.png" alt="深層研究会" class="fade-in"/>
+  <a class="skip-link" href="#main">本文へ移動</a>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <a class="brand" href="#top" aria-label="深層研究会 トップへ">
+        <span class="brand-mark" aria-hidden="true"></span>
+        <span class="brand-name">深層研究会</span>
+      </a>
+
+      <nav class="site-nav" aria-label="ページ内ナビゲーション">
+        <a href="#about">About</a>
+        <a href="#video">Video</a>
+        <a href="#goods">Goods</a>
+        <a href="#experience">Experience</a>
+        <a href="#event">Event</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="main">
+    <!-- トップ -->
+    <section id="top" class="hero" aria-label="トップ">
+      <div class="hero-inner">
+        <div class="hero-text">
+          <p class="eyebrow">SHINSOU / Research Circle</p>
+          <h1>深層研究会</h1>
+          
+          </p>
+
+          <div class="cta-row">
+            <a class="btn" href="#video">映像へ</a>
+            <a class="btn ghost" href="#experience">体験について</a>
+          </div>
+
+        </div>
+
+        <div class="hero-media" aria-hidden="true">
+          <img src="shinsou_touka.png" alt="" class="hero-img" loading="eager" />
+        </div>
+      </div>
     </section>
 
-    <!-- 説明セクション -->
-    <section class="intro-section fade-section">
+    <!-- About -->
+    <section id="about" class="section">
+      <div class="section-inner">
         <h2>わたしたちについて</h2>
-        
-        <p>深層研究会は、あなたがより深く自分を知り、豊かな生活を送るためのサポートを行なっています。</p>
+        <p>
+          深層研究会は、あなたがより深く自分を知り、豊かな生活を送るためのサポートを行なっています。
+        </p>
+      </div>
     </section>
 
-    <!-- 説明ビデオセクション -->
-    <!-- 説明ビデオセクション -->
-<section class="video-section fade-section">
-    <h2>深層研究会の紹介動画</h2>
-    
-    <!-- YouTube埋め込み -->
-    <iframe 
-        width="560" 
-        height="315" 
-        src="https://www.youtube.com/embed/LgTLb-QgnNg"  
-        title="YouTube video player" 
-        frameborder="0" 
-        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
-        allowfullscreen>
-    </iframe>
-</section>
+    <!-- Video -->
+    <section id="video" class="section">
+      <div class="section-inner">
+        <div class="section-head">
+          <h2>紹介映像</h2>
+          <button class="sound-toggle" type="button" aria-pressed="false">
+            Sound: Off
+          </button>
+        </div>
 
+        <div class="video-slit">
+          <div class="video-window">
+            <video id="introVideo" autoplay muted loop playsinline preload="auto">
+              <source src="shinsou.mp4" type="video/mp4" />
+              お使いのブラウザは動画の再生に対応していません。
+            </video>
+          </div>
+        </div>
+      </div>
+    </section>
 
-    <!-- グッズ販売セクション -->
-    <section class="goods-section fade-section">
+    <!-- Goods -->
+    <section id="goods" class="section">
+      <div class="section-inner">
         <h2>グッズの一例</h2>
-        <div class="goods-item">
-            <img src="tshirtx.png" alt="グッズ1">
-            <p>深層研究会公式Tシャツ - 価格: ¥1,500</p>
+
+        <div class="grid">
+          <article class="card">
+            <img src="tshirtx.png" alt="深層研究会公式Tシャツ" loading="lazy" />
+            <div class="card-body">
+              <h3>深層研究会公式Tシャツ</h3>
+              <p class="price">¥1,500</p>
+              <p class="desc">日常に、深層を。</p>
+            </div>
+          </article>
+
+          <article class="card">
+            <img src="gunte.png" alt="増鎖増強軍手" loading="lazy" />
+            <div class="card-body">
+              <h3>増鎖増強軍手</h3>
+              <p class="price">¥400</p>
+              <p class="desc">増鎖の手触りを、あなたの手に。</p>
+            </div>
+          </article>
         </div>
-        <div class="goods-item">
-            <img src="gunte.png" alt="グッズ2">
-            <p>増鎖増強軍手 - 価格: ¥400</p>
-        </div>
-        <!-- 必要に応じて他のグッズも追加 -->
+      </div>
     </section>
-    <!-- 増鎖体験セクション -->
-        <!-- 増鎖体験セクション -->
-        <section class="experience-section fade-section">
-            <h2>増鎖体験について</h2>
-            <p>増鎖とは深層研究会が日々行っている活動のうちの一つで、</p>
-            <p>不安を増幅させて心層フラクタルに到達することを目的としたものです。</p>
-            <p>私たちは、定期的に増鎖体験会を開催しております。</p>
+
+    <section id="experience" class="section">
+      <div class="section-inner">
+        <div class="experience-head">
+          <h2>増鎖体験について</h2>
+          <p class="note">参加要項は開催時に個別に通知されます。</p>
+        </div>
+
+        <div class="experience-layout">
+          <article class="experience-card">
+            <p class="experience-lead">
+              増鎖は、<span class="em">不安を増幅</span>させ、心層フラクタルへの到達を試みる実験です。
+            </p>
+
+            <div class="chips" aria-label="特徴">
+              <span class="chip">予約制</span>
+              <span class="chip">少人数</span>
+              <span class="chip">無音開始</span>
+              <span class="chip">記録あり</span>
+            </div>
+
+            <dl class="spec">
+              <div class="spec-row">
+                <dt>所要</dt><dd>約 30〜45 分</dd>
+              </div>
+              <div class="spec-row">
+                <dt>形式</dt><dd>観測／反復／配布</dd>
+              </div>
+              <div class="spec-row">
+                <dt>持ち物</dt><dd>なし（スマホは通知OFF推奨）</dd>
+              </div>
+              <div class="spec-row">
+                <dt>注意</dt><dd>気分が悪くなった場合は即中断できます</dd>
+              </div>
+            </dl>
+
+            <div class="experience-actions">
+              <a class="btn" href="mailto:kiss.info.japan@gmail.com?subject=%E5%A2%97%E9%8E%96%E4%BD%93%E9%A8%93%E3%81%AE%E7%94%B3%E8%BE%BC%E3%81%BF">問い合わせ</a>
+              <a class="btn ghost" href="#event">開催情報</a>
+            </div>
 
             
-            <!-- 増鎖体験のイメージ画像 -->
-            <img src="syuryo.png" alt="増鎖体験を終了した方に配布している修了証" class="experience-image">
-        </section>
-    
+          </article>
 
-    <!-- 次回開催情報セクション -->
-    <section class="next-event-section fade-section">
-        <h2>★次回開催予定★</h2>
-        <p>臨時体験会の次回開催予定日</p>
-        <h2>未定</h2>
-        <p>参加希望の方は、深層研究会までお問い合わせください。</p>
+          <aside class="experience-aside">
+            <figure class="figure">
+              <img src="syuryo.png" alt="増鎖体験を終了した方に配布している修了証" loading="lazy" />
+              <figcaption>配布物（修了証）</figcaption>
+            </figure>
+          </aside>
+        </div>
+      </div>
     </section>
-    <footer class="footer">
-        <p>&copy; 2024 深層研究会. All rights reserved.</p>
-        <p>お問い合わせ: kiss.info.japan@gmai.com</p>
-        <p><a href="kiss.genealogy.html" class="footer-link">架空 委員会 宗教 宗教</a></p>
-    </footer>
-    
 
-    <script src="shinsou.script.js"></script>
+    <!-- Event -->
+    <section id="event" class="section">
+      <div class="section-inner event">
+        <h2>次回開催予定</h2>
+        <p class="event-lead">臨時体験会の次回開催予定日</p>
+        <div class="event-date">未定</div>
+        <p class="small">参加希望の方は、深層研究会までお問い合わせください。</p>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="footer-inner">
+      <p>© 2024 深層研究会. All rights reserved.</p>
+      <p>お問い合わせ: <a href="mailto:kiss.info.japan@gmail.com">kiss.info.japan@gmail.com</a></p>
+      <p><a class="footer-link" href="kiss.genealogy.html">架空 委員会 宗教 宗教</a></p>
+    </div>
+  </footer>
+
+  <script src="shinsou.script.js" defer></script>
 </body>
 </html>
