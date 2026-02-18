@@ -553,6 +553,7 @@ main{ padding-bottom: 64px; }
 
 /* Event */
 .event{ text-align:center; }
+
 .event-lead{ margin: 0; color: rgba(243,243,243,.62); }
 .event-date{
   font-size: clamp(28px, 3.8vw, 40px);
@@ -561,19 +562,19 @@ main{ padding-bottom: 64px; }
   font-style: italic;
   color: rgba(243,243,243,.90);
 }
-
+.event .btn{
+  margin: 14px auto 0;
+  display: inline-flex;
+}
 /* Footer */
-.footer{ border-top: 1px solid var(--line); }
 .footer-inner{
   padding-top: 22px;
   padding-bottom: calc(22px + env(safe-area-inset-bottom));
   color: var(--muted);
   font-size: 12px;
-  text-align:left;
+  text-align:center;
 }
-.footer a{ color: var(--fg); opacity:.85; }
-.footer a:hover{ opacity:1; text-decoration: underline; }
-.footer-link{ letter-spacing:.10em; font-style: italic; }
+
 
 /* Responsive */
 @media (max-width: 860px){
