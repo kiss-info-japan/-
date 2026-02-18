@@ -141,13 +141,19 @@ a.nav-link:hover {
 
 /* ===== フッター ===== */
 footer {
-    color: #dcdcdc;
-    font-size: 0.1em;
+    width: 100%;
+    display: flex;
+    justify-content: center;  /* 横中央 */
+    align-items: center;
     text-align: center;
-    padding: 30px 0;
-    margin-top: 20px;
+    padding: 40px 0;
+    margin-top: auto;
+    color: #dcdcdc;
+    font-size: 0.8em;
     opacity: 0.8;
 }
+
+
 
 /* ===== フェードイン効果 ===== */
 .fade-in {
