@@ -59,29 +59,29 @@
   
 
     main{
-      max-width: var(--maxw);
-      margin: 0 auto;
-      padding: 18px var(--pad) 10px;
-      text-align: center;
-    }
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: 10px var(--pad) 10px;  /* 18px→10pxで詰める */
+  text-align: center;
+}
 
     h1{
-      margin: 10px 0 14px;
-      font-size: 18px;
-      font-weight: 700;
-      letter-spacing: 0.02em;
-    }
+  margin: 6px 0 10px;     /* 10/14 → 6/10 */
+  line-height: 1.2;
+  font-size: 18px;
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
 
-    /* ✅ここが本命：最初は“全体が収まる” */
     .map{
-      width: 100%;
-      height: min(40vh, 680px);
-      margin: 0 auto;
-      background: #fff;
-      overflow: hidden; /* 図がはみ出しても隠す */
-      touch-action: none; /* ピンチ/ドラッグをJSで扱う */
-      position: relative;
-    }
+  width: 100%;
+  height: min(70vh, 820px); /* 40vh→70vh に上げる */
+  margin: 0 auto;
+  background: #fff;
+  overflow: hidden;
+  touch-action: none;
+  position: relative;
+}
 
     /* SVGは“最初はフィット”させるため、コンテナに100%で入れる */
     svg{
@@ -260,7 +260,7 @@
   const viewport = document.getElementById('viewport');
   const svg = document.getElementById('svg');
 
-  let scale = 1, tx = 0, ty = 0;
+  let scale = 1, tx = 0, ty = -300;
   const MIN_SCALE = 1;
   const MAX_SCALE = 6;
 
