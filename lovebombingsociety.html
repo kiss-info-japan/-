@@ -1,15 +1,16 @@
-<!doctype html>  
+<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1000" /><title>まるやま こゆる（圓山越）</title>
+<meta name="viewport" content="width=1000" />
+<title>まるやま こゆる（圓山越）</title>
 
 <style>
   :root{
-    --page-bg: #dfe8c6;
-    --window-bg: #eef4d9;
-    --panel: #e7efc9;
-    --panel2:#dde7b9;
+    --page-bg: #d7ffc3;
+    --window-bg: #c4fff0;
+    --panel: #ffffff;
+    --panel2:#f8ffb8;
     --line: #e4ff99;
     --line2:#90b725;
     --text: #111;
@@ -24,25 +25,18 @@
     font-family: "MS PGothic","MS Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
     font-size: 14px;
     line-height: 1.75;
-background: linear-gradient(
-  180deg,
-  #fdffba 0%,
-  #ffffff 45%,
-  #bfe6ff 100%
-);     overflow-x: auto;
+    background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
+    overflow-x: auto;
   }
 
+  .window{
+    width: 1000px;
+    margin: 26px auto;
+    background: var(--window-bg);
+    border: 2px solid var(--line);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
+  }
 
-
- .window{
-  width: 1000px;
-  margin: 26px auto;
-  background: var(--window-bg);
-  border: 2px solid var(--line);
-  box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
-}
-
-  /* タイトルバー：丸3つなし */
   .titlebar{
     display:flex;
     align-items:center;
@@ -61,11 +55,10 @@ background: linear-gradient(
 
   .inner{ padding: 18px; }
 
-  /* ★タイトルに横長画像（header_banner.jpg）を背景として挿入 */
   .site-title{
     border: 2px solid var(--line);
     background-color: var(--panel);
-    background-image: url("header_banner.jpg"); /* 同じフォルダに置く */
+    background-image: url("header_banner.jpg");
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -74,7 +67,6 @@ background: linear-gradient(
     position: relative;
     overflow: hidden;
   }
-  
   .site-title .title-span{
     position: relative;
     display:inline-block;
@@ -82,30 +74,6 @@ background: linear-gradient(
     font-weight: 700;
     letter-spacing: .06em;
   }
-
-  .subline{
-    margin: 0 0 14px;
-    font-size: 12px;
-    opacity: .9;
-  }
-
-  .topnav{
-    display:flex;
-    gap: 12px;
-    margin: 0 0 10px;
-    padding: 0;
-    list-style:none;
-  }
-  .topnav a{
-    display:inline-block;
-    padding: 8px 18px;
-    border: 2px solid var(--line);
-    background: #f3f7df;
-    color: #111;
-    text-decoration:none;
-    font-weight: 700;
-  }
-  .topnav a:hover{ background:#fff; }
 
   .hr-dots{
     border:0;
@@ -135,10 +103,7 @@ background: linear-gradient(
     padding: 10px 12px;
   }
 
-  .menu{
-    margin:0;
-    padding-left: 18px;
-  }
+  .menu{ margin:0; padding-left: 18px; }
   .menu li{ margin: 6px 0; }
 
   a{ color: var(--link); text-decoration: underline; }
@@ -146,6 +111,7 @@ background: linear-gradient(
 
   .welcome{ margin-bottom: 16px; }
 
+  /* ★プロフィール（左）と写真（右）を並べる枠 */
   .content2{
     display:grid;
     grid-template-columns: 1fr 380px;
@@ -180,7 +146,6 @@ background: linear-gradient(
     opacity:.85;
   }
 
-  /* 記事 */
   .entry{ margin-top: 16px; }
   .entry h3{
     margin: 0;
@@ -201,14 +166,18 @@ background: linear-gradient(
     margin: 10px 0;
   }
 
-  /* コラム（タグなし） */
   .column p{ margin: 8px 0; }
-  .column .small{
-    font-size: 12px;
-    opacity: .85;
-  }
+  .column .small{ font-size: 12px; opacity: .85; }
 
- 
+  /* ★お願いの下に入れる縦長画像（同幅で箱に押し込む） */
+  .sideimg{ margin-top:14px; }
+  .sideimg img{
+    width: 100%;
+    height: auto;
+    display:block;
+    border: 1px solid rgba(0,0,0,.35);
+    background:#fff;
+  }
 </style>
 </head>
 
@@ -219,8 +188,7 @@ background: linear-gradient(
     </div>
 
     <div class="inner">
-      <div class="site-title"><span class="title-span">こゆるのＢｌｏｇ</span></div>
-
+      <div class="site-title"><span class="title-span">☆こゆるのＢｌｏｇ☆</span></div>
 
       <hr class="hr-dots" />
 
@@ -232,7 +200,6 @@ background: linear-gradient(
             <div class="box-b">
               <ul class="menu">
                 <li><a href="#profile">プロフィール</a></li>
-                
                 <li><a href="#text">本文</a></li>
                 <li><a href="#columns">コラム</a></li>
                 <li><a href="#links">リンク</a></li>
@@ -241,7 +208,6 @@ background: linear-gradient(
             </div>
           </div>
 
-
           <div class="box" style="margin-top:14px;">
             <div class="box-h">お願い</div>
             <div class="box-b">
@@ -249,52 +215,77 @@ background: linear-gradient(
               ・感想は掲示板へ（※工事中）<br>
             </div>
           </div>
-        </aside>
+
+          <!-- ★ここが「お願いの下」固定 -->
+         <div class="box sideimg">
+
+  <div class="box-b">
+
+    <img src="naizai.png"
+         alt="内在神研究サークル"
+         style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+
+    <div style="height:55px;"></div>
+
+    <img src="kami.png"
+         alt="内在神研究サークル2"
+         style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+
+  </div>
+</div>
+        </aside>   
 
         <!-- 右：本文 -->
         <section id="home">
           <div class="box welcome">
-            <div class="box-h">お知らせ</div>
+            <div class="box-h">自己紹介</div>
             <div class="box-b">
-              ようこそ。<br>
-              圓山 越（まるやま こゆる）です。<br>
+              こんにちは～。<br>
+              圓山 越（まるやま こゆる）です。おじさんです。<br>
               ここには、最近考えてることを、そのまま置いてます。<br>
-              内在する神についてとか。（むずかしい話もしますが、まあ気楽にどうぞ）
-              <br>
+              内在する神についてとか。（むずかしい話もしますが、まあ気楽にどうぞ）<br>
               ※いちおう言っておきますが、勧誘じゃないです（笑）
             </div>
           </div>
 
-       
+         <!-- ===== プロフィール ===== -->
+<div class="box entry" id="profile">
+  <div class="box-h"><h3>略歴</h3></div>
+  <div class="box-b">
+    <p><strong>圓山　越（まるやま こゆる）</strong></p>
+    <ul>
+      <li>1971年　キリスト教の家庭に生まれる</li>
+      <li>幼少期より教会に通いながら育つ</li>
+      <li>大学で心理学を学ぶ</li>
+      <li>フロイトの「超自我」概念に関心を持つ</li>
+      <li>フーコー『監獄の誕生』を読み、監視構造と宗教の類似性に気づく</li>
+      <li>内在神研究サークルを発足、セミナーを開始</li>
+    </ul>
+  </div>
+</div>
+
+<!-- ===== セミナー画像（プロフィール直下・右カラム・同幅） ===== -->
+<div class="box entry" id="seminar">
+  <div class="box-h"><h3>セミナーの様子</h3></div>
+  <div class="box-b">
+    <img src="etsu.jpg" alt="セミナーの写真1"
+         style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+    <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう</div>
+
+    <div style="height:10px;"></div>
+
+    <img src="seminor.jpg" alt="セミナーの写真2"
+         style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+    <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
+  </div>
+</div>
+</div>
 
 
-          <!-- ===== プロフィール ===== -->
-          <div class="box entry" id="profile">
-            <div class="box-h"><h3>略歴</h3></div>
-            <div class="box-b">
-              <p><strong>圓山　越（まるやま こゆる）</strong></p>
-              <ul> <li>1971年　キリスト教の家庭に生まれる</li> <li>幼少期より教会に通いながら育つ</li> <li>大学で心理学を学ぶ</li> <li>フロイトの「超自我」概念に関心を持つ</li> <li>フーコー『監獄の誕生』を読み、監視構造と宗教の類似性に気づく</li> <li>内在神学会を発足、セミナーを開始</li> </ul>
-            </div>
-          </div>
-          
-            <!-- 右（写真：★2枚にする） -->
-            <div class="photo">
-              <div class="stack">
-                <img src="etsu.jpg" alt="セミナーの写真1">
-                <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう？</div>
-              </div>
-
-              <div class="stack">
-                <img src="seminor.jpg" alt="セミナーの写真2">
-                <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
-              </div>
-            </div>
-          </div>
-<!-- ===== 本文 ===== -->
+          <!-- ===== 本文 ===== -->
           <div class="box entry" id="text">
             <div class="box-h"><h3>見られているという感覚について</h3></div>
             <div class="box-b">
-
               <p>神はいない、と私は思ってます。</p>
               <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
 
@@ -327,6 +318,7 @@ background: linear-gradient(
               <p>ただ、生活の中に小さな観測者が立ち上がって、それだけで世界がちょっと変わるんです。</p>
             </div>
           </div>
+
           <!-- ===== コラム ===== -->
           <div class="box entry" id="columns">
             <div class="box-h"><h3>コラム</h3></div>
@@ -334,8 +326,7 @@ background: linear-gradient(
 
               <div class="box column" style="margin-top:0;">
                 <div class="box-h">きっかけ</div>
-                    <div class="meta">　2006年6月18日 </div>
-
+                <div class="meta">　2006年6月18日 </div>
                 <div class="box-b">
                   <p class="small">子どもの頃から教会に通ってました。祈りの言葉とか、聖書のフレーズとか身に沁みついてました。</p>
                   <p class="small">ある日の礼拝で、牧師が言いました。「神は常にあなたを見ている」って。</p>
@@ -424,7 +415,7 @@ background: linear-gradient(
                   <p class="small">祈りは、それを定期的にやるための装置なのかもしれない。</p>
                   <p class="small">神がいるから祈るんじゃなくて、祈るという形式を保つために、神という受け手を置いたのでは？ ってね。</p>
                   <p class="small">だから私は祈りを否定しません。受け手が外にいなくても、話しかける相手として中に置けばいい、と思ってます。</p>
-                  <p class="small">内在神学会の説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
+                  <p class="small">内在神研究サークルの説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
                 </div>
               </div>
 
@@ -437,7 +428,7 @@ background: linear-gradient(
           <div class="box entry" id="links">
             <div class="box-h"><h3>リンク</h3></div>
             <div class="box-b">
-              <p>・<a href="#" onclick="alert('工事中です'); return false;">内在神学会（配布用）</a>（工事中）</p>
+              <p>・<a href="#" onclick="alert('工事中です'); return false;">内在神研究サークル（配布用）</a>（工事中）</p>
               <p>・<a href="#" onclick="alert('工事中です'); return false;">掲示板</a>（工事中）</p>
             </div>
           </div>
@@ -450,7 +441,7 @@ background: linear-gradient(
           </div>
 
           <div class="footer">
-            © 内在神学会　無断転載禁止
+            © 内在神研究サークル　無断転載禁止
           </div>
 
         </section>
