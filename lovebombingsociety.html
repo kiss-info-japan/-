@@ -3,7 +3,7 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1000, initial-scale=0.5" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
 <title>☆こゆるのＢｌｏｇ☆</title>
 
 <style>
@@ -206,7 +206,35 @@
     opacity:.85;
   }
 
- 
+ /* =========================
+   スマホ時 50%表示チューニング版
+   ========================= */
+
+@media (max-width: 540px){
+
+  body{
+    overflow-x: auto;
+    background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
+  }
+
+  .window{
+    transform: scale(0.5);
+    transform-origin: top left;
+
+    /* 元幅1000px → scale0.5なので2000pxに拡張 */
+    width: 2000px;
+    max-width: none;
+
+    margin: 10px 0;
+  }
+
+  /* scaleで高さが足りなくなるのを防ぐ */
+  body::after{
+    content:"";
+    display:block;
+    height:800px; /* 足りなければ増やす */
+  }
+}
 </style>
 </head>
 
