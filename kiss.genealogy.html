@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -407,3 +408,414 @@
 
 </body>
 </html>
+=======
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <title>架空委員会宗教宗教 架空宗教の系譜図</title>
+  <link rel="stylesheet" href="keifustyle.css">
+
+  <style>
+    :root{
+      --maxw: 1100px;
+      --pad: 14px;
+      --nav-h: 52px;
+      --text: #111;
+      --muted: #918f8f;
+      --bg: #fff;
+    }
+
+    html, body{
+      margin:0;
+      padding:0;
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, "Segoe UI", "Noto Sans JP", "Hiragino Kaku Gothic ProN", sans-serif;
+    }
+
+    /* ✅ナビ：中央寄せ、枠線なし */
+    header{
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      background: rgba(255,255,255,0.92);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+    }
+    header nav{
+      height: var(--nav-h);
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 0 var(--pad);
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      align-items: center;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      white-space: nowrap;
+    }
+    header nav a{
+      color: var(--text);
+      text-decoration: none;
+      font-size: 14px;
+      padding: 8px 10px;
+      border: none;
+      border-radius: 999px;
+      flex: 0 0 auto;
+    }
+  
+
+    main{
+      max-width: var(--maxw);
+      margin: 0 auto;
+      padding: 18px var(--pad) 10px;
+      text-align: center;
+    }
+
+    h1{
+      margin: 10px 0 14px;
+      font-size: 18px;
+      font-weight: 700;
+      letter-spacing: 0.02em;
+    }
+
+    /* ✅ここが本命：最初は“全体が収まる” */
+    .map{
+      width: 100%;
+      height: min(40vh, 680px);
+      margin: 0 auto;
+      background: #fff;
+      overflow: hidden; /* 図がはみ出しても隠す */
+      touch-action: none; /* ピンチ/ドラッグをJSで扱う */
+      position: relative;
+    }
+
+    /* SVGは“最初はフィット”させるため、コンテナに100%で入れる */
+    svg{
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+
+    /* SVGの中身をtransformするためのグループ */
+    .viewport{
+      transform-origin: 0 0;
+    }
+
+    footer{
+      color: var(--muted);
+      font-size: 12px;
+      text-align: center;
+      padding: 22px 0 calc(22px + env(safe-area-inset-bottom));
+      opacity: 0.9;
+      font-weight: normal;
+    }
+    footer .small{ margin: 6px 0; }
+  </style>
+</head>
+
+<body>
+  <header>
+    <nav>
+      <a href="index.html">Home</a>
+      <a href="kiss.Activityrecord.html">Activity record</a>
+      <a href="kissgenealogy.html">Genealogy</a>
+    </nav>
+  </header>
+
+  <main>
+    <h1>系譜</h1>
+
+    <!-- ✅ここで“地図”化 -->
+    <div class="map" id="map">
+      <svg id="svg" viewBox="0 0 1100 600" role="img" aria-label="架空宗教の系譜図">
+        <defs>
+          <clipPath id="clipCircle50">
+            <circle r="50" cx="0" cy="0"></circle>
+          </clipPath>
+          <style>
+            .node { cursor: pointer; }
+            .ring { fill:#D3D3D3; stroke:#000; stroke-width:2; }
+            .line { stroke:#000; stroke-width:2; }
+            .dash { stroke-dasharray: 5,5; }
+          </style>
+        </defs>
+
+        <!-- 👇中身全部をこのgに入れる（transform対象） -->
+        <g class="viewport" id="viewport">
+
+          <!-- 深層研究会 -->
+          <a href="shinsou.html">
+            <g class="node" transform="translate(400 100)">
+              <circle class="ring" r="50"></circle>
+              <image href="shinsou.jpg" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <line class="line" x1="400" y1="150" x2="300" y2="250"></line>
+
+          <!-- Life Expectancy -->
+          <a href="life.html">
+            <g class="node" transform="translate(300 250)">
+              <circle class="ring" r="50"></circle>
+              <image href="lifeexpectancy.jpg" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <line class="line" x1="400" y1="150" x2="500" y2="250"></line>
+
+          <!-- Rebirth -->
+          <a href="rebirth.html">
+            <g class="node" transform="translate(500 250)">
+              <circle class="ring" r="50"></circle>
+              <image href="rebirth.jpg" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- 脱我連合（独立） -->
+          <a href="datsuga.html" target="_blank">
+            <g class="node" transform="translate(650 100)">
+              <circle class="ring" r="50"></circle>
+              <image href="datsugalogo.jpg" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- 南閃（独立） -->
+          <a href="minami sen.html" target="_blank">
+            <g class="node" transform="translate(800 100)">
+              <circle class="ring" r="50"></circle>
+              <image href="minamisen.png" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- 複保会（独立） -->
+          <a href="fukuhokai.html" target="_blank">
+            <g class="node" transform="translate(950 100)">
+              <circle class="ring" r="50"></circle>
+              <image href="複保会２.png" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- ばく（点線） -->
+          <line class="line dash" x1="350" y1="100" x2="250" y2="100"></line>
+          <a href="baku.html" target="_blank">
+            <g class="node" transform="translate(250 100)">
+              <circle class="ring" r="50"></circle>
+              <image href="ばく.png" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- 双命会 -->
+          <a href="soumeikai.html" target="_blank">
+            <g class="node" transform="translate(725 240)">
+              <circle class="ring" r="50"></circle>
+              <image href="soumeikailogo.png" x="-50" y="-50" width="100" height="100" clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+          <a href="lovebombingsociety.html" target="_blank" rel="noopener noreferrer">
+            <g class="node" transform="translate(865 240)">
+              <circle class="ring" r="50"></circle>
+              <image href="naizaishingakukai.png"
+                     x="-50" y="-50"
+                     width="100" height="100"
+                     clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- 内在神学会 → LoveBombingSociety -->
+          <line class="line" x1="865" y1="290" x2="865" y2="340"></line>
+
+          <!-- LoveBombingSociety（内在神学会の下） -->
+          <a href="https://www.lovebombingsociety.com" target="_blank" rel="noopener noreferrer">
+            <g class="node" transform="translate(865 390)">
+              <circle class="ring" r="50"></circle>
+              <image href="lovebombingsociety.png"
+                     x="-50" y="-50"
+                     width="100" height="100"
+                     clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+          <!-- LoveBombingSociety → 論文（PDF） -->
+          <line class="line" x1="865" y1="440" x2="865" y2="490"></line>
+
+          <!-- 論文ノード（PDF） -->
+          <a href="Love Bombing Society.pdf" target="_blank">
+            <g class="node" transform="translate(865 540)">
+              <circle class="ring" r="50"></circle>
+              <image href="ronbun.png"
+                     x="-50" y="-50"
+                     width="100" height="100"
+                     clip-path="url(#clipCircle50)"></image>
+            </g>
+          </a>
+
+
+        </g>
+      </svg>
+    </div>
+  </main>
+
+  <footer>
+    <p class="small">&copy;2024 架空 委員会 宗教 宗教</p>
+    <p class="small">お問い合わせ: kiss.info.japan@gmail.com</p>
+  </footer>
+
+  <script>
+(() => {
+  const map = document.getElementById('map');
+  const viewport = document.getElementById('viewport');
+  const svg = document.getElementById('svg');
+
+  let scale = 1, tx = 0, ty = 0;
+  const MIN_SCALE = 1;
+  const MAX_SCALE = 6;
+
+  function apply(){
+    viewport.setAttribute('transform', `translate(${tx} ${ty}) scale(${scale})`);
+  }
+
+  function zoomAt(clientX, clientY, nextScale){
+    const rect = map.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+
+    const x = (clientX - rect.left) * (vb.width / rect.width);
+    const y = (clientY - rect.top)  * (vb.height / rect.height);
+
+    const k = nextScale / scale;
+    tx = x - k * (x - tx);
+    ty = y - k * (y - ty);
+
+    scale = nextScale;
+    apply();
+  }
+
+  // ---- パン（ドラッグ）: 「少し動いたら」開始＆リンク上は開始しない ----
+  const DRAG_THRESHOLD = 6; // px（この距離より動いたらドラッグ扱い）
+  let isDragging = false;
+  let dragArmed = false;   // 押した直後（まだドラッグじゃない）
+  let startX = 0, startY = 0;
+  let lastX = 0, lastY = 0;
+
+  function isOnLinkTarget(e){
+    // SVG内の<a>を探す（g/image/circleをタップしても<a>に包まれてる想定）
+    const a = e.target && e.target.closest ? e.target.closest('a') : null;
+    return !!a;
+  }
+
+  map.addEventListener('pointerdown', (e) => {
+    // 2本指ピンチ処理があるので、ここでは「1本指の時だけ」パン準備
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+
+    // ✅リンク上ならパン準備しない（クリックを優先）
+    if (isOnLinkTarget(e)) {
+      dragArmed = false;
+      isDragging = false;
+      return;
+    }
+
+    dragArmed = true;
+    isDragging = false;
+
+    startX = lastX = e.clientX;
+    startY = lastY = e.clientY;
+  });
+
+  map.addEventListener('pointermove', (e) => {
+    if (!dragArmed) return;
+
+    const dx0 = e.clientX - startX;
+    const dy0 = e.clientY - startY;
+
+    // まだドラッグ開始してないなら、しきい値超えたら開始
+    if (!isDragging) {
+      if (Math.hypot(dx0, dy0) < DRAG_THRESHOLD) return;
+      isDragging = true;
+      map.setPointerCapture(e.pointerId);
+    }
+
+    const dx = e.clientX - lastX;
+    const dy = e.clientY - lastY;
+    lastX = e.clientX;
+    lastY = e.clientY;
+
+    const rect = map.getBoundingClientRect();
+    const vb = svg.viewBox.baseVal;
+
+    tx += dx * (vb.width / rect.width);
+    ty += dy * (vb.height / rect.height);
+    apply();
+  });
+
+  map.addEventListener('pointerup', (e) => {
+    if (isDragging) {
+      try { map.releasePointerCapture(e.pointerId); } catch {}
+    }
+    dragArmed = false;
+    isDragging = false;
+  });
+
+  map.addEventListener('pointercancel', () => {
+    dragArmed = false;
+    isDragging = false;
+  });
+
+  // ---- ピンチズーム（2本指） ----
+  const pointers = new Map();
+  let pinchStartDist = null;
+  let pinchStartScale = 1;
+  let pinchCenter = null;
+
+  const dist = (a,b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
+
+  map.addEventListener('pointerdown', (e) => {
+    pointers.set(e.pointerId, e);
+    if (pointers.size === 2) {
+      const [p1, p2] = Array.from(pointers.values());
+      pinchStartDist = dist(p1, p2);
+      pinchStartScale = scale;
+      pinchCenter = { x:(p1.clientX+p2.clientX)/2, y:(p1.clientY+p2.clientY)/2 };
+    }
+  });
+
+  map.addEventListener('pointermove', (e) => {
+    if (!pointers.has(e.pointerId)) return;
+    pointers.set(e.pointerId, e);
+
+    if (pointers.size === 2 && pinchStartDist) {
+      const [p1, p2] = Array.from(pointers.values());
+      const d = dist(p1, p2);
+      let next = pinchStartScale * (d / pinchStartDist);
+      next = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+      zoomAt(pinchCenter.x, pinchCenter.y, next);
+    }
+  });
+
+  map.addEventListener('pointerup', (e) => {
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) {
+      pinchStartDist = null;
+      pinchCenter = null;
+    }
+  });
+
+  // ---- ホイールズーム（PC） ----
+  map.addEventListener('wheel', (e) => {
+    e.preventDefault();
+    const step = e.deltaY > 0 ? 0.9 : 1.1;
+    let next = scale * step;
+    next = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+    zoomAt(e.clientX, e.clientY, next);
+  }, { passive:false });
+
+  apply();
+})();
+</script>
+
+</body>
+</html>
+>>>>>>> 4fa89db42454ad0a316f067d839c77c95dceebad
