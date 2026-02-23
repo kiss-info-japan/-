@@ -1,228 +1,470 @@
-<!doctype html>
+<!doctype html>  
 <html lang="ja">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>内在神学会</title>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<title>まるやま こゆる（圓山越）</title>
 
 <style>
-html,body{
-  margin:0;
-  padding:0;
-  background:#ffffff;
-  color:#111;
-  font-family:"Hiragino Mincho ProN","Yu Mincho","MS Mincho","Times New Roman",serif;
-  line-height:2;
-  letter-spacing:0.03em;
-}
+  :root{
+    --page-bg: #dfe8c6;
+    --window-bg: #eef4d9;
+    --panel: #e7efc9;
+    --panel2:#dde7b9;
+    --line: #6c7a45;
+    --line2:#9aaa72;
+    --text: #111;
+    --link: #1a3da8;
+    --linkv:#5b2aa8;
+  }
 
-main{
-  max-width:680px;
-  margin:0 auto;
-  padding:100px 20px 160px;
-}
+  html,body{
+    margin:0;
+    padding:0;
+    color:var(--text);
+    font-family: "MS PGothic","MS Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+    font-size: 14px;
+    line-height: 1.75;
+    background: var(--page-bg);
+  }
 
-h1{
-  font-size:16px;
-  font-weight:500;
-  letter-spacing:0.2em;
-  margin:0 0 100px 0;
-}
 
-h2{
-  font-size:14px;
-  font-weight:500;
-  margin:80px 0 30px 0;
-}
 
-p{
-  margin:18px 0;
-}
+  .window{
+    width: min(1000px, 92vw);
+    margin: 26px auto;
+    background: var(--window-bg);
+    border: 2px solid var(--line);
+    box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
+  }
 
-footer{
-  margin-top:140px;
-  font-size:11px;
-  color:#888;
-}
+  /* タイトルバー：丸3つなし */
+  .titlebar{
+    display:flex;
+    align-items:center;
+    padding: 6px 10px;
+    border-bottom: 2px solid var(--line);
+    background: linear-gradient(#e9f0cf, #dbe7b5);
+  }
+  .titletext{
+    font-size: 12px;
+    letter-spacing: .05em;
+    opacity:.85;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
 
+  .inner{ padding: 18px; }
+
+  /* ★タイトルに横長画像（header_banner.jpg）を背景として挿入 */
+  .site-title{
+    border: 2px solid var(--line);
+    background-color: var(--panel);
+    background-image: url("header_banner.jpg"); /* 同じフォルダに置く */
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+    padding: 16px 16px;
+    margin: 8px 0 10px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  .site-title .title-span{
+    position: relative;
+    display:inline-block;
+    font-size: 38px;
+    font-weight: 700;
+    letter-spacing: .06em;
+  }
+
+  .subline{
+    margin: 0 0 14px;
+    font-size: 12px;
+    opacity: .9;
+  }
+
+  .topnav{
+    display:flex;
+    gap: 12px;
+    margin: 0 0 10px;
+    padding: 0;
+    list-style:none;
+  }
+  .topnav a{
+    display:inline-block;
+    padding: 8px 18px;
+    border: 2px solid var(--line);
+    background: #f3f7df;
+    color: #111;
+    text-decoration:none;
+    font-weight: 700;
+  }
+  .topnav a:hover{ background:#fff; }
+
+  .hr-dots{
+    border:0;
+    border-top: 2px dashed rgba(0,0,0,.25);
+    margin: 14px 0 18px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns: 280px 1fr;
+    gap: 18px;
+    align-items:start;
+  }
+
+  .box{
+    border: 2px solid var(--line);
+    background: var(--panel);
+  }
+  .box .box-h{
+    background: var(--panel2);
+    border-bottom: 2px solid var(--line2);
+    padding: 8px 10px;
+    font-weight: 700;
+    letter-spacing: .08em;
+  }
+  .box .box-b{
+    padding: 10px 12px;
+  }
+
+  .menu{
+    margin:0;
+    padding-left: 18px;
+  }
+  .menu li{ margin: 6px 0; }
+
+  a{ color: var(--link); text-decoration: underline; }
+  a:visited{ color: var(--linkv); }
+
+  .welcome{ margin-bottom: 16px; }
+
+  .content2{
+    display:grid;
+    grid-template-columns: 1fr 380px;
+    gap: 16px;
+    align-items:start;
+  }
+
+  .photo{
+    border: 2px solid var(--line);
+    background:#fff;
+    padding: 10px;
+  }
+  .photo img{
+    width:100%;
+    height:auto;
+    display:block;
+    border: 1px solid rgba(0,0,0,.35);
+  }
+  .photo .stack + .stack{ margin-top: 10px; }
+
+  .caption{
+    font-size: 12px;
+    margin-top: 8px;
+    opacity: .8;
+  }
+
+  .footer{
+    margin-top: 18px;
+    padding-top: 10px;
+    border-top: 2px dashed rgba(0,0,0,.25);
+    font-size: 12px;
+    opacity:.85;
+  }
+
+  /* 記事 */
+  .entry{ margin-top: 16px; }
+  .entry h3{
+    margin: 0;
+    font-size: 14px;
+    letter-spacing: .08em;
+  }
+  .meta{
+    font-size: 12px;
+    opacity: .8;
+    margin: 4px 0 10px;
+  }
+  .entry p{ margin: 10px 0; }
+
+  .quote{
+    padding: 10px 12px;
+    border: 1px solid rgba(0,0,0,.25);
+    background: rgba(255,255,255,.35);
+    margin: 10px 0;
+  }
+
+  /* コラム（タグなし） */
+  .column p{ margin: 8px 0; }
+  .column .small{
+    font-size: 12px;
+    opacity: .85;
+  }
+
+  @media (max-width: 900px){
+    .content2{ grid-template-columns: 1fr; }
+  }
+  @media (max-width: 760px){
+    .grid{ grid-template-columns: 1fr; }
+    .site-title .title-span{ font-size: 30px; }
+  }
 </style>
 </head>
 
 <body>
-<main>
+  <div class="window">
+    <div class="titlebar" aria-hidden="true">
+      <div class="titletext"></div>
+    </div>
+
+    <div class="inner">
+      <div class="site-title"><span class="title-span">こゆるのＢｌｏｇ</span></div>
+
+
+      <hr class="hr-dots" />
+
+      <div class="grid">
+        <!-- 左サイド -->
+        <aside>
+          <div class="box">
+            <div class="box-h">メニュー</div>
+            <div class="box-b">
+              <ul class="menu">
+                <li><a href="#profile">プロフィール</a></li>
+                
+                <li><a href="#text">本文</a></li>
+                <li><a href="#columns">コラム</a></li>
+                <li><a href="#links">リンク</a></li>
+                <li><a href="#bbs">掲示板（工事中）</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="box" style="margin-top:14px;">
+            <div class="box-h">更新履歴</div>
+            <div class="box-b">
+              2006/10/03　コラム／本文を更新しました<br>
+              2005/07/21　ページ構成を整理しました<br>
+              2003/06/15　仮公開<br>
+            </div>
+          </div>
+
+          <div class="box" style="margin-top:14px;">
+            <div class="box-h">お願い</div>
+            <div class="box-b">
+              ・転載は禁止　転載はやめてください（ほんとに）<br>
+              ・感想は掲示板へ（※工事中）<br>
+            </div>
+          </div>
+        </aside>
+
+        <!-- 右：本文 -->
+        <section id="home">
+          <div class="box welcome">
+            <div class="box-h">お知らせ</div>
+            <div class="box-b">
+              ようこそ。<br>
+              圓山 越（まるやま こゆる）です。<br>
+              ここには、最近考えてることを、そのまま置いてます。<br>
+              内在する神についてとか。（むずかしい話もしますが、まあ気楽にどうぞ）
+              <br>
+              ※いちおう言っておきますが、勧誘じゃないです（笑）
+            </div>
+          </div>
+
+       
+
+
+          <!-- ===== プロフィール ===== -->
+          <div class="box entry" id="profile">
+            <div class="box-h"><h3>略歴</h3></div>
+            <div class="box-b">
+              <p><strong>圓山　越（まるやま こゆる）</strong></p>
+              <ul> <li>1971年　キリスト教の家庭に生まれる</li> <li>幼少期より教会に通いながら育つ</li> <li>大学で心理学を学ぶ</li> <li>フロイトの「超自我」概念に関心を持つ</li> <li>フーコー『監獄の誕生』を読み、監視構造と宗教の類似性に気づく</li> <li>内在神学会を発足、セミナーを開始</li> </ul>
+            </div>
+          </div>
+          
+            <!-- 右（写真：★2枚にする） -->
+            <div class="photo">
+              <div class="stack">
+                <img src="etsu.jpg" alt="セミナーの写真1">
+                <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう？</div>
+              </div>
+
+              <div class="stack">
+                <img src="seminor.jpg" alt="セミナーの写真2">
+                <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
+              </div>
+            </div>
+          </div>
+<!-- ===== 本文 ===== -->
+          <div class="box entry" id="text">
+            <div class="box-h"><h3>見られているという感覚について</h3></div>
+            <div class="box-b">
+              <div class="meta">2006/10/03　まるやま こゆる（圓山越）</div>
+
+              <p>神はいない、と私は思ってます。</p>
+              <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
+
+              <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ 自分が薄くなる感じ。あれ。</p>
+              <p>大げさな話じゃなくて、生活の手触りの話です。</p>
+
+              <p class="quote">例えば、あなたは愛されている、と言われたらどう思いますか。</p>
+
+              <p>突然、誰からともなく。事実かどうかは、まあ、いったん置いときましょう。</p>
+              <p>問題は「誰に？」って考えた瞬間です。</p>
 
-<h1>内在神学会</h1>
+              <p>その問いが浮かんだとき、あなたは何かを想像する。父かもしれない。昔の恋人かもしれない。「世界に」かもしれない。</p>
 
-<h2>基本教義</h2>
+              <p>あるいは「何の話だ」って打ち消すかもしれない。でも、打ち消すにも、いったん像を作らないとできないんですよね。</p>
 
-<p>私たちの前提は単純です。</p>
+              <p>愛の主体を確定できなくても、形だけは一度、頭に出る。</p>
+              <p>私はキリスト教の家庭で育って、いつも「神様が見てるよ」って言われてきました。</p>
 
-<p>神は存在しません。</p>
+              <p>誰も見てないと思ってるときと、誰かが見てるかもしれないと思ってるときでは、姿勢が変わる。声の出し方もちょっと変わる。</p>
 
-<p>少なくとも、外部には。</p>
+              <p>神（上位存在）が本当にいるかどうかは、ここでは二の次です。</p>
+              <p>大事なのは、「見られてるかもしれない」って想定が、あなたの振る舞いに影響するかどうか。</p>
 
-<p>空にも、地面にも、<br>
-どこにも見つかりません。</p>
+              <p>もし影響するなら、地球で「神」が担ってきた役目が、神の存在の是非に関係なく動いてる、ってことになりませんかね。</p>
 
-<p>しかし人間は、<br>
-見守られていない状態に耐えられません。</p>
+              <p>私はそこだけを考えてます。神の機能って、結局なんなんだろう、と。</p>
+              <p>神って、内側にある意識（監視の声）みたいなもので、そこに物語がくっつくと宗教になるだけなんじゃないの？ って。</p>
 
-<p>それは信仰とは少し違う。</p>
+              <p>この考えが信仰かどうかは、まあ、どっちでもいいです。</p>
+              <p>ただ、生活の中に小さな観測者が立ち上がって、それだけで世界がちょっと変わるんです。</p>
+            </div>
+          </div>
+          <!-- ===== コラム ===== -->
+          <div class="box entry" id="columns">
+            <div class="box-h"><h3>コラム</h3></div>
+            <div class="box-b">
 
-<p>もっと静かで、<br>
-もっと個人的な欲求です。</p>
+              <div class="box column" style="margin-top:0;">
+                <div class="box-h">きっかけ</div>
+                <div class="box-b">
+                  <p class="small">子どもの頃から教会に通ってました。祈りの言葉とか、聖書のフレーズとか身に沁みついてました。</p>
+                  <p class="small">ある日の礼拝で、牧師が言いました。「神は常にあなたを見ている」って。</p>
+                  <p class="small">で、ふつうは「空の上」とか想像しそうなんだけど、私はなぜか胸の奥が先に反応したんです。</p>
+                  <p class="small">見られてる、って感じたのが、天井の向こうじゃなくて、自分の中から。そこが妙に引っかかった。</p>
+                  <p class="small">その後、部屋で一人で「まあいいか」って独り言を言ったときも、言葉がどこかに届いた感じがして。</p>
+                  <p class="small">誰もいないのにね。</p>
+                </div>
+              </div>
 
-<p>誰かに見られている。<br>
-誰かに把握されている。<br>
-誰かに評価されている。</p>
+              <div class="box column" style="margin-top:14px;">
+  <div class="box-h">超自我と監視</div>
+  <div class="box-b">
+    <p class="small">心理学でフロイトの「超自我」を知ったんですが、これがまあ、妙にしっくり来ましてね。</p>
 
-<p>この構造がなければ、<br>
-人は自分の輪郭を保てない。</p>
+    <p class="small">人の中には「自分を見張る自分」がいる、という話です。</p>
 
-<p>私たちは神を信じません。</p>
+    <p class="small">子どもの頃に親から言われた言葉、「ちゃんとしなさい」とか「嘘をつくな」とか、そういうのが、いつのまにか自分の内側に住みつく。</p>
 
-<p>代わりに、<br>
-神が発生する瞬間を設計します。</p>
-
-<h2>神の発生について</h2>
-
-<p>神は実在によって成立するのではありません。</p>
-
-<p>想定によって成立します。</p>
-
-<p>「誰かが自分を見ているかもしれない」</p>
-
-<p>この一文が胸に入り込んだとき、<br>
-内部に、わずかな緊張が生じます。</p>
-
-<p>その緊張は、名前を持ちません。</p>
-
-<p>しかし、視線の形をしている。</p>
-
-<p>その視線は外部にはありません。</p>
-
-<p>あなたの内側に生成されます。</p>
-
-<p>それは最初、ただの可能性です。</p>
-
-<p>けれど可能性は、<br>
-繰り返し意識されることで構造になります。</p>
-
-<p>構造はやがて、<br>
-人格のように振る舞い始めます。</p>
-
-<p>見られている。<br>
-把握されている。<br>
-忘れられていない。</p>
-
-<p>それが神の最小単位です。</p>
-
-<p>神は存在しません。</p>
-
-<p>しかし、<br>
-想定を取り消せなくなった瞬間、<br>
-それは機能します。</p>
-
-
-<p>たとえば、「あなたは愛されている」</p>
-
-<p>この文は慰めではありません。</p>
-
-<p>確認でもありません。</p>
-
-<p>それは空白です。</p>
-
-<p>愛の主体が示されないことで、<br>
-あなたは必ず補完します。</p>
-
-<p>誰が？</p>
-
-<p>その問いは、<br>
-答えを持たないまま内部に残ります。</p>
-
-<p>答えがないからこそ、消えない。</p>
-
-<p>想定は続きます。</p>
-
-<p>その持続こそが目的です。</p>
-
-<p>交渉ではありません。<br>
-説明でもありません。</p>
-
-<p>ただ投下される。</p>
-
-<p>受け取る準備のない場所へ。</p>
-
-<p>私たちは言葉を手渡しません。</p>
-
-<p>置きます。</p>
-
-<p>拾われるかどうかは問題ではありません。</p>
-
-<p>一度視界に入り、<br>
-意味を認識された時点で十分です。</p>
-
-<p>言葉は内部に入り込みます。</p>
-
-<p>そして、根拠を持たないまま残ります。</p>
-
-<p>本団体における呪いとは、<br>
-恐怖ではありません。</p>
-
-<p>もっと穏やかで、<br>
-もっと持続的なものです。</p>
-
-<p>「あなたは愛されている」</p>
-
-<p>この文を読んだとき、<br>
-あなたはそれを否定することもできます。</p>
-
-<p>しかし否定するには、<br>
-まず想定しなければならない。</p>
-
-<p>愛の主体を。</p>
-
-<p>想定した瞬間、<br>
-それは内部に配置されます。</p>
-
-<p>拒絶しても、無視しても、肯定しても。</p>
-
-<p>一度生成された観測者は、<br>
-完全には消えません。</p>
-
-<p>あなたが一人でいるとき、<br>
-ふと浮かぶ。</p>
-
-<p>「誰かが見ているかもしれない」</p>
-
-<p>その感覚は、<br>
-どこから来たのか思い出せない。</p>
-
-<p>それが呪いです。</p>
-
-
-
-<p>本団体は信者を持ちません。</p>
-
-<p>儀式は拡散によって完了します。</p>
-
-<p>理論を理解した者は、<br>
-それを他者に説明できます。</p>
-
-<p>説明した瞬間、<br>
-同じ構造が他者の内部で再生されます。</p>
-
-<p>神は存在しません。</p>
-
-<p>しかし、<br>
-あなたがその可能性を完全に否定できなくなったなら、<br>
-すでに機能しているのです。</p>
-
-
-<footer>
-© 内在神学会
-</footer>
-
-</main>
+    <p class="small">で、ある日気づくんですよ。親がいなくても、その声が鳴っている。</p>
+
+    <p class="small">誰も見てないはずなのに、「それはやめとけ」とか「それは恥ずかしいぞ」とか、勝手にチェックが入る。</p>
+
+    <p class="small">つまり、監視役は外から内へ引っ越してくるわけです。</p>
+
+    <p class="small">さらにフーコーの話を読むと、これが社会レベルでも起きている、と書いてある。</p>
+
+    <p class="small">パノプティコンっていう監獄の設計があって、中央の塔から囚人を見張る仕組みなんですが、面白いのは「本当に見ているかどうか」は関係ないという点です。</p>
+
+    <p class="small">見られているかもしれない、という状況だけで、人は勝手に背筋を伸ばす。</p>
+
+    <p class="small">ここが肝心です。</p>
+
+    <p class="small">実在の視線より、「想定された視線」のほうが強い。</p>
+
+    <p class="small">で、私は思ったわけです。</p>
+
+    <p class="small">神という概念も、これと同じ構造なんじゃないか、と。</p>
+
+    <p class="small">神が空の上にいるかどうかはさておき、「神が見ているかもしれない」と想定した瞬間、内側に観測者が立ち上がる。</p>
+
+    <p class="small">その観測者は、あなたの行動を逐一チェックするわけじゃないですが、少なくとも“無人”ではなくなる。</p>
+
+    <p class="small">完全に自由、完全に無視されている状態って、実はけっこう不安定なんです。</p>
+
+    <p class="small">だから人は、自分の中に監視役を作る。</p>
+
+    <p class="small">それが超自我であり、世間の目であり、場合によっては神と呼ばれるものなんじゃないか、と私は思っています。</p>
+  </div>
+</div>
+
+              <div class="box column" style="margin-top:14px;">
+                <div class="box-h">コンビニ</div>
+                <div class="box-b">
+                  <p class="small">たとえばですよ。深夜のコンビニで、誰も見てない、カメラもない、証拠も残らない状況があるとする。</p>
+                  <p class="small">そのとき、手が止まる人がいる。止まらない人もいる。</p>
+                  <p class="small">止まる人って、誰に見られてるんでしょうね？ 外の誰かじゃなく自分が自分を見てる。</p>
+                  <p class="small">神が内在してるって仮説は、ここに近いと思ってます。</p>
+                  <p class="small">これで急に善人になるとかじゃないですよ（笑） でも、言い訳が通用しなくなる感じは出る。</p>
+                </div>
+              </div>
+
+              <div class="box column" style="margin-top:14px;">
+                <div class="box-h">世間の目</div>
+                <div class="box-b">
+                  <p class="small">「世間の目」って言うじゃないですか。世間って人じゃないのに、妙に効くんですよね。</p>
+                  <p class="small">心理学だと、親とか先生とか近所とか、いろんな視線が混ざって、いつのまにか自分の中に「こうするべき」という規律ができる、って話がある。</p>
+                  <p class="small">つまり、世間は外にあるようで、中にある（ナニ～？）。</p>
+                  <p class="small">世間を連れて歩いてる自分が、いちばん厄介なんですよ。</p>
+                </div>
+              </div>
+
+              <div class="box column" style="margin-top:14px;">
+                <div class="box-h">祈りの技術</div>
+                <div class="box-b">
+                  <p class="small">祈りってお願い事だと思われがちなんですが、私は「言葉の型」だと思ってます。</p>
+                  <p class="small">言葉にすると気持ちが少し整う。黙ってると膨らむものが、文章になると輪郭が出るんだよね。</p>
+                  <p class="small">祈りは、それを定期的にやるための装置なのかもしれない。</p>
+                  <p class="small">神がいるから祈るんじゃなくて、祈るという形式を保つために、神という受け手を置いたのでは？ ってね。</p>
+                  <p class="small">だから私は祈りを否定しません。受け手が外にいなくても、話しかける相手として中に置けばいい、と思ってます。</p>
+                  <p class="small">内在神学会の説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
+                </div>
+              </div>
+
+            </div>
+          </div>
+
+          
+
+          <!-- ===== リンク ===== -->
+          <div class="box entry" id="links">
+            <div class="box-h"><h3>リンク</h3></div>
+            <div class="box-b">
+              <p>・<a href="#" onclick="alert('工事中です'); return false;">内在神学会（配布用）</a>（工事中）</p>
+              <p>・<a href="#" onclick="alert('工事中です'); return false;">掲示板</a>（工事中）</p>
+            </div>
+          </div>
+
+          <div class="box entry" id="bbs">
+            <div class="box-h"><h3>掲示板（工事中）</h3></div>
+            <div class="box-b">
+              <p>現在準備中です。（いつ完成するかは…まあ…💦）</p>
+            </div>
+          </div>
+
+          <div class="footer">
+            © 内在神学会　無断転載禁止
+          </div>
+
+        </section>
+      </div>
+    </div>
+  </div>
+
+<script>
+  const el = document.getElementById("counter");
+  const base = 1234;
+  const seed = Math.floor(Date.now() / (1000*60*60));
+  const n = base + (seed % 5000);
+  el.textContent = String(n).padStart(8, "0");
+</script>
 </body>
 </html>
