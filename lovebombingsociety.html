@@ -2,8 +2,8 @@
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=1000" />
-<title>まるやま こゆる（圓山越）</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>☆こゆるのＢｌｏｇ☆</title>
 
 <style>
   :root{
@@ -18,25 +18,89 @@
     --linkv:#5b2aa8;
   }
 
+ html,body{
+  margin:0;
+  padding:0;
+  color:var(--text);
+  font-family: "MS PGothic","MS Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
+  font-size:16px;
+  line-height:1.8;
+  background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
+}
+  /* 可変幅 */
+.window{
+  max-width:1000px;
+  width:95%;
+  margin:20px auto;
+  background: var(--window-bg);
+  border: 2px solid var(--line);
+  box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
+}
+/* 2カラム（PC） */
+.grid{
+  display:grid;
+  grid-template-columns:280px 1fr;
+  gap:18px;
+}
+
+
+/* 本文の文字を大きめに */
+.entry p{
+  font-size:18px;
+}
+/* コラム文字サイズ修正 */
+.column .small{
+  font-size:18px;
+  line-height:1.8;
+}
+/* スマホではさらに大きく */
+@media (max-width:768px){
+  .column .small{
+    font-size:20px;
+  }
+}
+/* 見出しも少し大きく */
+.entry h3{
+  font-size:18px;
+}
+/* 画像は常に可変 */
+img{
+  max-width:100%;
+  height:auto;
+}
+
+/* ===== スマホ ===== */
+@media (max-width: 768px){
+
   html,body{
-    margin:0;
-    padding:0;
-    color:var(--text);
-    font-family: "MS PGothic","MS Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
-    font-size: 14px;
-    line-height: 1.75;
-    background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
-    overflow-x: auto;
+    font-size:18px;
   }
 
-  .window{
-    width: 1000px;
-    margin: 26px auto;
-    background: var(--window-bg);
-    border: 2px solid var(--line);
-    box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
+  .grid{
+    grid-template-columns:1fr;
   }
 
+  aside{
+    order:1;
+  }
+
+  section{
+    order:2;
+  }
+
+  .entry p{
+    font-size:20px;
+  }
+
+  .column .small{
+    font-size:19px;
+  }
+
+  .entry h3{
+    font-size:20px;
+  }
+
+}
   .titlebar{
     display:flex;
     align-items:center;
@@ -289,8 +353,8 @@
               <p>神はいない、と私は思ってます。</p>
               <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
 
-              <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ 自分が薄くなる感じ。あれ。</p>
-              <p>大げさな話じゃなくて、生活の手触りの話です。</p>
+              <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ </p>
+              <p>大げさな話じゃなくてです。</p>
 
               <p class="quote">例えば、あなたは愛されている、と言われたらどう思いますか。</p>
 
@@ -428,15 +492,18 @@
           <div class="box entry" id="links">
             <div class="box-h"><h3>リンク</h3></div>
             <div class="box-b">
-              <p>・<a href="#" onclick="alert('工事中です'); return false;">内在神研究サークル（配布用）</a>（工事中）</p>
-              <p>・<a href="#" onclick="alert('工事中です'); return false;">掲示板</a>（工事中）</p>
+<p>
+  ・<a href="chirashi.html" target="_blank">
+    内在神研究サークル（配布用）
+  </a>
+</p>              
             </div>
           </div>
 
           <div class="box entry" id="bbs">
             <div class="box-h"><h3>掲示板（工事中）</h3></div>
             <div class="box-b">
-              <p>現在準備中です。（いつ完成するかは…まあ…💦）</p>
+              <p>現在準備中です。（いつ完成するかは…まあ…(=^・^=)）</p>
             </div>
           </div>
 
