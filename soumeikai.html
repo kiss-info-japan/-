@@ -2,13 +2,13 @@
 <html lang="ja">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=900, initial-scale=0.42, maximum-scale=1, user-scalable=yes" />
   <title>双命会</title>
   <style>
     :root{
       --paper-pink: #f9e8eb;
-      --paper-green: #eef9ec;
       --accent: #c88a97;
+      --paper-green: #eef9ec;
       --text: #3b2f2f;
       --muted: #6b5a5a;
       --container-width: 820px;
@@ -18,241 +18,208 @@
       margin:0;
       font-family: "Hiragino Mincho ProN", "Hiragino Mincho Pro", "Yu Mincho", "MS Mincho", "Times New Roman", serif;
       color:var(--text);
-background: linear-gradient(
-    180deg,
-    var(--paper-pink) 0%,
-    #f7f4f4 35%,
-    #f3f7f3 65%,
-    var(--paper-green) 100%
-  );      
-  -webkit-font-smoothing:antialiased;
+      background: linear-gradient(
+        180deg,
+        var(--paper-pink) 0%,
+        #f7f4f4 35%,
+        #f3f7f3 65%,
+        var(--paper-green) 100%
+      );
+      -webkit-font-smoothing:antialiased;
       line-height:1.9;
-      background-attachment: fixed; /* スクロールでも崩れにくい */
+      background-attachment: fixed;
+
+      /* ✅ 全体の文字を小さめに */
+      font-size: 15px;
     }
 
     .wrap{
       max-width:var(--container-width);
-      margin:48px auto;
+      margin:42px auto;                 /* ✅ 少し詰める */
       background: rgba(255,255,255,0.86);
       border:1px solid rgba(0,0,0,0.06);
       box-shadow: 0 8px 30px rgba(30,30,30,0.06);
-      padding:56px 64px 80px 64px;
+      padding:48px 58px 72px 58px;      /* ✅ 少し詰める */
       position:relative;
     }
 
+    .hero{
+      text-align:center;
+      padding: 14px 10px 6px;           /* ✅ 少し詰める */
+    }
 
-.logo-wrap img{
-  width:100%;
-  height:100%;
-  object-fit:cover;
-  display:block;
-}
-.hero{
-  text-align:center;
-  padding: 20px 10px 6px;
-}
+    /* ✅ 楕円を少し小さく */
+    .hero .mark{
+      width: 170px;
+      height: 255px;
+      margin: 0 auto 14px;
+      border-radius: 50% / 60%;
+      overflow: hidden;
+      box-shadow: 0 12px 28px rgba(0,0,0,0.14);
+      flex: 0 0 auto;
+    }
+    .hero .mark img{
+      width:100%;
+      height:100%;
+      object-fit: cover;
+      object-position: center center;
+      display:block;
+    }
 
-.hero .mark{
-  width: 140px;
-  height: 140px;
-  margin: 0 auto 14px;
-  border-radius: 50%;
-  overflow: hidden;
-  box-shadow: 0 10px 24px rgba(0,0,0,0.12);
-}
+    /* ✅ タイトルも一段小さく */
+    .hero h1{
+      font-size: 30px;
+      margin: 0;
+      letter-spacing: 5px;
+    }
 
-.hero .mark{
-  width: 200px;        /* ← 横幅を拡大 */
-  height: 300px;       /* ← 縦をさらに大きく（楕円） */
-  margin: 0 auto 18px;
-  border-radius: 50% / 60%;  /* ← 縦長楕円のキモ */
-  overflow: hidden;
-  box-shadow: 0 14px 32px rgba(0,0,0,0.16);
-}
-.hero .mark img{
-  width:100%;
-  height:100%;
-  object-fit: cover;
-  object-position: center center; /* ← まずは明示 */
-  display:block;
-}
+    .hero .lead{
+      margin: 6px 0 12px;
+      font-size: 13px;
+      color: var(--muted);
+      letter-spacing: 0.08em;
+    }
 
+    .hero nav{
+      margin: 16px auto 0;
+      padding-top: 16px;
+      border-top: 1px dashed rgba(0,0,0,0.10);
+      display:flex;
+      gap:10px;
+      justify-content:center;
+      flex-wrap:wrap;
+    }
 
-.hero h1{
-  font-size: 34px;
-  margin: 0;
-  letter-spacing: 6px;
-}
+    .hero nav a{
+      text-decoration:none;
+      color: var(--accent);
+      font-weight: 700;
+      padding: 6px 10px;               /* ✅ 少し小さく */
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 13px;                 /* ✅ 少し小さく */
+    }
 
-.hero .lead{
-  margin: 6px 0 14px;
-  font-size: 14px;
-  color: var(--muted);
-  letter-spacing: 0.08em;
-}
+    .mark-row{
+      display:flex;
+      align-items:center;
+      justify-content:center;
+      gap: 14px;                       /* ✅ 少し詰める */
+      margin: 0 auto 12px;
+      flex-wrap: nowrap;
+    }
 
-.hero nav{
-  margin: 18px auto 0;
-  padding-top: 18px;
-  border-top: 1px dashed rgba(0,0,0,0.10);
-  display:flex;
-  gap:10px;
-  justify-content:center;
-  flex-wrap:wrap;
-}
-
-.hero nav a{
-  text-decoration:none;
-  color: var(--accent);
-  font-weight: 700;
-  padding: 7px 12px;
-  background: rgba(255, 255, 255, 0.6);
-}
-
-/* ロゴ＋羽の並び */
-.mark-row{
-  display:flex;
-  align-items:center;
-  justify-content:center;
-  gap: 16px;                 /* ロゴと羽の間隔 */
-  margin: 0 auto 14px;
-}
-
-/* 羽 */
-.hane{
-  width: 160px;              /* 羽の大きさ */
-  height: auto;
-  display:block;
-  opacity: 0.95;
-  filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
-}
-
-
-
-/* スマホでは羽を小さく（or 消す） */
-@media (max-width:700px){
-  .hane{ width: 110px; }
-  .mark-row{ gap: 10px; }
-}
-@media (max-width:520px){
-  .hane{ display:none; }     /* 小さすぎて窮屈になるので消す */
-}
-
-
-@media (max-width:600px){
-  .hero h1{font-size:30px; letter-spacing:4px;}
-  .hero .mark{width:120px;height:120px;}
-}
-
-   
+    /* ✅ 羽も一回り小さく */
+    .hane{
+      width: 140px;
+      height: auto;
+      display:block;
+      opacity: 0.95;
+      filter: drop-shadow(0 10px 18px rgba(0,0,0,0.12));
+      flex: 0 0 auto;
+    }
 
     .post{
-      margin-top:34px;
-      padding:22px;
+      margin-top:28px;                  /* ✅ 少し詰める */
+      padding:18px;                     /* ✅ 少し詰める */
       background:linear-gradient(180deg, rgba(250,244,246,0.8), rgba(246,250,246,0.8));
       border:1px solid rgba(0,0,0,0.03);
     }
-    .post h2{font-size:22px;margin:0 0 8px 0;}
-    .meta{font-size:13px;color:var(--muted);margin-bottom:12px;}
+
+    /* ✅ 見出しも一段小さく */
+    .post h2{font-size:20px;margin:0 0 8px 0;}
+    .meta{font-size:12px;color:var(--muted);margin-bottom:10px;}
 
     .hr{
-      margin:18px 0;
+      margin:16px 0;
       border:0;
       border-top:1px dashed rgba(0,0,0,0.10);
     }
 
     footer{
-      margin-top:44px;
-      font-size:13px;
+      margin-top:36px;
+      font-size:12px;
       color:var(--muted);
       border-top:1px solid rgba(0,0,0,0.04);
-      padding-top:18px;
-      text-align: center; /* ← これ追加 */
+      padding-top:16px;
+      text-align: center;
     }
 
-    p, li{font-size:16px}
+    /* ✅ 本文のサイズを小さめに */
+    p, li{font-size:15px}
     ul{padding-left:1.1em}
-    .note{font-size:14px;color:var(--muted)}
+    .note{font-size:13px;color:var(--muted)}
+
     .quote{
-      padding:14px 16px;
+      padding:12px 14px;
       border-left:3px solid rgba(200,138,151,0.45);
       background:rgba(255,255,255,0.55);
-      margin:14px 0;
+      margin:12px 0;
       color:var(--text);
+      font-size: 15px;
     }
-    .smallcaps{letter-spacing:1px; font-size:13px; color:var(--muted)}
+
+    .smallcaps{letter-spacing:1px; font-size:12px; color:var(--muted)}
     code.k{
       font-family: inherit;
       background: rgba(255,255,255,0.6);
       border:1px solid rgba(0,0,0,0.06);
       padding:1px 6px;
       border-radius:6px;
+      font-size: 0.95em;
     }
 
     @media (max-width:900px){
-      .wrap{padding:40px 26px; margin:28px 14px}
+      .wrap{padding:36px 22px; margin:24px 14px}
       .logo-wrap{position:relative;left:auto;top:auto;margin:-90px auto 18px;display:block}
       header h1, header p.lead, nav{padding-left:0;margin-left:0}
     }
+
     .image-pair{
-  margin: 22px 0 28px;
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 14px;
-}
-
-.image-pair img{
-  width: 100%;
-  height: auto;
-  display: block;
- 
-}
-
-/* スマホでは縦並び */
-@media (max-width:600px){
-  .image-pair{
-    grid-template-columns: 1fr;
-  }
-}
-.image-pair figure{
-  margin: 0;
-}
-
-.image-pair figcaption{
-  margin-top: 6px;
-  font-size: 13px;
-  line-height: 1.6;
-  color:#3b2f2f;
-  letter-spacing: 0.02em;
-}
+      margin: 18px 0 22px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 14px;
+    }
+    .image-pair img{
+      width: 100%;
+      height: auto;
+      display: block;
+    }
+   
+    .image-pair figure{ margin: 0; }
+    .image-pair figcaption{
+      margin-top: 6px;
+      font-size: 12px;                 /* ✅ 少し小さく */
+      line-height: 1.6;
+      color:#3b2f2f;
+      letter-spacing: 0.02em;
+    }
   </style>
 </head>
 
 <body>
   <div class="wrap">
     <header class="hero">
-  <div class="mark-row" aria-hidden="true">
-  <img class="hane hane-left" src="hane-left.png" alt="" />
-  
-  <div class="mark">
-    <img src="soumeikai.png" alt="双命会の紋章" />
-  </div>
-  
-  <img class="hane hane-right" src="hane-right.png" alt="" />
-</div>
+      <div class="mark-row" aria-hidden="true">
+        <img class="hane hane-left" src="hane-left.png" alt="" />
 
+        <div class="mark">
+          <img src="soumeikai.png" alt="双命会の紋章" />
+        </div>
 
-  <h1>双命会</h1>
-  <p class="lead">── ひとはみな、ふたりでひとつ ──</p>
+        <img class="hane hane-right" src="hane-right.png" alt="" />
+      </div>
 
-  <nav>
-    <a href="#origin">はじめに</a>
-    <a href="#doctrine">教義</a>
-    <a href="#method">片割れの定義</a>
-    <a href="#rituals">ダイアド</a>
-  </nav>
-</header>
+      <h1>双命会</h1>
+      <p class="lead">── ひとはみな、ふたりでひとつ ──</p>
 
+      <nav>
+        <a href="#origin">はじめに</a>
+        <a href="#doctrine">教義</a>
+        <a href="#method">片割れの定義</a>
+        <a href="#rituals">ダイアド</a>
+      </nav>
+    </header>
     <article class="post" id="origin">
       <h2>はじめに</h2>
       <div class="meta">ゆずヶ原牧場／三島泰久</div>
