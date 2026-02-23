@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>脱我連合</title>
+  <style>
+    
+
+    body {
+        font-family: '明朝体', serif;
+        background: radial-gradient(ellipse,
+  #8b0000 0%,
+  #d1aaaa 65%,
+  #8b0000);      color: #000000; /* 黒い文字 */
+      
+    }
+   
+    .header {
+        
+        display: flex;
+        flex-direction: column;  /* 縦方向に並べる */
+        align-items: center;     /* 水平方向に中央ぞろえ */
+        justify-content: center; /* 垂直方向に中央ぞろえ */
+        
+    }
+    
+    header img {
+      height: auto;
+      width: auto;
+      max-width: 300px;
+    }
+
+    #datsugalogo {
+      height: 300px;
+    }
+
+    nav ul {
+        font-family: '07ふぉんとうは怖い明朝体', serif;
+      list-style-type: none;
+      padding: 0;
+      margin-bottom: 50px;
+      text-align: center;
+    }
+
+    nav ul li {
+      display: inline;
+      margin: 0 15px;
+    }
+
+    nav ul li a {
+      color: #000000; /* 黒 */
+      font-weight: bold;
+      text-decoration: none;
+      font-size: 16px;
+    }
+
+    nav ul li a:hover {
+      color: #ffffff; /* ホバー時に白色 */
+    }
+
+    main {
+    
+  width: 90%; /* モバイル対応のために幅を可変に */
+      padding: 20px;
+      max-width: 800px;
+      margin: 20px auto;
+    }
+    section {
+  margin-bottom: 80px; /* セクション間のスペースを追加 */
+}
+
+    section h2 {
+      font-size: 24px;
+      color: #000000; /* 黒 */
+      margin-bottom: 10px;
+      font-style: normal; /* italic解除 */
+    }
+
+    section p,
+    section ul li {
+      font-size: 16px;
+      color: #000000; /* 文字色を黒に */
+      margin-bottom: 1.5em;
+    }
+
+    section ul {
+      padding-left: 20px;
+    }
+
+    footer {
+        color: #000000;
+      text-align: center;
+      padding: 20px;
+      font-size: 14px;
+      border-top: 1px solid #8B0000; /* 深紅でアクセント */
+    }
+
+    footer a {
+      color: #8B0000; /* 深紅 */
+      text-decoration: none;
+    }
+
+    footer a:hover {
+      text-decoration: underline;
+      color: #ffffff; /* ホバー時に白色 */
+    }
+
+    .calendar-container {
+  margin-top: 20px;
+  border-radius: 8px;
+  padding: 10px;
+}   
+
+
+    .calendar-header {
+    font-family: '07ふぉんとうは怖い明朝体', serif;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      color: #000000;
+      margin-bottom: 30px;
+    }
+
+    .calendar-header button {
+        background: radial-gradient(circle, #96101000, #00000000); /* 外向きのグラデーション */
+        color: rgb(0, 0, 0);
+      border: none;
+      padding: 5px 10px;
+      border-radius: 4px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .calendar-header button:hover {
+        background: radial-gradient(circle, #8B0000, #00000000); /* 外向きのグラデーション */
+      color: #ffffff; /* 深紅色 */
+    }
+
+    .calendar-grid {
+      display: grid;
+      grid-template-columns: repeat(7, 1fr);
+      gap: 5px;
+    }
+
+    .day-name {
+        
+  font-weight: bold;
+  text-align: center;
+  color: #000000; /* 深紅 */
+  font-size: 18px; /* サイズを少し大きく */
+}
+
+.calendar-day {
+font-family: '07ふぉんとうは怖い明朝体', serif;
+  text-align: center;
+  padding: 15px;
+  border-radius: 6px;
+  font-size: 17px; /* 文字サイズを少し小さく */
+  font-style: bold;
+}
+.calendar-day:hover {
+    background: radial-gradient(circle, #8B0000, #8b000000); /* 外向きのグラデーション */
+    cursor: pointer;
+    color: white;
+
+}
+
+.logo-container {
+  display: flex;
+  flex-direction: column; /* ← 横並びを縦並びに変える */
+  align-items: center;    /* 中央揃え */
+  position: relative; /* ぼやけた円のエフェクト用 */
+
+}
+.logo-container::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 100%; /* 円のサイズを大きく */
+    height: 100%; /* 円のサイズを大きく */
+    background: radial-gradient(ellipse,
+  #8b0000 0%,
+  #d1aaaa 75%,
+  #8b0000 0%);/* 中心を#8b0000に */
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    filter: blur(50px); /* ぼかしの強さを強化 */
+    pointer-events: none; /* クリックなどの影響を受けないようにする */
+    z-index: -1; /* 他の要素の背後に配置 */
+}
+
+    .logo-container svg {
+      max-height: none;
+      width: 30%;
+      height: auto;
+    }
+
+    .midashi-image {
+  max-width: 300px;
+  height: auto;
+ margin-bottom: 50px;
+
+}
+.accordion-item {
+    margin-bottom: 10px;
+  }
+
+  .accordion-title {
+    background: #00000000; /* 外向きのグラデーション */
+    color: #000000;
+    padding: 15px;
+    width: 100%;
+    text-align: left;
+    font-size: 18px;
+    font-family: '明朝体', serif;
+    cursor: pointer;
+    border: none;
+    outline: none;
+    transition: background-color 0.3s ease;
+  }
+
+  .accordion-title:hover {
+    background: radial-gradient(circle, #3d0a0a, #8b000000); /* 外向きのグラデーション */
+    color: #ffffff;
+  }
+
+  .accordion-content {
+    padding: 15px;
+    display: none;
+    background-color: #f9f9f900;
+    color: #000000;
+    font-size: 16px;
+    border-radius: 0 0 8px 8px;
+  }
+  
+
+  /* .contact クラスのスタイル */
+  .contact {
+    max-width: 800px;           /* 最大幅 */
+    margin: 0 auto;             /* 横方向の中央揃え */
+    border-radius: 10px;        /* 角丸 */
+    padding: 20px;              /* 内側の余白 */
+  }
+
+ 
+
+  /* リンクのスタイル */
+  .contact a {
+    color: #000000;             /* テキストカラー */
+    text-decoration: none;      /* 下線を消す */
+    font-size: 18px;            /* フォントサイズ */
+    padding: 10px 20px;         /* 内側の余白 */
+    border-radius: 5px;         /* 角丸 */
+    transition: background-color 0.3s, color 0.3s; /* ホバー時のアニメーション */
+  }
+
+  /* リンクにホバーしたときのスタイル */
+  .contact a:hover {
+    background: radial-gradient(circle, #3d0a0a, #8b000000); /* 外向きのグラデーション */
+    color: #fff;                /* テキストカラー */
+  }
+  @media screen and (max-width: 600px) {
+  nav ul li {
+    display: block;
+    margin: 10px 0;
+  }
+
+  .accordion-title {
+    font-size: 16px;
+  }
+
+  section h2 {
+    font-size: 20px;
+  }
+
+  .calendar-day {
+    font-size: 14px;
+    padding: 10px;
+  }
+}
+ul {
+    list-style-type: none; /* デフォルトのリストマーカーを非表示に */
+    padding-left: 0; /* 左の余白をなくす */
+}
+
+/* liのスタイル */
+li {
+    margin-bottom: 10px; /* 各項目の間隔を広げる */
+    font-size: 16px; /* フォントサイズを指定 */
+    line-height: 1.6; /* 行間を広げる */
+}
+
+/* liの強調テキストのスタイル */
+li strong {
+    font-weight: bold; /* 強調テキストを太字に */
+    color: #000000; /* 色を暗いグレーに */
+    font-size: 18px; /* 少し大きめに */
+}
+  </style>
+<body>
+
+    <header>
+        <div class="logo-container">
+            <svg width="150" height="150" viewBox="0 0 400 400" xmlns="http://www.w3.org/2000/svg">  
+                <defs>
+                  <!-- グラデーション定義 -->
+                  <radialGradient id="grad1" cx="50%" cy="50%" r="50%" fx="50%" fy="50%">
+                    <stop offset="0%" style="stop-color:#ffffff;stop-opacity:1" />
+                    <stop offset="100%" style="stop-color:#b4323200;stop-opacity:1" />
+                  </radialGradient>
+                </defs>
+                <!-- 上の左羽 -->
+                <path d="M200,150 
+                         C80,40 20,230 150,270 
+                         C170,240 120,190 200,150 Z" 
+                      fill="url(#grad1)" />
+                <!-- 上の右羽 -->
+                <path d="M200,150 
+                         C320,40 380,230 250,270 
+                         C230,240 280,190 200,150 Z" 
+                      fill="url(#grad1)" />
+                <!-- 下の左羽 -->
+                <path d="M200,250 
+                         C80,180 20,350 150,320 
+                         C170,290 120,270 200,250 Z" 
+                      fill="url(#grad1)" />
+                <!-- 下の右羽 -->
+                <path d="M200,250 
+                         C320,180 380,350 250,320 
+                         C230,290 280,270 200,250 Z" 
+                      fill="url(#grad1)" />
+                <!-- 中央部分（円を大きくした） -->
+                <circle cx="200" cy="200" r="30" fill="url(#grad1)" />
+              </svg>
+              
+              
+          <img src="datsugamidasi.png" alt="サブイメージ" class="midashi-image">
+        </div>
+      
+  <nav>
+    <ul>
+      <li><a href="#background">経緯</a></li>
+      <li><a href="#purpose">信念</a></li>
+      <li><a href="#activities">活動</a></li>
+      <li><a href="#guide">ガイド</a></li>
+      <li><a href="#calendar">予定表</a></li>
+      <li><a href="#column">コラム</a></li>
+      <li><a href="#contact">参加申請</a></li>
+    </ul>
+  </nav>
+</header>
+
+<main>
+  <section id="background">
+    <h2>設立の経緯</h2>
+    <p>脱我連合は、匿名の哲学者により創設されました。</p>
+  </section>
+
+  <section id="purpose">
+    <h2>目的と信念</h2>
+    <ul>
+      <li>「自己からの脱却」――すなわち「脱我」を目的に、我々『脱我連合』は活動しています。
+        
+        「死にたくはないが、消えたい」「自分という存在が憎い」。そうした葛藤を抱える者たちが、私たちの行う儀式に救済や安堵を見出し、連合の参加者は静かに、しかし確実に増え続けています。</li>
+        
+        <li>あなたがあなたでなくなることが、救いになることもあるのです。</li>
+  
+    </ul>
+</section>
+
+  <section id="activities">
+    <h2>主な活動</h2>
+    <p>当連合が行っている儀式は、目隠しをした状態で、不特定多数の参加者と非性愛的な接吻を交わすというものです。この接吻は、単なる行為ではなく、「他者との境界を曖昧にする哲学的な実践」として捉えています。視覚情報を遮断した状態で、自他の境界を曖昧にする体験を通じて、「自分」という輪郭を規定する外殻を解き放つ――その瞬間こそが『脱我』の達成であると考えます。
+    </p>
+    <div style="text-align: center;">
+        <img src="datsugaimage.png" alt="活動イメージ" style="width:100%; max-width:600px; margin-top:20px;text-align: center;">
+      </div>
+      <p>　　　　　　儀式のイメージ↑</p>
+
+      </section>
+
+      <section id="guide">
+        <h2>参加ガイド</h2>
+        <ul>
+            <li><strong>集合場所：</strong>目隠しを装着し、指定された場所に集合していただきます。実施場所は幹部により前日に告知されます。</li>
+    
+            <li><strong>儀式内容：</strong></li>
+            <ul>
+                <li>目隠しをした状態で、何時間でも接吻を続けます。接吻は性的要素を一切含まない非性愛的行為として行います。</li>
+                <li>接吻を繰り返すことで、少しずつ「自分」と「他者」の境界が曖昧になる感覚を得ることができます。</li>
+            </ul>
+    
+            <li><strong>修行進行：</strong></li>
+            <ul>
+                <li>脱我は通常、一度の儀式では達成できません。</li>
+                <li>参加者は「境界が曖昧になる感覚」を感じるまで、儀式を終了しないでください。これには最低でも数時間を要することがあります。</li>
+                <li>参加者が感覚的に境界を曖昧にしたと感じる、または儀式の時間が終了するまで接吻を続けていただきます。</li>
+            </ul>
+    
+            <li><strong>備考：</strong></li>
+            <ul>
+                <li>目隠しと無音の状態が脱我に集中する際の条件となります。</li>
+                <li>性的な側面や個々の趣向は一切無関係であり、目的は純粋に境界を曖昧にすることのみです。</li>
+            </ul>
+        </ul>
+    </section>
+    
+
+  <section id="calendar">
+    <h2>今後の予定</h2>
+    <div class="calendar-container">
+      <div class="calendar-header">
+        <button onclick="changeMonth(-1)">&#8592;</button>
+        <div id="calendar-month-year"></div>
+        <button onclick="changeMonth(1)">&#8594;</button>
+      </div>
+      <div class="calendar-grid" id="calendar-days"></div>
+    </div>
+  </section>
+
+  <section id="column"> 
+    <h2>コラム</h2>
+  
+    <div class="accordion-item">
+        <button class="accordion-title">「自己を超えるとは何か？」</button>
+        <div class="accordion-content">
+          <p>私たちが「自己」と呼ぶものは、実は他者との関わりの中で形成される仮初の概念に過ぎません。名前や職業、性別、外見などのラベルは、私たちが社会の中で機能するための道具であり、内面的な本質を表現するものではないのです。</p>
+          <p>脱我連合の儀式は、この自己という仮の枠組みを解体し、物理的・精神的な境界を無くすことを目的としています。目隠しをし、匿名の他者と非性愛的に接触することで、自己を一時的に消し去り、他者との境界が消えた状態で「存在」そのものを経験します。これは、自己を超越し、本質的な「無」に近づくための道のりです。</p>
+          <p>私たちの目指すのは、他者を「他者」として捉えず、自己と他者の境界が溶け合うこと。脱我連合の儀式は、それを実現するための手段に過ぎません。</p>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <button class="accordion-title">「非性愛的接触の意義」</button>
+        <div class="accordion-content">
+          <p>人が他者と接触することには、無限の可能性があります。単なる肉体的接触にとどまらず、精神的、感情的な変容を促す力を持っています。しかし、接触が性愛的である必要はないのです。</p>
+          <p>脱我連合においては、接吻や手のひらを交わすことで、互いの境界を無化し、「自己」を消し去りつつ他者と一体化する体験を重視します。これらの儀式は、欲望に基づくものではなく、自己と他者の違いを超越するための行為です。</p>
+          <p>非性愛的接触を通じて、私たちは自我を放棄し、純粋な「存在」として他者と交わることを目指しています。この接触が示すのは、欲望を排除した新たな関係性の可能性です。</p>
+        </div>
+    </div>
+    
+    <div class="accordion-item">
+        <button class="accordion-title">「匿名性と自由」</button>
+        <div class="accordion-content">
+          <p>現代社会では、私たちの「誰であるか」が常に問われ続けます。私たちは名前や職業、社会的地位で自分を定義し、それに基づいて行動します。しかし、そのような定義が本当に私たちを表しているのでしょうか？</p>
+          <p>脱我連合の活動は、個人の「名前」や「役割」から解放され、純粋な自己を探し求める過程です。匿名性は、この過程を支える重要な要素であり、自己を超越するための手段として機能します。</p>
+          <p>匿名であることによって、私たちは既存の枠組みから解放され、純粋な自由を手に入れます。自己を定義づけるあらゆるラベルを取り払うことによって、初めて本当の意味での「自由」が訪れるのです。</p>
+        </div>
+    </div>
+</section>
+
+      <section id="contact">
+        <div class="contact">
+    <h2>加入について</h2>
+      <a href="https://kakuinkaisyukyosyukyo123.github.io/kiss.japan/index.html">詳細はこちら</a>
+    </div>
+    
+  </section>
+  
+</main>
+
+<footer>
+  © 2025 脱我連合. All rights reserved.
+</footer>
+
+<script>
+    const accordionTitles = document.querySelectorAll('.accordion-title');
+
+accordionTitles.forEach(title => {
+  title.addEventListener('click', function() {
+    const content = this.nextElementSibling; // アコーディオン内容
+
+    // すでに他のアコーディオンが開かれていれば閉じる
+    document.querySelectorAll('.accordion-content').forEach(item => {
+      if (item !== content) {
+        item.style.display = 'none';
+      }
+    });
+
+    // アコーディオンの開閉
+    if (content.style.display === 'block') {
+      content.style.display = 'none';
+    } else {
+      content.style.display = 'block';
+    }
+  });
+});
+  const calendarDays = document.getElementById('calendar-days');
+  const monthYear = document.getElementById('calendar-month-year');
+  let currentDate = new Date();
+
+  function renderCalendar(date) {
+    const year = date.getFullYear();
+    const month = date.getMonth();
+    const firstDay = new Date(year, month, 1).getDay();
+    const daysInMonth = new Date(year, month + 1, 0).getDate();
+
+    const dayNames = ['日', '月', '火', '水', '木', '金', '土'];
+    calendarDays.innerHTML = '';
+    dayNames.forEach(day => {
+      const el = document.createElement('div');
+      el.className = 'day-name';
+      el.textContent = day;
+      calendarDays.appendChild(el);
+    });
+
+    for (let i = 0; i < firstDay; i++) {
+      calendarDays.appendChild(document.createElement('div'));
+    }
+
+    for (let i = 1; i <= daysInMonth; i++) {
+
+
+  const dayEl = document.createElement('div');
+  dayEl.className = 'calendar-day';
+  dayEl.textContent = i;
+  calendarDays.appendChild(dayEl);
+}
+
+monthYear.textContent = `${year}年${month + 1}月`;
+}
+
+function changeMonth(offset) { currentDate.setMonth(currentDate.getMonth() + offset); renderCalendar(currentDate); }
+
+document.addEventListener('DOMContentLoaded', () => { renderCalendar(currentDate); }); </script>
+
+</body> </html> 

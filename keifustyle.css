@@ -1,0 +1,199 @@
+/* 基本スタイル */
+body {
+    line-height: 1.6;
+    background: linear-gradient(to bottom, #ffffff 80%, #d8d8d8, #7d7d7d, #000000);
+    background-attachment: fixed;
+    background-size: cover;
+    color: #333;
+    padding: 20px;
+    font-family: 'Hiragino Mincho Pro', serif;
+    display: flex;
+    flex-direction: column;
+    overflow-x: hidden;
+}
+
+h1 {
+    padding: 70px 0;
+    font-size: 1.5em;
+    text-align: center;
+}
+
+/* 基本リンクのスタイル */
+a {
+    color: #f7f7f7;
+    padding: 8px 16px;
+    border-radius: 20px;
+    text-decoration: none;
+    font-weight: normal;
+    transition: background-color 0.3s, color 0.3s;
+}
+
+a.nav-link {
+    color: #000;
+    padding: 8px 16px;
+    border-radius: 20px;
+    transition: background-image 0.6s ease, color 0.3s, transform 0.3s;
+    text-decoration: none;
+    position: relative;
+}
+
+a.nav-link:hover {
+    color: #fff;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.4) 20%, rgba(0, 0, 0, 0) 80%);
+    transform: scale(1.05);
+}
+
+a:hover {
+    color: #999;
+    text-decoration: underline;
+}
+
+/* ヘッダー */
+header {
+    text-align: center;
+    margin-bottom: 20px;
+    font-weight: bold;
+    font-family: 'Hiragino Mincho Pro', serif;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 0;
+    z-index: 10;
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+    color: #333;
+}
+
+/* ヘッダーリンク */
+header nav a {
+    color: #454545;
+    text-decoration: none;
+    font-weight: normal;
+    padding: 8px 16px;
+}
+
+header nav a:hover {
+    color: #fff;
+    background-image: radial-gradient(ellipse, rgba(0, 0, 0, 0.7) 20%, rgba(0, 0, 0, 0) 70%);
+    transform: scale(1.05);
+    text-decoration: none;
+}
+
+/* メインコンテンツ */
+main {
+    flex-grow: 1;
+    width: 90%;
+    max-width: 1200px;
+    padding: 70px;
+    text-align: center;
+    overflow-y: auto;
+}
+
+/* 画像の中央揃え */
+.center-image {
+    display: flex;
+    justify-content: center;
+    margin-top: 80px;
+}
+
+.center-image img {
+    width: 30%;
+    height: auto;
+    transition: transform 0.3s ease;
+}
+
+.center-image img:hover {
+    transform: scale(1.05);
+}
+
+/* モーダルのスタイル */
+.modal {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1000;
+    justify-content: center;
+    align-items: center;
+}
+
+footer {
+    color: #dcdcdc;
+    font-size: 0.1em;
+    text-align: center;
+    margin-top: 20px;
+    opacity: 0.8;
+    font-weight: normal;
+    bottom: 0;
+    position: fixed;
+    left: 50%;
+    transform: translateX(-50%);
+    width: auto;
+    padding: 10px 0;
+}
+
+/* 画像のフェードイン効果 */
+.fade-in {
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.fade-in.visible {
+    opacity: 1;
+}
+
+/* スクロールバー */
+::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+}
+
+::-webkit-scrollbar-track {
+    background: #c9c9c9;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+    background: #d1d1d1;
+    border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #bebebe;
+}
+
+/* メディアクエリでスマホ対応 */
+@media (max-width: 768px) {
+    h1 {
+        font-size: 1.2em; /* 小さな画面でフォントサイズを小さく */
+    }
+
+    .center-image img {
+        width: 70%; /* 画像の幅を広げる */
+    }
+
+    header h1 {
+        font-size: 1.8em;
+    }
+
+    main {
+        padding: 20px; /* モバイルでは余白を少なく */
+    }
+
+    footer {
+        font-size: 0.8em; /* フッターの文字サイズ調整 */
+    }
+
+    /* ヘッダーリンクの調整 */
+    header nav a {
+        font-size: 0.9em;
+        padding: 6px 12px;
+    }
+}
