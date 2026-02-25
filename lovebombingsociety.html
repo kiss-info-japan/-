@@ -1,14 +1,13 @@
-
-<!doctype html>
+<!doctype html>  
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
 <title>☆こゆるのＢｌｏｇ☆</title>
 
-<style>
-  :root{
-    --window-bg: #c4fff0;
+<style> 
+  :root{ 
+    --window-bg: #c4fff0; 
     --panel: #ffffff;
     --panel2:#f8ffb8;
     --line: #e4ff99;
@@ -16,6 +15,12 @@
     --text: #111;
     --link: #1a3da8;
     --linkv:#5b2aa8;
+
+    /* ★ PC版の基準幅 */
+    --basew: 1000px;
+
+    /* ★ PC版の左右ゆとり（好みで増減OK） */
+    --pc-gutter: 300px;
   }
 
   *{ box-sizing:border-box; }
@@ -28,17 +33,27 @@
     font-size:16px;
     line-height:1.8;
     background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
-    overflow-x:auto; /* カラム維持したいので横スクロール許可 */
+    overflow-x:hidden;
   }
 
-  /* 全体 */
+  /* ★ 縮小用の外枠（PCでは左右に余白を作る） */
+  .stage{
+    width: 100%;
+    overflow: hidden;
+    padding-left: var(--pc-gutter);
+    padding-right: var(--pc-gutter);
+  }
+
+  /* 全体（PCレイアウトは固定幅で描画） */
   .window{
-    max-width:1000px;
-    width:min(95%, 1000px);
+    width: var(--basew);
     margin:20px auto;
     background: var(--window-bg);
     border: 2px solid var(--line);
     box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
+
+    transform-origin: top left;
+    will-change: transform;
   }
 
   .titlebar{
@@ -112,7 +127,6 @@
 
   .welcome{ margin-bottom: 16px; }
 
-  /* 文字サイズ（本文・コラム） */
   .entry{ margin-top: 16px; }
   .entry h3{
     margin: 0;
@@ -152,9 +166,6 @@
     opacity: .85;
   }
 
-  /* ===== 左カラムの縦3画像：トリミングしない（縮小＋余白） =====
-     右(#seminar)の下端に合わせて高さはJSで揃える。
-     画像は contain で縮小、余白はパディングで作る。 */
   .sideimg{
     overflow: hidden;
   }
@@ -171,29 +182,29 @@
     display:flex;
     align-items:center;
     justify-content:center;
-    padding:10px;          /* ← 余白（画面小さい時ほど効く） */
+    padding:10px;
   }
   .sideimg .thumb img{
     width:100%;
     height:100%;
-    object-fit:contain;    /* ← トリミングしない */
+    object-fit:contain;
     display:block;
   }
-.sideimg .thumb a{
-  width: 100%;
-  height: 100%;
-  display: flex;              /* 中央寄せを維持するため */
-  align-items: center;
-  justify-content: center;
-  text-decoration: none;      /* 下線いらないなら */
-}
-.sideimg .thumb a img{
-  width: 100%;
-  height: 100%;
-  object-fit: contain;        /* 既に同じだけど念のため */
-  display:block;
-}
-  /* ===== 「見られているという感覚について」以降は全幅 ===== */
+  .sideimg .thumb a{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+  }
+  .sideimg .thumb a img{
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    display:block;
+  }
+
   .fullwide{
     margin-top: 16px;
   }
@@ -206,261 +217,236 @@
     opacity:.85;
   }
 
- /* =========================
-   スマホ時 50%表示チューニング版
-   ========================= */
-
-@media (max-width: 540px){
-
-  body{
-    overflow-x: auto;
-    background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
+  /* ★ 画面が狭い端末はガターを弱める（縮小の邪魔をしない） */
+  @media (max-width: 820px){
+    .stage{
+      padding-left: 10px;
+      padding-right: 10px;
+    }
   }
-
-  .window{
-    transform: scale(0.5);
-    transform-origin: top left;
-
-    /* 元幅1000px → scale0.5なので2000pxに拡張 */
-    width: 2000px;
-    max-width: none;
-
-    margin: 10px 0;
-  }
-
-  /* scaleで高さが足りなくなるのを防ぐ */
-  body::after{
-    content:"";
-    display:block;
-    height:800px; /* 足りなければ増やす */
-  }
-}
 </style>
 </head>
 
 <body>
-<div class="window">
-  <div class="titlebar" aria-hidden="true">
-    <div class="titletext"></div>
-  </div>
 
-  <div class="inner">
-    <div class="site-title"><span class="title-span">☆こゆるのＢｌｏｇ☆</span></div>
-    <hr class="hr-dots" />
+<div class="stage" id="stage">
+  <div class="window" id="window">
+    <div class="titlebar" aria-hidden="true">
+      <div class="titletext"></div>
+    </div>
 
-    <!-- ここまでは 2カラム -->
-    <div class="grid">
-      <!-- 左サイド -->
-      <aside>
+    <div class="inner">
+      <div class="site-title"><span class="title-span">☆こゆるのＢｌｏｇ☆</span></div>
+      <hr class="hr-dots" />
 
-        <div class="box">
-          <div class="box-h">メニュー</div>
+      <div class="grid">
+        <aside>
+
+          <div class="box">
+            <div class="box-h">メニュー</div>
+            <div class="box-b">
+              <ul class="menu">
+                <li><a href="#profile">プロフィール</a></li>
+                <li><a href="#text">本文</a></li>
+                <li><a href="#columns">コラム</a></li>
+                <li><a href="#links">リンク</a></li>
+                <li><a href="#bbs">掲示板（工事中）</a></li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="box" style="margin-top:14px;">
+            <div class="box-h">お願い</div>
+            <div class="box-b">
+              ・転載は禁止　転載はやめてください（ほんとに）<br>
+              ・感想は掲示板へ（※工事中）<br>
+            </div>
+          </div>
+
+          <div class="box sideimg" style="margin-top:14px;">
+            <div class="box-b">
+              <div class="thumb">
+                <a href="chirashi.html" aria-label="内在神研究サークル（配布用）を開く">
+                  <img src="naizai.png" alt="内在神研究サークル">
+                </a>
+              </div>
+              <div class="thumb"><img src="kami.png" alt="内在神研究サークル2"></div>
+              <div class="thumb"><img src="senden.png" alt="書籍"></div>
+            </div>
+          </div>
+
+        </aside>
+
+        <section id="top">
+          <div class="box welcome">
+            <div class="box-h">自己紹介</div>
+            <div class="box-b">
+              こんにちは～。<br>
+              圓山 越（まるやま こゆる）です。おじさんに片足突っ込んでいる思想家です。<br>
+              ここには、最近考えてることを、そのまま書いててます。<br>
+              （むずかしい話もしますが、まあ気楽にどうぞ）<br>
+            </div>
+          </div>
+
+          <div class="box entry" id="profile">
+            <div class="box-h"><h3>略歴</h3></div>
+            <div class="box-b">
+              <p><strong>圓山　越（まるやま こゆる）</strong></p>
+              <ul>
+                <li>1971年　山口県生まれ</li>
+                <li>幼少期より教会に通いながら育つ</li>
+                <li>大学で心理学を学ぶ</li>
+                <li>フロイトの「超自我」概念に関心を持つ</li>
+                <li>8年間企業カウンセラーとして勤務</li>
+                <li>内在神研究サークルを発足、セミナーを開催する</li>
+                <li>著書「あなたは愛されている」を発売</li>
+              </ul>
+            </div>
+          </div>
+
+          <div class="box entry" id="seminar">
+            <div class="box-h"><h3>セミナーの様子</h3></div>
+            <div class="box-b">
+              <img src="etsu.png" alt="セミナーの写真1" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+              <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう</div>
+              <div style="height:10px;"></div>
+              <img src="seminor.jpg" alt="セミナーの写真2" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+              <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <section class="fullwide">
+
+        <div class="box entry" id="text">
+          <div class="box-h"><h3>見られているという感覚について</h3></div>
           <div class="box-b">
-            <ul class="menu">
-              <li><a href="#profile">プロフィール</a></li>
-              <li><a href="#text">本文</a></li>
-              <li><a href="#columns">コラム</a></li>
-              <li><a href="#links">リンク</a></li>
-              <li><a href="#bbs">掲示板（工事中）</a></li>
-            </ul>
+            <p>神はいない、と私は思ってます。</p>
+            <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
+            <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ </p>
+            <p>大げさな話じゃなくてです。</p>
+            <p class="quote">例えば、あなたは愛されている、と言われたらどう思いますか。</p>
+            <p>突然、誰からともなく。事実かどうかは、まあ、いったん置いときましょう。</p>
+            <p>問題は「誰に？」って考えた瞬間です。</p>
+            <p>その問いが浮かんだとき、あなたは何かを想像する。父かもしれない。昔の恋人かもしれない。「世界に」かもしれない。</p>
+            <p>あるいは「何の話だ」って打ち消すかもしれない。でも、打ち消すにも、いったん像を作らないとできないんですよね。</p>
+            <p>愛の主体を確定できなくても、形だけは一度、頭に出る。</p>
+            <p>そのとき、安心しませんか？何かに見守られていて、無条件に愛されているという感覚に。</p>
+            <p>私はキリスト教の家庭で育って、いつも「神様が見てるよ」って言われてきました。</p>
+            <p>誰も見てないと思ってるときと、誰かが見てるかもしれないと思ってるときでは、姿勢が変わる。声の出し方もちょっと変わる。</p>
+            <p>神（上位存在）が本当にいるかどうかは、ここでは二の次です。</p>
+            <p>大事なのは、「見られてるかもしれない」って想定が、あなたの振る舞いや自信に影響するかどうか。</p>
+            <p>もし影響するなら、地球において「神」が担ってきた役目が、神の存在の是非に関係なく動いてる、ってことになりませんかね。</p>
+            <p>私はそこだけを考えてます。神の機能って、結局なんなんだろう、と。</p>
+            <p>神って、内側にある意識（監視の声）みたいなもので、そこに物語がくっつくと宗教になるだけなんじゃないの？ って。</p>
+            <p>この考えが信仰かどうかは、まあ、どっちでもいいです。</p>
+            <p>ただ、生活の中に小さな観測者が現れて、それだけで世界がちょっと変わるんです。</p>
           </div>
         </div>
 
-        <div class="box" style="margin-top:14px;">
-          <div class="box-h">お願い</div>
+        <div class="box entry" id="columns">
+          <div class="box-h"><h3>コラム</h3></div>
           <div class="box-b">
-            ・転載は禁止　転載はやめてください（ほんとに）<br>
-            ・感想は掲示板へ（※工事中）<br>
+
+            <div class="box column" style="margin-top:0;">
+              <div class="box-h">きっかけ</div>
+              <div class="meta">　2006年6月18日 </div>
+              <div class="box-b">
+                <p class="small">「世間の目」って言うじゃないですか。世間って人じゃないのに、妙に効くんですよね。</p>
+                <p class="small">心理学だと、親とか先生とか近所とか、いろんな視線が混ざって、いつのまにか自分の中に「こうするべき」という規律ができる、って話がある。</p>
+                <p class="small">つまり、世間は外にあるようで、中にある（ナニ～？）。</p>
+                <p class="small">世間を連れて歩いてる自分が、いちばん厄介なんですよ。</p>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">超自我と監視</div>
+              <div class="meta">　2006年7月8日 </div>
+              <div class="box-b">
+                <p class="small">心理学でフロイトの「超自我」を知ったんですが、これがまあ、妙にしっくり来ましてね。</p>
+                <p class="small">人の中には「自分を見張る自分」がいる、という話です。</p>
+                <p class="small">子どもの頃に親から言われた言葉、「ちゃんとしなさい」とか「嘘をつくな」とか、そういうのが、いつのまにか自分の内側に住みつく。</p>
+                <p class="small">で、ある日気づくんですよ。親がいなくても、その声が鳴っている。</p>
+                <p class="small">誰も見てないはずなのに、「それはやめとけ」とか「それは恥ずかしいぞ」とか、勝手にチェックが入る。</p>
+                <p class="small">つまり、監視役は外から内へ引っ越してくるわけです。</p>
+                <p class="small">さらにフーコーの話を読むと、これが社会レベルでも起きている、と書いてある。</p>
+                <p class="small">パノプティコンっていう監獄の設計があって、中央の塔から囚人を見張る仕組みなんですが、面白いのは「本当に見ているかどうか」は関係ないという点です。</p>
+                <p class="small">見られているかもしれない、という状況だけで、人は勝手に背筋を伸ばす。</p>
+                <p class="small">ここが肝心です。</p>
+                <p class="small">実在の視線より、「想定された視線」のほうが強いんですね。</p>
+                <p class="small">で、私は思ったわけです。</p>
+                <p class="small">神という概念も、これと同じ構造なんじゃないか、と。</p>
+                <p class="small">神が空の上にいるかどうかはさておき、「神が見ているかもしれない」と想定した瞬間、内側に神ができるわけです。</p>
+                <p class="small">完全に自由、完全に無視されている状態って、実はけっこう不安定なんです。</p>
+                <p class="small">だから人は、自分の中に監視役を作る。</p>
+                <p class="small">それが超自我であり、世間の目であり、場合によっては神と呼ばれるものなんじゃないか、と私は思っています。</p>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">コンビニ</div>
+              <div class="meta">　2006年8月2日 </div>
+              <div class="box-b">
+                <p class="small">たとえばですよ。深夜のコンビニで、誰も見てない、カメラもない、証拠も残らない状況があるとする。</p>
+                <p class="small">そのとき、手が止まる人がいる。止まらない人もいる。</p>
+                <p class="small">止まる人って、誰に見られてるんでしょうね？ 外の誰かじゃなく自分が自分を見てる。</p>
+                <p class="small">神が内在してるって仮説は、ここに近いと思ってます。</p>
+                <p class="small">これで急に善人になるとかじゃないですよ（笑） でも、言い訳が通用しなくなる感じは出る。</p>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">世間の目</div>
+              <div class="meta">　2006年9月9日 </div>
+              <div class="box-b">
+                <p class="small">子どもの頃から教会に通ってました。祈りの言葉とか、聖書のフレーズとか身に沁みついてました。</p>
+                <p class="small">ある日の礼拝で、牧師が言いました。「神は常にあなたを見ている」って。</p>
+                <p class="small">で、ふつうは「空の上」とか想像しそうなんだけど、私はなぜか胸の奥が先に反応したんです。</p>
+                <p class="small">見られてる、って感じたのが、天井の向こうじゃなくて、自分の中から。そこが妙に引っかかった。</p>
+                <p class="small">その後、部屋で一人で「まあいいか」って独り言を言ったときも、言葉がどこかに届いた感じがして。</p>
+                <p class="small">誰もいないのにね。</p>
+                <img src="kyokai.png" alt="教会の写真" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">祈りの技術</div>
+              <div class="meta">　2006年10月3日 </div>
+              <div class="box-b">
+                <p class="small">祈りってお願い事だと思われがちなんですが、私は「言葉の型」だと思ってます。</p>
+                <p class="small">言葉にすると気持ちが少し整う。黙ってると膨らむものが、文章になると輪郭が出るんだよね。</p>
+                <p class="small">祈りは、それを定期的にやるための装置なのかもしれない。</p>
+                <p class="small">神がいるから祈るんじゃなくて、祈るという形式を保つために、神という受け手を置いたのでは？ ってね。</p>
+                <p class="small">だから私は祈りを否定しません。受け手が外にいなくても、話しかける相手として中に置けばいい、と思ってます。</p>
+                <p class="small">内在神研究サークルの説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
+              </div>
+            </div>
+
           </div>
         </div>
 
-        <div class="box sideimg" style="margin-top:14px;">
+        <div class="box entry" id="links">
+          <div class="box-h"><h3>リンク</h3></div>
           <div class="box-b">
-            <div class="thumb"><a href="chirashi.html" aria-label="内在神研究サークル（配布用）を開く">
-               <img src="naizai.png" alt="内在神研究サークル"></a></div>
-            <div class="thumb"><img src="kami.png" alt="内在神研究サークル2"></div>
-            <div class="thumb"><img src="senden.png" alt="書籍"></div>
+            <p> ・<a href="chirashi.html" target="_blank"> 内在神研究サークル（配布用） </a> </p>
           </div>
         </div>
 
-      </aside>
-
-      <!-- 右：上部だけ -->
-      <section id="top">
-        <div class="box welcome">
-          <div class="box-h">自己紹介</div>
+        <div class="box entry" id="bbs">
+          <div class="box-h"><h3>掲示板（工事中）</h3></div>
           <div class="box-b">
-            こんにちは～。<br>
-            圓山 越（まるやま こゆる）です。おじさんに片足突っ込んでいる思想家です。<br>
-            ここには、最近考えてることを、そのまま書いててます。<br>
-          （むずかしい話もしますが、まあ気楽にどうぞ）<br>
+            <p>現在準備中です。（いつ完成するかは…まあ…(=^・^=)）</p>
           </div>
         </div>
 
-        <div class="box entry" id="profile">
-          <div class="box-h"><h3>略歴</h3></div>
-          <div class="box-b">
-            <p><strong>圓山　越（まるやま こゆる）</strong></p>
-            <ul>
-              <li>1971年　山口県生まれ</li>
-              <li>幼少期より教会に通いながら育つ</li>
-              <li>大学で心理学を学ぶ</li>
-              <li>フロイトの「超自我」概念に関心を持つ</li>
-              <li>8年間企業カウンセラーとして勤務</li>
-              <li>内在神研究サークルを発足、セミナーを開催する</li>
-              <li>著書「あなたは愛されている」を発売</li>
-
-            </ul>
-          </div>
-        </div>
-
-        <div class="box entry" id="seminar">
-          <div class="box-h"><h3>セミナーの様子</h3></div>
-          <div class="box-b">
-            <img src="etsu.png" alt="セミナーの写真1" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
-            <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう</div>
-            <div style="height:10px;"></div>
-            <img src="seminor.jpg" alt="セミナーの写真2" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
-            <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
-          </div>
-        </div>
+        <div class="footer">© 内在神研究サークル　無断転載禁止</div>
       </section>
     </div>
-    <!-- /2カラムここまで -->
-
-    <!-- ここから全幅（「見られているという感覚について」以降） -->
-    <section class="fullwide">
-
-      <div class="box entry" id="text">
-        <div class="box-h"><h3>見られているという感覚について</h3></div>
-        <div class="box-b">
-          <p>神はいない、と私は思ってます。</p>
-          <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
-          <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ </p>
-          <p>大げさな話じゃなくてです。</p>
-          <p class="quote">例えば、あなたは愛されている、と言われたらどう思いますか。</p>
-          <p>突然、誰からともなく。事実かどうかは、まあ、いったん置いときましょう。</p>
-          <p>問題は「誰に？」って考えた瞬間です。</p>
-          <p>その問いが浮かんだとき、あなたは何かを想像する。父かもしれない。昔の恋人かもしれない。「世界に」かもしれない。</p>
-          <p>あるいは「何の話だ」って打ち消すかもしれない。でも、打ち消すにも、いったん像を作らないとできないんですよね。</p>
-          <p>愛の主体を確定できなくても、形だけは一度、頭に出る。</p>
-          <p>そのとき、安心しませんか？何かに見守られていて、無条件に愛されているという感覚に。</p>
-          <p>私はキリスト教の家庭で育って、いつも「神様が見てるよ」って言われてきました。</p>
-          <p>誰も見てないと思ってるときと、誰かが見てるかもしれないと思ってるときでは、姿勢が変わる。声の出し方もちょっと変わる。</p>
-          <p>神（上位存在）が本当にいるかどうかは、ここでは二の次です。</p>
-          <p>大事なのは、「見られてるかもしれない」って想定が、あなたの振る舞いや自信に影響するかどうか。</p>
-          <p>もし影響するなら、地球において「神」が担ってきた役目が、神の存在の是非に関係なく動いてる、ってことになりませんかね。</p>
-          <p>私はそこだけを考えてます。神の機能って、結局なんなんだろう、と。</p>
-          <p>神って、内側にある意識（監視の声）みたいなもので、そこに物語がくっつくと宗教になるだけなんじゃないの？ って。</p>
-          <p>この考えが信仰かどうかは、まあ、どっちでもいいです。</p>
-          <p>ただ、生活の中に小さな観測者が現れて、それだけで世界がちょっと変わるんです。</p>
-        </div>
-      </div>
-
-      <div class="box entry" id="columns">
-        <div class="box-h"><h3>コラム</h3></div>
-        <div class="box-b">
-
-          <div class="box column" style="margin-top:0;">
-            <div class="box-h">きっかけ</div>
-            <div class="meta">　2006年6月18日 </div>
-            <div class="box-b">
-               <p class="small">「世間の目」って言うじゃないですか。世間って人じゃないのに、妙に効くんですよね。</p>
-              <p class="small">心理学だと、親とか先生とか近所とか、いろんな視線が混ざって、いつのまにか自分の中に「こうするべき」という規律ができる、って話がある。</p>
-              <p class="small">つまり、世間は外にあるようで、中にある（ナニ～？）。</p>
-              <p class="small">世間を連れて歩いてる自分が、いちばん厄介なんですよ。</p>
-            </div>
-          </div>
-
-          <div class="box column" style="margin-top:14px;">
-            <div class="box-h">超自我と監視</div>
-            <div class="meta">　2006年7月8日 </div>
-            <div class="box-b">
-              <p class="small">心理学でフロイトの「超自我」を知ったんですが、これがまあ、妙にしっくり来ましてね。</p>
-              <p class="small">人の中には「自分を見張る自分」がいる、という話です。</p>
-              <p class="small">子どもの頃に親から言われた言葉、「ちゃんとしなさい」とか「嘘をつくな」とか、そういうのが、いつのまにか自分の内側に住みつく。</p>
-              <p class="small">で、ある日気づくんですよ。親がいなくても、その声が鳴っている。</p>
-              <p class="small">誰も見てないはずなのに、「それはやめとけ」とか「それは恥ずかしいぞ」とか、勝手にチェックが入る。</p>
-              <p class="small">つまり、監視役は外から内へ引っ越してくるわけです。</p>
-              <p class="small">さらにフーコーの話を読むと、これが社会レベルでも起きている、と書いてある。</p>
-              <p class="small">パノプティコンっていう監獄の設計があって、中央の塔から囚人を見張る仕組みなんですが、面白いのは「本当に見ているかどうか」は関係ないという点です。</p>
-              <p class="small">見られているかもしれない、という状況だけで、人は勝手に背筋を伸ばす。</p>
-              <p class="small">ここが肝心です。</p>
-              <p class="small">実在の視線より、「想定された視線」のほうが強いんですね。</p>
-              <p class="small">で、私は思ったわけです。</p>
-              <p class="small">神という概念も、これと同じ構造なんじゃないか、と。</p>
-              <p class="small">神が空の上にいるかどうかはさておき、「神が見ているかもしれない」と想定した瞬間、内側に神ができるわけです。</p>
-              <p class="small">完全に自由、完全に無視されている状態って、実はけっこう不安定なんです。</p>
-              <p class="small">だから人は、自分の中に監視役を作る。</p>
-              <p class="small">それが超自我であり、世間の目であり、場合によっては神と呼ばれるものなんじゃないか、と私は思っています。</p>
-            </div>
-          </div>
-
-          <div class="box column" style="margin-top:14px;">
-            <div class="box-h">コンビニ</div>
-            <div class="meta">　2006年8月2日 </div>
-            <div class="box-b">
-              <p class="small">たとえばですよ。深夜のコンビニで、誰も見てない、カメラもない、証拠も残らない状況があるとする。</p>
-              <p class="small">そのとき、手が止まる人がいる。止まらない人もいる。</p>
-              <p class="small">止まる人って、誰に見られてるんでしょうね？ 外の誰かじゃなく自分が自分を見てる。</p>
-              <p class="small">神が内在してるって仮説は、ここに近いと思ってます。</p>
-              <p class="small">これで急に善人になるとかじゃないですよ（笑） でも、言い訳が通用しなくなる感じは出る。</p>
-            </div>
-          </div>
-
-          <div class="box column" style="margin-top:14px;">
-            <div class="box-h">世間の目</div>
-            <div class="meta">　2006年9月9日 </div>
-            <div class="box-b">
-              <p class="small">子どもの頃から教会に通ってました。祈りの言葉とか、聖書のフレーズとか身に沁みついてました。</p>
-              <p class="small">ある日の礼拝で、牧師が言いました。「神は常にあなたを見ている」って。</p>
-              <p class="small">で、ふつうは「空の上」とか想像しそうなんだけど、私はなぜか胸の奥が先に反応したんです。</p>
-              <p class="small">見られてる、って感じたのが、天井の向こうじゃなくて、自分の中から。そこが妙に引っかかった。</p>
-              <p class="small">その後、部屋で一人で「まあいいか」って独り言を言ったときも、言葉がどこかに届いた感じがして。</p>
-              <p class="small">誰もいないのにね。</p>
-              <img src="kyokai.png" alt="セミナーの写真1" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
-            
-             
-            </div>
-          </div>
-
-          <div class="box column" style="margin-top:14px;">
-            <div class="box-h">祈りの技術</div>
-            <div class="meta">　2006年10月3日 </div>
-            <div class="box-b">
-              <p class="small">祈りってお願い事だと思われがちなんですが、私は「言葉の型」だと思ってます。</p>
-              <p class="small">言葉にすると気持ちが少し整う。黙ってると膨らむものが、文章になると輪郭が出るんだよね。</p>
-              <p class="small">祈りは、それを定期的にやるための装置なのかもしれない。</p>
-              <p class="small">神がいるから祈るんじゃなくて、祈るという形式を保つために、神という受け手を置いたのでは？ ってね。</p>
-              <p class="small">だから私は祈りを否定しません。受け手が外にいなくても、話しかける相手として中に置けばいい、と思ってます。</p>
-              <p class="small">内在神研究サークルの説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
-            </div>
-          </div>
-
-        </div>
-      </div>
-
-      <div class="box entry" id="links">
-        <div class="box-h"><h3>リンク</h3></div>
-        <div class="box-b">
-          <p> ・<a href="chirashi.html" target="_blank"> 内在神研究サークル（配布用） </a> </p>
-        </div>
-      </div>
-
-      <div class="box entry" id="bbs">
-        <div class="box-h"><h3>掲示板（工事中）</h3></div>
-        <div class="box-b">
-          <p>現在準備中です。（いつ完成するかは…まあ…(=^・^=)）</p>
-        </div>
-      </div>
-
-      <div class="footer">© 内在神研究サークル　無断転載禁止</div>
-    </section>
   </div>
 </div>
 
 <script>
-  // --- counter（#counterが無くても落ちないように） ---
   const el = document.getElementById("counter");
   if (el){
     const base = 1234;
@@ -469,34 +455,69 @@
     el.textContent = String(n).padStart(8, "0");
   }
 
-  // --- 左(sideimg)の下端を右(#seminar)の下端に合わせる ---
+  function fitPCtoMobile(){
+    const stage = document.getElementById("stage");
+    const win = document.getElementById("window");
+    if(!stage || !win) return;
+
+    const baseW = 1000; // CSS --basew と合わせる
+    const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
+
+    // ★ stageの左右padding分を引いた「実効幅」でscaleを計算
+    const cs = getComputedStyle(stage);
+    const padL = parseFloat(cs.paddingLeft) || 0;
+    const padR = parseFloat(cs.paddingRight) || 0;
+    const effective = Math.max(0, vw - (padL + padR));
+
+    // 余白ちょい（端末の丸め対策）
+    const margin = 6;
+    const scale = Math.min(1, (effective - margin) / baseW);
+
+    window.__pcScale = scale;
+    win.style.transform = `scale(${scale})`;
+
+    // transformは高さに反映されないので、ステージの高さを補正
+    const rect = win.getBoundingClientRect();
+    stage.style.height = Math.ceil(rect.height) + "px";
+  }
+
   function syncSideimgToSeminar(){
     const seminar = document.getElementById("seminar");
     const sideBox = document.querySelector(".sideimg");
     if(!seminar || !sideBox) return;
 
-    // いったんリセットしてから計測
     sideBox.style.height = "";
 
+    const scale = window.__pcScale || 1;
     const seminarRect = seminar.getBoundingClientRect();
     const sideRect = sideBox.getBoundingClientRect();
-    const desired = Math.floor(seminarRect.bottom - sideRect.top);
+
+    const desired = Math.floor((seminarRect.bottom - sideRect.top) / scale);
 
     if (desired > 120){
       sideBox.style.height = desired + "px";
     }
   }
 
-  window.addEventListener("load", syncSideimgToSeminar);
+  function doLayout(){
+    fitPCtoMobile();
+    syncSideimgToSeminar();
+  }
+
+  window.addEventListener("load", doLayout);
+
   window.addEventListener("resize", () => {
-    clearTimeout(window.__sideSyncTimer);
-    window.__sideSyncTimer = setTimeout(syncSideimgToSeminar, 60);
+    clearTimeout(window.__layoutTimer);
+    window.__layoutTimer = setTimeout(doLayout, 90);
   });
 
   document.querySelectorAll("#seminar img, .sideimg img").forEach(img=>{
     if (img.complete) return;
-    img.addEventListener("load", syncSideimgToSeminar, { once:true });
+    img.addEventListener("load", () => {
+      doLayout();
+    }, { once:true });
   });
 </script>
 
 </body>
+</html>
