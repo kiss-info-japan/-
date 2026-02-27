@@ -208,7 +208,7 @@
           <a href="lovebombingsociety.html" target="_blank" rel="noopener noreferrer">
             <g class="node" transform="translate(865 240)">
               <circle class="ring" r="50"></circle>
-              <image href="naizaishingakukai.png"
+              <image href="ELCC.png"
                      x="-50" y="-50"
                      width="100" height="100"
                      clip-path="url(#clipCircle50)"></image>
@@ -254,18 +254,39 @@
     <p class="small">お問い合わせ: kiss.info.japan@gmail.com</p>
   </footer>
 
-  <script>
+<script>
 (() => {
   const map = document.getElementById('map');
   const viewport = document.getElementById('viewport');
   const svg = document.getElementById('svg');
 
-  let scale = 1, tx = 0, ty = -300;
+  let scale = 1, tx = 0, ty = 0;
   const MIN_SCALE = 1;
   const MAX_SCALE = 6;
 
   function apply(){
     viewport.setAttribute('transform', `translate(${tx} ${ty}) scale(${scale})`);
+  }
+
+  // ✅ 最初に「全部見えるように」フィット＆中央寄せ
+  function fitToScreen(){
+    const vb = svg.viewBox.baseVal;
+    const b = viewport.getBBox(); // いまのノード全体の範囲（SVG座標）
+
+    // 余白つきでフィット
+    const s = Math.min(vb.width / b.width, vb.height / b.height) * 0.92;
+    scale = Math.max(MIN_SCALE, Math.min(MAX_SCALE, s));
+
+    // translate→scale の順なので、中心合わせは desired/scale で計算
+    const desiredCx = vb.width / 2;
+    const desiredCy = vb.height / 2;
+    const bCx = b.x + b.width / 2;
+    const bCy = b.y + b.height / 2;
+
+    tx = (desiredCx / scale) - bCx;
+    ty = (desiredCy / scale) - bCy;
+
+    apply();
   }
 
   function zoomAt(clientX, clientY, nextScale){
@@ -284,43 +305,62 @@
   }
 
   // ---- パン（ドラッグ）: 「少し動いたら」開始＆リンク上は開始しない ----
-  const DRAG_THRESHOLD = 6; // px（この距離より動いたらドラッグ扱い）
+  const DRAG_THRESHOLD = 6;
   let isDragging = false;
-  let dragArmed = false;   // 押した直後（まだドラッグじゃない）
+  let dragArmed = false;
   let startX = 0, startY = 0;
   let lastX = 0, lastY = 0;
 
   function isOnLinkTarget(e){
-    // SVG内の<a>を探す（g/image/circleをタップしても<a>に包まれてる想定）
     const a = e.target && e.target.closest ? e.target.closest('a') : null;
     return !!a;
   }
 
-  map.addEventListener('pointerdown', (e) => {
-    // 2本指ピンチ処理があるので、ここでは「1本指の時だけ」パン準備
-    if (e.pointerType === 'mouse' && e.button !== 0) return;
+  // ピンチ用 pointer 管理（PCでも悪さしないように共存）
+  const pointers = new Map();
+  let pinchStartDist = null;
+  let pinchStartScale = 1;
+  let pinchCenter = null;
+  const dist = (a,b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
 
-    // ✅リンク上ならパン準備しない（クリックを優先）
-    if (isOnLinkTarget(e)) {
-      dragArmed = false;
-      isDragging = false;
-      return;
+  map.addEventListener('pointerdown', (e) => {
+    // ピンチ管理
+    pointers.set(e.pointerId, e);
+    if (pointers.size === 2) {
+      const [p1, p2] = Array.from(pointers.values());
+      pinchStartDist = dist(p1, p2);
+      pinchStartScale = scale;
+      pinchCenter = { x:(p1.clientX+p2.clientX)/2, y:(p1.clientY+p2.clientY)/2 };
     }
+
+    // パン準備（リンク上は除外）
+    if (e.pointerType === 'mouse' && e.button !== 0) return;
+    if (isOnLinkTarget(e)) { dragArmed = false; isDragging = false; return; }
 
     dragArmed = true;
     isDragging = false;
-
     startX = lastX = e.clientX;
     startY = lastY = e.clientY;
   });
 
   map.addEventListener('pointermove', (e) => {
+    // ピンチ
+    if (pointers.has(e.pointerId)) pointers.set(e.pointerId, e);
+    if (pointers.size === 2 && pinchStartDist) {
+      const [p1, p2] = Array.from(pointers.values());
+      const d = dist(p1, p2);
+      let next = pinchStartScale * (d / pinchStartDist);
+      next = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
+      zoomAt(pinchCenter.x, pinchCenter.y, next);
+      return; // ピンチ中はパンしない
+    }
+
+    // パン
     if (!dragArmed) return;
 
     const dx0 = e.clientX - startX;
     const dy0 = e.clientY - startY;
 
-    // まだドラッグ開始してないなら、しきい値超えたら開始
     if (!isDragging) {
       if (Math.hypot(dx0, dy0) < DRAG_THRESHOLD) return;
       isDragging = true;
@@ -341,55 +381,20 @@
   });
 
   map.addEventListener('pointerup', (e) => {
-    if (isDragging) {
-      try { map.releasePointerCapture(e.pointerId); } catch {}
-    }
+    pointers.delete(e.pointerId);
+    if (pointers.size < 2) { pinchStartDist = null; pinchCenter = null; }
+
+    if (isDragging) { try { map.releasePointerCapture(e.pointerId); } catch {} }
     dragArmed = false;
     isDragging = false;
   });
 
   map.addEventListener('pointercancel', () => {
+    pointers.clear();
+    pinchStartDist = null;
+    pinchCenter = null;
     dragArmed = false;
     isDragging = false;
-  });
-
-  // ---- ピンチズーム（2本指） ----
-  const pointers = new Map();
-  let pinchStartDist = null;
-  let pinchStartScale = 1;
-  let pinchCenter = null;
-
-  const dist = (a,b) => Math.hypot(a.clientX - b.clientX, a.clientY - b.clientY);
-
-  map.addEventListener('pointerdown', (e) => {
-    pointers.set(e.pointerId, e);
-    if (pointers.size === 2) {
-      const [p1, p2] = Array.from(pointers.values());
-      pinchStartDist = dist(p1, p2);
-      pinchStartScale = scale;
-      pinchCenter = { x:(p1.clientX+p2.clientX)/2, y:(p1.clientY+p2.clientY)/2 };
-    }
-  });
-
-  map.addEventListener('pointermove', (e) => {
-    if (!pointers.has(e.pointerId)) return;
-    pointers.set(e.pointerId, e);
-
-    if (pointers.size === 2 && pinchStartDist) {
-      const [p1, p2] = Array.from(pointers.values());
-      const d = dist(p1, p2);
-      let next = pinchStartScale * (d / pinchStartDist);
-      next = Math.max(MIN_SCALE, Math.min(MAX_SCALE, next));
-      zoomAt(pinchCenter.x, pinchCenter.y, next);
-    }
-  });
-
-  map.addEventListener('pointerup', (e) => {
-    pointers.delete(e.pointerId);
-    if (pointers.size < 2) {
-      pinchStartDist = null;
-      pinchCenter = null;
-    }
   });
 
   // ---- ホイールズーム（PC） ----
@@ -401,9 +406,10 @@
     zoomAt(e.clientX, e.clientY, next);
   }, { passive:false });
 
-  apply();
+  // ✅ 起動時フィット（画像ロード後が確実）
+  window.addEventListener('load', fitToScreen);
+  window.addEventListener('resize', fitToScreen);
 })();
 </script>
-
 </body>
 </html>

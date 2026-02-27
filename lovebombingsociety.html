@@ -1,13 +1,13 @@
-<!doctype html>  
+<!doctype html>
 <html lang="ja">
 <head>
 <meta charset="utf-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-<title>☆こゆるのＢｌｏｇ☆</title>
+<title>☆牧師こゆるの独白Ｂｌｏｇ☆</title>
 
-<style> 
-  :root{ 
-    --window-bg: #c4fff0; 
+<style>
+  :root{
+    --window-bg: #c4fff0;
     --panel: #ffffff;
     --panel2:#f8ffb8;
     --line: #e4ff99;
@@ -16,11 +16,10 @@
     --link: #1a3da8;
     --linkv:#5b2aa8;
 
-    /* ★ PC版の基準幅 */
     --basew: 1000px;
-
-    /* ★ PC版の左右ゆとり（好みで増減OK） */
     --pc-gutter: 220px;
+
+    --img-scale: 0.333333;
   }
 
   *{ box-sizing:border-box; }
@@ -32,11 +31,10 @@
     font-family: "MS PGothic","MS Gothic","Hiragino Kaku Gothic ProN","Noto Sans JP",sans-serif;
     font-size:16px;
     line-height:1.8;
-    background: linear-gradient(180deg, #fdffba 0%, #ffffff 45%, #bfe6ff 100%);
+    background:#2450ff;
     overflow-x:hidden;
   }
 
-  /* ★ 縮小用の外枠（PCでは左右に余白を作る） */
   .stage{
     width: 100%;
     overflow: hidden;
@@ -44,52 +42,138 @@
     padding-right: var(--pc-gutter);
   }
 
-  /* 全体（PCレイアウトは固定幅で描画） */
   .window{
     width: var(--basew);
     margin:20px auto;
     background: var(--window-bg);
     border: 2px solid var(--line);
     box-shadow: 0 0 0 2px rgba(255,255,255,.4) inset;
-
     transform-origin: top left;
     will-change: transform;
   }
 
+  /* ====== デカめ＆凝ったタイトルバー（ボタンUIなし） ====== */
   .titlebar{
+    position: relative;
     display:flex;
     align-items:center;
-    padding: 6px 10px;
+    gap:14px;
+    padding: 14px 16px;
     border-bottom: 2px solid var(--line);
-    background: linear-gradient(#e9f0cf, #dbe7b5);
+    background:
+      repeating-linear-gradient(135deg,
+        rgba(255,255,255,.22) 0px,
+        rgba(255,255,255,.22) 7px,
+        rgba(0,0,0,.06) 7px,
+        rgba(0,0,0,.06) 14px),
+      linear-gradient(180deg, #f7ffe2 0%, #abf750 45%, #bfe08f 100%);
+    box-shadow:
+      0 1px 0 rgba(255,255,255,.9) inset,
+      0 -1px 0 rgba(0,0,0,.12) inset;
   }
+
+  .titlebar::after{
+    content:"";
+    position:absolute;
+    inset:0;
+    pointer-events:none;
+    background: repeating-linear-gradient(
+      0deg,
+      rgba(255,255,255,.08) 0px,
+      rgba(255,255,255,.08) 1px,
+      rgba(0,0,0,0) 1px,
+      rgba(0,0,0,0) 4px
+    );
+    mix-blend-mode: overlay;
+    opacity:.55;
+  }
+
+  
+
   .titletext{
-    font-size: 12px;
-    letter-spacing: .05em;
-    opacity:.85;
+    flex:1;
+    font-size: 40px;
+    font-weight: 900;
+    letter-spacing: .10em;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
+    color:#0b1b0b;
+    text-shadow:
+      1px 1px 0 rgba(255,255,255,.85),
+      -1px -1px 0 rgba(0,0,0,.05);
   }
 
   .inner{ padding: 18px; }
 
-  .site-title{
+  /* ====== ティッカー（途切れない） ====== */
+  .ticker{
     border: 2px solid var(--line);
-    background-color: var(--panel);
-    background-image: url("header_banner.jpg");
-    background-repeat: no-repeat;
-    background-size: cover;
-    background-position: center;
-    padding: 16px 16px;
+    background: linear-gradient(180deg, #7b2cff 0%, #ff62c8 100%);
     margin: 8px 0 10px;
-    overflow: hidden;
+    overflow:hidden;
+    position:relative;
+    height: 44px; /* var(--ticker-h)が未定義だったので固定 */
+    display:flex;
+    align-items:center;
   }
-  .site-title .title-span{
-    display:inline-block;
-    font-size: 38px;
-    font-weight: 700;
-    letter-spacing: .06em;
+
+  .ticker .track,
+  .ticker .track2{
+    display:flex;
+    white-space:nowrap;
+    flex-wrap:nowrap;
+    will-change: transform;
+    animation: tickerMove 18s linear infinite;
+  }
+  .ticker .track2{ animation-name: tickerMove2; }
+
+  .ticker .item{
+    display:inline-flex;
+    align-items:center;
+    gap:10px;
+    padding: 0 26px;
+    font-size:14px;
+    font-weight:700;
+    color: #fff;
+  }
+
+  .ticker .bracket,
+  .ticker .bracket-text{
+    color:#ff0000;
+    font-weight:900;
+  }
+
+  @keyframes tickerMove{
+    0%   { transform: translateX(0%); }
+    100% { transform: translateX(-100%); }
+  }
+  @keyframes tickerMove2{
+    0%   { transform: translateX(100%); }
+    100% { transform: translateX(0%); }
+  }
+
+  /* ====== メニュー ====== */
+  .menu-bar{
+    border: 2px solid var(--line);
+    background: var(--panel2);
+    margin: 0 0 12px;
+    padding: 8px 10px;
+  }
+  .menu-inline{
+    list-style:none;
+    margin:0;
+    padding:0;
+    display:flex;
+    flex-wrap:wrap;
+    gap:10px 14px;
+    align-items:center;
+  }
+  .menu-inline li{ margin:0; padding:0; }
+  .menu-inline a{
+    color: var(--link);
+    text-decoration: underline;
+    font-weight:700;
   }
 
   .hr-dots{
@@ -98,11 +182,7 @@
     margin: 14px 0 18px;
   }
 
-  .grid{
-    display:grid;
-    grid-template-columns:200px 1fr;
-    gap:18px;
-  }
+  .content-one{ display:block; }
 
   .box{
     border: 2px solid var(--line);
@@ -115,12 +195,7 @@
     font-weight: 700;
     letter-spacing: .08em;
   }
-  .box .box-b{
-    padding: 10px 12px;
-  }
-
-  .menu{ margin:0; padding-left: 18px; }
-  .menu li{ margin: 6px 0; }
+  .box .box-b{ padding: 10px 12px; }
 
   a{ color: var(--link); text-decoration: underline; }
   a:visited{ color: var(--linkv); }
@@ -134,6 +209,7 @@
     letter-spacing: .08em;
   }
   .entry p{ margin: 10px 0; font-size:18px; }
+
   .meta{
     font-size: 13px;
     opacity: .8;
@@ -147,11 +223,25 @@
     margin: 10px 0;
   }
 
-  .column p{ margin: 8px 0; }
   .column .small{
     font-size:18px;
     line-height:1.8;
     opacity:.95;
+  }
+
+  .bible{
+    padding: 10px 12px;
+    border: 1px dotted rgba(0,0,0,.28);
+    background: rgba(255,255,255,.55);
+    margin: 10px 0 12px;
+    font-size: 17px;
+    line-height: 1.8;
+  }
+  .bible .ref{
+    font-size: 12px;
+    opacity: .85;
+    margin-top: 6px;
+    text-align: right;
   }
 
   img{
@@ -160,54 +250,7 @@
     display:block;
   }
 
-  .caption{
-    font-size: 13px;
-    margin-top: 8px;
-    opacity: .85;
-  }
-
-  .sideimg{
-    overflow: hidden;
-  }
-  .sideimg .box-b{
-    height: 100%;
-    display:flex;
-    flex-direction:column;
-    gap:14px;
-  }
-  .sideimg .thumb{
-    flex:1 1 0;
-    min-height:0;
-    background:#fff;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:10px;
-  }
-  .sideimg .thumb img{
-    width:100%;
-    height:100%;
-    object-fit:contain;
-    display:block;
-  }
-  .sideimg .thumb a{
-    width: 100%;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-  }
-  .sideimg .thumb a img{
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-    display:block;
-  }
-
-  .fullwide{
-    margin-top: 16px;
-  }
+  .fullwide{ margin-top: 16px; }
 
   .footer{
     margin-top: 18px;
@@ -217,11 +260,42 @@
     opacity:.85;
   }
 
-  /* ★ 画面が狭い端末はガターを弱める（縮小の邪魔をしない） */
+  /* ====== 画像サイズ：全部1/3 ====== */
+
+  .intro-pic{
+    margin-top: 10px;
+    display:flex;
+    justify-content:center;
+  }
+  .intro-pic img{
+    width: 60%;
+    max-width: 600px;   /* 小さすぎ防止 */
+    min-width: 120px;   /* 見えない事故防止 */
+    border:1px solid rgba(0,0,0,.35);
+    background:#fff;
+  }
+  .intro-cap{
+    text-align:center;
+    font-size: 13px;
+    margin-top: 6px;
+    opacity: .85;
+  }
+
+
   @media (max-width: 820px){
     .stage{
       padding-left: 10px;
       padding-right: 10px;
+    }
+    /* スマホでは小さすぎるので、少し大きめにして見えるように */
+    .intro-pic img{
+      width: 38%;
+      min-width: 0;
+    }
+    
+    .ticker .track,
+    .ticker .track2{
+      animation-duration: 14s;
     }
   }
 </style>
@@ -231,197 +305,464 @@
 
 <div class="stage" id="stage">
   <div class="window" id="window">
-    <div class="titlebar" aria-hidden="true">
-      <div class="titletext"></div>
-    </div>
+   <div class="titlebar" aria-label="ウィンドウのタイトルバー">
+  <div class="titletext">☆牧師こゆるの独白Ｂｌｏｇ☆</div>
 
-    <div class="inner">
-      <div class="site-title"><span class="title-span">☆こゆるのＢｌｏｇ☆</span></div>
+</div>
+
+  
+        <!-- ★ お願い：途切れない流れる文字（2トラック） -->
+      <div class="ticker" aria-label="お願い（流れる表示）">
+        <div class="track" aria-hidden="true">
+          <div class="item">
+            <span class="bracket">【</span><span class="bracket-text">お願い</span><span class="bracket">】</span>
+            <span>転載は禁止　転載はやめてください（ほんとに）／ 感想は掲示板へ（※工事中）／ リンクフリー…にしたい気もするけど、今はナシで…（汗）</span>
+          </div>
+          <div class="item">
+            <span class="bracket">【</span><span class="bracket-text">お願い</span><span class="bracket">】</span>
+            <span>転載は禁止　転載はやめてください（ほんとに）／ 感想は掲示板へ（※工事中）／ リンクフリー…にしたい気もするけど、今はナシで…（汗）</span>
+          </div>
+        </div>
+        <div class="track2" aria-hidden="true">
+          <div class="item">
+            <span class="bracket">【</span><span class="bracket-text">お願い</span><span class="bracket">】</span>
+            <span>転載は禁止　転載はやめてください（ほんとに）／ 感想は掲示板へ（※工事中）／ リンクフリー…にしたい気もするけど、今はナシで…（汗）</span>
+          </div>
+          <div class="item">
+            <span class="bracket">【</span><span class="bracket-text">お願い</span><span class="bracket">】</span>
+            <span>転載は禁止　転載はやめてください（ほんとに）／ 感想は掲示板へ（※工事中）／ リンクフリー…にしたい気もするけど、今はナシで…（汗）</span>
+          </div>
+        </div>
+      </div>
+
+
+      <!-- ★ メニュー：タイトルの下（横並び） -->
+      <nav class="menu-bar" aria-label="メニュー">
+        
+        <ul class="menu-inline">
+          <li><a href="#top">トップ</a></li>
+          <li><a href="#profile">プロフィール</a></li>
+          <li><a href="#text">本文</a></li>
+          <li><a href="#columns">コラム</a></li>
+          <li><a href="#links">リンク</a></li>
+          <li><a href="#bbs">掲示板（工事中）</a></li>
+        </ul>
+      </nav>
+
       <hr class="hr-dots" />
 
-      <div class="grid">
-        <aside>
-
-          <div class="box">
-            <div class="box-h">メニュー</div>
-            <div class="box-b">
-              <ul class="menu">
-                <li><a href="#profile">プロフィール</a></li>
-                <li><a href="#text">本文</a></li>
-                <li><a href="#columns">コラム</a></li>
-                <li><a href="#links">リンク</a></li>
-                <li><a href="#bbs">掲示板（工事中）</a></li>
-              </ul>
-            </div>
-          </div>
-
-          <div class="box" style="margin-top:14px;">
-            <div class="box-h">お願い</div>
-            <div class="box-b">
-              ・転載は禁止　転載はやめてください（ほんとに）<br>
-              ・感想は掲示板へ（※工事中）<br>
-            </div>
-          </div>
-
-          <div class="box sideimg" style="margin-top:14px;">
-            <div class="box-b">
-              <div class="thumb">
-                <a href="chirashi.html" aria-label="内在神研究サークル（配布用）を開く">
-                  <img src="naizai.png" alt="内在神研究サークル">
-                </a>
-              </div>
-              <div class="thumb"><img src="kami.png" alt="内在神研究サークル2"></div>
-              <div class="thumb"><img src="senden.png" alt="書籍"></div>
-            </div>
-          </div>
-
-        </aside>
+      <!-- ★ 左右カラムやめて、単一カラム -->
+      <div class="content-one">
 
         <section id="top">
           <div class="box welcome">
             <div class="box-h">自己紹介</div>
             <div class="box-b">
               こんにちは～。<br>
-              圓山 越（まるやま こゆる）です。おじさんに片足突っ込んでいる思想家です。<br>
-              ここには、最近考えてることを、そのまま書いててます。<br>
+              圓山 越（まるやま こゆる）です。おじさんに片足突っ込んでいる牧師です。<br>
+              ここは、ある出来事のあとに作りました。いまさら感ありますが…（汗）<br>
               （むずかしい話もしますが、まあ気楽にどうぞ）<br>
+
+             <div class="intro-pic">
+  <img src="etsu.png" alt="watashi">
+</div>
+<div class="intro-cap">↑最近の私の写真です</div>
+              </div>
             </div>
           </div>
 
           <div class="box entry" id="profile">
             <div class="box-h"><h3>略歴</h3></div>
             <div class="box-b">
-              <p><strong>圓山　越（まるやま こゆる）</strong></p>
               <ul>
                 <li>1971年　山口県生まれ</li>
-                <li>幼少期より教会に通いながら育つ</li>
-                <li>大学で心理学を学ぶ</li>
-                <li>フロイトの「超自我」概念に関心を持つ</li>
-                <li>8年間企業カウンセラーとして勤務</li>
-                <li>内在神研究サークルを発足、セミナーを開催する</li>
-                <li>著書「あなたは愛されている」を発売</li>
+                <li>牧師の家庭に育つ</li>
+                <li>神学部卒</li>
+                <li>永遠の光キリスト教会　設立</li>
               </ul>
             </div>
           </div>
+        </section>
 
-          <div class="box entry" id="seminar">
-            <div class="box-h"><h3>セミナーの様子</h3></div>
+        <section class="fullwide">
+
+          <div class="box entry" id="text">
+            <div class="box-h"><h3>このブログについて</h3></div>
             <div class="box-b">
-              <img src="etsu.png" alt="セミナーの写真1" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
-              <div class="caption">文化センターでのセミナーの様子です↑カッコイ～でしょう</div>
-              <div style="height:10px;"></div>
-              <img src="seminor.jpg" alt="セミナーの写真2" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
-              <div class="caption">人が多くて、なかなか良い雰囲気でした！</div>
+
+              <p>実名でこんなことを書くのは、牧師として、また一個人として、あまりに不謹慎で、配慮に欠けて
+                いることは自覚しています。……それでも、ここ以外のどこに私の喉の詰まりを吐き出せというのでしょう。
+                私の教会、私の家族、誰に話せばいいのですか。神にさえ、もう声が届かない気がしているのに。</p>
+
+              <p>こういうのは本当は人に見せるもんじゃないのですが、日が経っても頭の中が片付かないので、
+                ここに書こうと思います。気分が悪くなったら閉じてください（汗）</p>
+
+              <p>私は牧師の家に生まれて、物心ついた頃から「私たちは神に愛されている」という言葉を、家
+                の中で何度も聞いて育ちました。朝の祈りの終わりでも、夕飯のあとでも、風邪をひいた日でも
+                、私が叱られた日でも、親が疲れて黙り込んだ日でも、最後はそこへ戻るんです。子どもの私は、
+                世界が崩れそうになるたびに、その言葉のところへ連れていかれて、そこで落ち着く、というのを
+                繰り返していた気がします。</p>
+
+              <p class="quote">「あなたは愛されている」</p>
+
+              <p>だから私は、その言葉を「慰めの決まり文句」みたいに覚えたのではなく、もっと深いところで
+                「そういう世界なんだ」と思い込んでしまったんだと思います。神はいる、神は見ている、神は愛
+                してくださっている、だから私はここにいるし、どこかで転んでも最後は拾われる、という感じで
+                、私は自分の骨組みを作ってしまった。</p>
+
+              <p>牧師になってからも、そのままでした。説教の中で、私は同じ言葉を何度も口にしてきました。
+                句を添える日もあるし、証し話に絡める日もあるし、黙祷のあとに短く言うだけのときもあるけど
+                、結局のところ、私は最後にそこへ戻りがちで、礼拝の時間が落ち着いて終わるように、みなさん
+                の顔がほどけるように、その言葉を置いてきたつもりでした。</p>
+
+              <p>礼拝が終わって、会衆が帰る前の廊下で、誰かが立ち止まって相談してくることがあります。家族
+                の話、身体の話、仕事の話、言いにくい話。私は聞きながら、祈りながら、最後に自分が信じてい
+                ることを渡す。あれは、私にとって「神の愛は本物だ」という確認でもあったし、「この言葉がある
+                限り、私は牧師でいられる」という確認でもあったのだと思います。今となっては、そういう部分が
+                あったのを否定できないです。</p>
+
+              <p>……で、その言葉が、最悪の形で戻ってきました。</p>
+
+              <p>私の教会にいた若い信徒が、自ら命を絶ちました。噂話にしたくないので細部は書きません。通夜
+                の夜、参列者が引いて、教会が静まり返った頃に、お母様が私のところへ来て、何も言わずに封筒を
+                差し出しました。</p>
+
+              <p>中身は遺書でした。私は、いまでも紙の匂いまで覚えている気がします。</p>
+
+              <p class="quote">「私は、今のままで、完全に愛されている」</p>
+
+              <p>そして最後に、こう書いてあった。</p>
+              <p><strong>「これ以上、どこへ行けばいいんですか？」</strong></p>
+
+              <p>その一行を見たとき、私は、体の内側で何かが沈むのを感じました。あの子にとって私の言葉は、
+                外へ出るための扉ではなく、行き止まりの壁みたいになっていたのかもしれない
+                、という考えが浮かんできたからです。私はあの子を見捨てないというつもりで語って
+                いたのに、あの子は「もうここから先はない」と受け取ってしまったのかもしれない。</p>
+
+              <p>あの子は、変わりたかったんだと思います。苦しくて、どうにかしたくて、助けを求めていた。
+                それなのに私は毎週、壇上から「そのままでいい」「今のままで完璧だ」と言い続けた。私の中で
+                はそれは神の愛の話で、神の側があなたを離さない、という約束のつもりだったのに、あの子の中
+                では、違う形になっていたのかもしれない。</p>
+
+              <p>私は否定したかった。「そんなつもりはない」と言いたかった。けれど喉が固まって、声になりま
+                せんでした。言い訳を口にした瞬間、私は牧師としての顔のまま、自分を守るだけの人間になる気
+                がして、それが怖かった。</p>
+
+              <p>それでも私は、その日以来、説教で同じ言葉を前より多く言うようになりました。おかしいのは
+                分かってるのに、止まらない。神に愛されているという確信が、自分の芯だったからです。芯が揺
+                らいだとき、私は、揺らいだ芯にしがみつくしかなかった。信仰が揺らいだ、というより、信仰が
+                私の避難所みたいになってしまった、という方が近いかもしれない。</p>
+
+              <p>いつのまにか、礼拝のあとに人が残るようになりました。特別な案内を出したわけでもなく、誰
+                かが「話していきませんか」と言い出したわけでもなく、ただ帰り支度が遅れる人がいて、椅子を
+                片付けないままの人がいて、そのうち数人が円みたいになって座る。私は片付けをしながら、声を
+                かけられたら混じる、という程度で、最初はそんな感じでした。</p>
+
+<img src="seminor.jpg"
+     alt="集まりの写真2"
+     style="width:70%; display:block; margin:50px auto; border:1px solid rgba(0,0,0,.35);">
+              <p>その時間を、誰が言い出したのか分からないけど、「愛の集い」と呼ぶようになりました。ふざけ
+                てるのか、照れ隠しなのか、たぶん両方で、私も笑って流したのに、その呼び名だけは残ってしま
+                った。私は「集いを作った」つもりはないのに、名前が付くと、それはそこにあるものになるんで
+                すね（汗）</p>
+
+              <p>愛の集いでは、私は結局、いつもの話をします。神はあなたを見捨てないこと、あなたたちは愛され
+                ているということ。けれど少し変わったのは、私が言う前に、参加者同士が言い合うようになったことで
+                す。泣いている人がいると、隣の人が小さな声で言う。「あなたは愛されているよ」と。</p>
+
+              <p>私は、その場面を「神の愛が届いている」と思って見ていました。けれど、遺書の一行が頭に刺さった
+                ままの私が、その場面を見ているということ自体が、</p>
+
+              <p>愛の集いは、教会の中だけに留まりませんでした。集いに来た人が、家に帰って家族に同じ言葉
+                を言う。病院の待合で、小さな声で同じ言葉を言う。メモ帳の端に書く。手帳に挟む。誰かの携帯
+                の留守電に残す。</p>
+
+              <p>私はそれを止められませんでした。止めたいとも思えなかった。止めたら、あの子の死が私の中
+                で崩れる気がしたからです。あの言葉が人を追い込むことがある、と真正面から認めてしまったら
+                、私は自分の人生の最初から全部を疑い直さないといけない。家で言われてきた言葉も、私が自分
+                を支えてきた言葉も、説教で言ってきた言葉も、全部です。</p>
+
+              <p>ここがいちばん醜いところで、私はそれを自覚しています。あの子の死が、私の言葉と無関係だっ
+                た、と言いたくて言いたくて仕方がない。無関係だと言えないなら、せめて神の愛の話を崩したく
+                ない。崩したら、私が私でなくなる気がする。だから私は、同じ言葉の周りに人が集まっていくのを
+                、見て見ぬふりをしてしまう。</p>
+
+              <p>このブログは、その状態の記録です。礼拝の壇上では書けない話を、ここに残します。</p>
+
             </div>
           </div>
-        </section>
-      </div>
 
-      <section class="fullwide">
-
-        <div class="box entry" id="text">
-          <div class="box-h"><h3>見られているという感覚について</h3></div>
-          <div class="box-b">
-            <p>神はいない、と私は思ってます。</p>
-            <p>少なくとも、空の上とか地面の下に住んでる神は、見たことないし、正直、信じられたこともないです。</p>
-            <p>ただね、人って「見られてない時間」が長く続くと、なんか落ち着かなくならないですか？ </p>
-            <p>大げさな話じゃなくてです。</p>
-            <p class="quote">例えば、あなたは愛されている、と言われたらどう思いますか。</p>
-            <p>突然、誰からともなく。事実かどうかは、まあ、いったん置いときましょう。</p>
-            <p>問題は「誰に？」って考えた瞬間です。</p>
-            <p>その問いが浮かんだとき、あなたは何かを想像する。父かもしれない。昔の恋人かもしれない。「世界に」かもしれない。</p>
-            <p>あるいは「何の話だ」って打ち消すかもしれない。でも、打ち消すにも、いったん像を作らないとできないんですよね。</p>
-            <p>愛の主体を確定できなくても、形だけは一度、頭に出る。</p>
-            <p>そのとき、安心しませんか？何かに見守られていて、無条件に愛されているという感覚に。</p>
-            <p>私はキリスト教の家庭で育って、いつも「神様が見てるよ」って言われてきました。</p>
-            <p>誰も見てないと思ってるときと、誰かが見てるかもしれないと思ってるときでは、姿勢が変わる。声の出し方もちょっと変わる。</p>
-            <p>神（上位存在）が本当にいるかどうかは、ここでは二の次です。</p>
-            <p>大事なのは、「見られてるかもしれない」って想定が、あなたの振る舞いや自信に影響するかどうか。</p>
-            <p>もし影響するなら、地球において「神」が担ってきた役目が、神の存在の是非に関係なく動いてる、ってことになりませんかね。</p>
-            <p>私はそこだけを考えてます。神の機能って、結局なんなんだろう、と。</p>
-            <p>神って、内側にある意識（監視の声）みたいなもので、そこに物語がくっつくと宗教になるだけなんじゃないの？ って。</p>
-            <p>この考えが信仰かどうかは、まあ、どっちでもいいです。</p>
-            <p>ただ、生活の中に小さな観測者が現れて、それだけで世界がちょっと変わるんです。</p>
-          </div>
-        </div>
-
+        <!-- コラム（文章は現行のまま。聖書引用だけ追加） -->
         <div class="box entry" id="columns">
           <div class="box-h"><h3>コラム</h3></div>
           <div class="box-b">
 
+            
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">「正しい人」の地獄</div>
+              <div class="meta">2006年6月25日</div>
+              <div class="box-b">
+                <p class="small">聖書の「放蕩息子」の話で、いつも弟ばかりが注目されるけど、私は「兄」のことが頭から離れません。<br>
+                彼は一度も道を踏み外さず、正しくあろうとした。その結果、彼は自分が「許される」という経験を奪われたんです。あの子も同じでした。私の教会という枠の中で、「正しい信徒」を完璧に演じ続けてしまった。許される必要がないほど「愛されている」という状態は、実は人間にとって最も孤独な牢獄なのかもしれませんね（汗）</p>
+
+                <div class="bible">
+                  「兄は怒って、家に入ろうとしなかった。」
+                  <div class="ref">ルカ 15:28</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">救いという名の暴力</div>
+              <div class="meta">2006年7月12日</div>
+              <div class="box-b">
+                <p class="small">イエスが死んだラザロに向かって「出てきなさい」と叫ぶ場面。あれを奇跡と呼ぶには、私にはどうしても躊躇があるんです。<br>
+                せっかく闇の中で静かに終わっていたものを、無理やり現世に引きずり戻すなんて。牧師という仕事は、絶望の淵にいる人の肩を掴んで、無理やり光の中へ引き戻す暴力ではないでしょうか。「生きろ」「あなたは愛されている」という言葉が、あの子にはどれほど過酷な鞭だったのか。そう思うと、もう安易に励ますことができなくなりました。</p>
+
+                <div class="bible">
+                  「ラザロ、出てきなさい。」
+                  <div class="ref">ヨハネ 11:43</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">完璧にはなれない</div>
+              <div class="meta">2006年8月5日</div>
+              <div class="box-b">
+                <p class="small">人間は完璧になれない存在のはずです。<br>
+                「今のままで完璧だ」と言い切ることは、相手の成長の芽を摘み取ることと同意ではないか。あの子の遺書を読んでから、私は「愛」という言葉を吐き出すたびに、自分の喉が締め付けられるような感覚を覚えます。祝福は、相手の事情を飛び越えて、相手を完成させてしまう。完成させてしまったら、もうどこへも行けなくなってしまうのです。</p>
+
+                <div class="bible">
+                  「成長させてくださるのは神です。」
+                  <div class="ref">Ⅰコリント 3:7</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">壇上の私</div>
+              <div class="meta">2006年9月1日</div>
+              <div class="box-b">
+                <p class="small">最近、説教壇に立つのが怖いです。<br>
+                壇上の私は「牧師」という役を演じているだけで、中身は空っぽだと自分で分かってしまうから。あの子を死なせた言葉を、今日もまた多くの信徒に向けて投げている。「あなたたちは愛されている」と。信徒は頷いてくれる。でも、その頷きが、私には「もう救いはない」という同意のように聞こえてしまう。私は、あの子を殺した言葉を、今日も生産し続けているんです。</p>
+
+                <div class="bible">
+                  「教える者は、兄弟たちよ、多くなってはいけません。」
+                  <div class="ref">ヤコブ 3:1</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">十字架は誰のものか</div>
+              <div class="meta">2006年10月15日</div>
+              <div class="box-b">
+                <p class="small">牧師は「自分の十字架を負え」と言われる。でも、私の十字架はあの子の遺書でした。<br>
+                重くて、痛くて、誰も変わってくれない。でも、この重みさえも「試練だ」と定義してしまえば、どこか楽になれる気がする。ああ、私は結局、神の言葉を借りて自分のエゴを正当化しているだけなんですね。……この「気色悪さ」を、私はずっと抱えて生きていくんだと思います。それ以外に、私には何も残っていないから。</p>
+
+                <div class="bible">
+                  「だれでも自分の十字架を背負って、わたしに従って来なさい。」
+                  <div class="ref">ルカ 9:23</div>
+                </div>
+              </div>
+            </div>
+
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">私は慰めに酔っていた</div>
+              <div class="meta">2006年11月2日</div>
+              <div class="box-b">
+                <p class="small">
+                  正直に書きます。<br>
+                  私は、人を慰める自分に酔っていました。<br>
+                  「あなたは愛されている」と言って、相手が涙ぐむ。その瞬間、私は必要とされている気がした。救っている気がした。<br>
+                  でもあれは、本当に相手のためだったのか。私が「役に立つ人間」であることを確認するための儀式だったのではないか。<br>
+                  もしそうなら、私は神の名を使って自分を満たしていただけです。
+                </p>
+                <div class="bible">
+                  「人からほめられようとして善行をするな。」
+                  <div class="ref">マタイ 6:1</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">分かったふり</div>
+              <div class="meta">2006年11月18日</div>
+              <div class="box-b">
+                <p class="small">
+                  相談を受けると、私はよく頷きます。<br>
+                  「うん、分かります」と。<br>
+                  でも、本当は分かっていないことのほうが多い。分からないまま、分かった顔で、最後に祈って終わらせる。<br>
+                  分からないと言う勇気がなかった。牧師が分からないと言ったら、場が崩れると思っていたから。<br>
+                  崩れるのが怖かったのは、信徒ではなく、私自身でした。
+                </p>
+                <div class="bible">
+                  「知っていると思う者は、まだ知らないのである。」
+                  <div class="ref">Ⅰコリント 8:2</div>
+                </div>
+              </div>
+            </div>
             <div class="box column" style="margin-top:0;">
-              <div class="box-h">きっかけ</div>
-              <div class="meta">　2006年6月18日 </div>
+              <div class="box-h">記憶の中の教会</div>
+              <div class="meta">2006年6月10日</div>
               <div class="box-b">
-                <p class="small">「世間の目」って言うじゃないですか。世間って人じゃないのに、妙に効くんですよね。</p>
-                <p class="small">心理学だと、親とか先生とか近所とか、いろんな視線が混ざって、いつのまにか自分の中に「こうするべき」という規律ができる、って話がある。</p>
-                <p class="small">つまり、世間は外にあるようで、中にある（ナニ～？）。</p>
-                <p class="small">世間を連れて歩いてる自分が、いちばん厄介なんですよ。</p>
+                <p class="small">アルバムを整理していたら、父の教会の写真が出てきました。<br>
+                <img src="kyokai.png" alt="子供の頃" style="width:100%; border:1px solid #ccc; margin:10px 0;">
+                この頃の私にとって、神殿はただただ「安全な場所」でした。大人たちが「愛されている」と言えば、世界が平和で満たされた。でも今、この教会の屋根を見上げると、私にはそれが「蓋」のように見えてしまいます。あの子を窒息させたのは、この頃から私の中に形作られた、この安全な蓋のイメージだったのかもしれません。</p>
+
+                <div class="bible">
+                  「主はわたしの岩、わたしのとりで、わたしの救い主。」
+                  <div class="ref">詩編 18:2</div>
+                </div>
+              </div>
+            </div>
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">止めなかった罪</div>
+              <div class="meta">2006年12月3日</div>
+              <div class="box-b">
+                <p class="small">
+                  愛の集いが広がっていくのを、私は止めませんでした。<br>
+                  止められたのに、止めなかった。<br>
+                  どこかで、「これは良いことだ」と思っていたからです。<br>
+                  でも、良いことだと決めていたのは私です。<br>
+                  誰かにとって息苦しいものになっていた可能性から、私は目を逸らしました。
+                </p>
+                <div class="bible">
+                  「善を行うことを知りながら行わないなら、それはその人の罪である。」
+                  <div class="ref">ヤコブ 4:17</div>
+                </div>
               </div>
             </div>
 
             <div class="box column" style="margin-top:14px;">
-              <div class="box-h">超自我と監視</div>
-              <div class="meta">　2006年7月8日 </div>
+              <div class="box-h">完成させたがる癖</div>
+              <div class="meta">2006年12月20日</div>
               <div class="box-b">
-                <p class="small">心理学でフロイトの「超自我」を知ったんですが、これがまあ、妙にしっくり来ましてね。</p>
-                <p class="small">人の中には「自分を見張る自分」がいる、という話です。</p>
-                <p class="small">子どもの頃に親から言われた言葉、「ちゃんとしなさい」とか「嘘をつくな」とか、そういうのが、いつのまにか自分の内側に住みつく。</p>
-                <p class="small">で、ある日気づくんですよ。親がいなくても、その声が鳴っている。</p>
-                <p class="small">誰も見てないはずなのに、「それはやめとけ」とか「それは恥ずかしいぞ」とか、勝手にチェックが入る。</p>
-                <p class="small">つまり、監視役は外から内へ引っ越してくるわけです。</p>
-                <p class="small">さらにフーコーの話を読むと、これが社会レベルでも起きている、と書いてある。</p>
-                <p class="small">パノプティコンっていう監獄の設計があって、中央の塔から囚人を見張る仕組みなんですが、面白いのは「本当に見ているかどうか」は関係ないという点です。</p>
-                <p class="small">見られているかもしれない、という状況だけで、人は勝手に背筋を伸ばす。</p>
-                <p class="small">ここが肝心です。</p>
-                <p class="small">実在の視線より、「想定された視線」のほうが強いんですね。</p>
-                <p class="small">で、私は思ったわけです。</p>
-                <p class="small">神という概念も、これと同じ構造なんじゃないか、と。</p>
-                <p class="small">神が空の上にいるかどうかはさておき、「神が見ているかもしれない」と想定した瞬間、内側に神ができるわけです。</p>
-                <p class="small">完全に自由、完全に無視されている状態って、実はけっこう不安定なんです。</p>
-                <p class="small">だから人は、自分の中に監視役を作る。</p>
-                <p class="small">それが超自我であり、世間の目であり、場合によっては神と呼ばれるものなんじゃないか、と私は思っています。</p>
+                <p class="small">
+                  私は物事をきれいにまとめたがる人です。<br>
+                  苦しみも、悲しみも、最後は希望で締めたい。<br>
+                  でも、それは本当に相手のためでしょうか。<br>
+                  未完のまま、答えの出ないまま、そこに置いておく勇気が、私にはなかった。<br>
+                  私は、相手の人生を私の説教の形に収めようとしていたのかもしれません。
+                </p>
+                <div class="bible">
+                  「すべてのことには時がある。」
+                  <div class="ref">伝道者 3:1</div>
+                </div>
               </div>
             </div>
 
             <div class="box column" style="margin-top:14px;">
-              <div class="box-h">コンビニ</div>
-              <div class="meta">　2006年8月2日 </div>
+              <div class="box-h">役を降りられない</div>
+              <div class="meta">2007年1月7日</div>
               <div class="box-b">
-                <p class="small">たとえばですよ。深夜のコンビニで、誰も見てない、カメラもない、証拠も残らない状況があるとする。</p>
-                <p class="small">そのとき、手が止まる人がいる。止まらない人もいる。</p>
-                <p class="small">止まる人って、誰に見られてるんでしょうね？ 外の誰かじゃなく自分が自分を見てる。</p>
-                <p class="small">神が内在してるって仮説は、ここに近いと思ってます。</p>
-                <p class="small">これで急に善人になるとかじゃないですよ（笑） でも、言い訳が通用しなくなる感じは出る。</p>
+                <p class="small">
+                  私は「牧師」という役を降りられません。<br>
+                  家でも、廊下でも、電話口でも。<br>
+                  役を脱いだら、何が残るのか分からないからです。<br>
+                  あの子の死が、役のほころびを見せた。<br>
+                  それでも私は、ほころびを縫い直して、また壇上に立っています。
+                </p>
+                <div class="bible">
+                  「わたしの力は、弱さのうちに完全に現れる。」
+                  <div class="ref">Ⅱコリント 12:9</div>
+                </div>
               </div>
             </div>
 
             <div class="box column" style="margin-top:14px;">
-              <div class="box-h">世間の目</div>
-              <div class="meta">　2006年9月9日 </div>
+              <div class="box-h">沈黙に耐えられない</div>
+              <div class="meta">2007年1月26日</div>
               <div class="box-b">
-                <p class="small">子どもの頃から教会に通ってました。祈りの言葉とか、聖書のフレーズとか身に沁みついてました。</p>
-                <p class="small">ある日の礼拝で、牧師が言いました。「神は常にあなたを見ている」って。</p>
-                <p class="small">で、ふつうは「空の上」とか想像しそうなんだけど、私はなぜか胸の奥が先に反応したんです。</p>
-                <p class="small">見られてる、って感じたのが、天井の向こうじゃなくて、自分の中から。そこが妙に引っかかった。</p>
-                <p class="small">その後、部屋で一人で「まあいいか」って独り言を言ったときも、言葉がどこかに届いた感じがして。</p>
-                <p class="small">誰もいないのにね。</p>
-                <img src="kyokai.png" alt="教会の写真" style="width:100%; height:auto; display:block; border:1px solid rgba(0,0,0,.35);">
+                <p class="small">
+                  誰かが泣いているとき、黙って隣に座っていられない。<br>
+                  何か言わなければと思ってしまう。<br>
+                  言葉で場を整えたくなる。<br>
+                  でも、もしかしたら必要なのは言葉ではなく、ただの時間だったのかもしれない。<br>
+                  私は「何もしない」ことが怖いのです。
+                </p>
+                <div class="bible">
+                  「静まって、わたしこそ神であることを知れ。」
+                  <div class="ref">詩編 46:10</div>
+                </div>
               </div>
             </div>
 
             <div class="box column" style="margin-top:14px;">
-              <div class="box-h">祈りの技術</div>
-              <div class="meta">　2006年10月3日 </div>
+              <div class="box-h">中心に座る罪</div>
+              <div class="meta">2007年2月10日</div>
               <div class="box-b">
-                <p class="small">祈りってお願い事だと思われがちなんですが、私は「言葉の型」だと思ってます。</p>
-                <p class="small">言葉にすると気持ちが少し整う。黙ってると膨らむものが、文章になると輪郭が出るんだよね。</p>
-                <p class="small">祈りは、それを定期的にやるための装置なのかもしれない。</p>
-                <p class="small">神がいるから祈るんじゃなくて、祈るという形式を保つために、神という受け手を置いたのでは？ ってね。</p>
-                <p class="small">だから私は祈りを否定しません。受け手が外にいなくても、話しかける相手として中に置けばいい、と思ってます。</p>
-                <p class="small">内在神研究サークルの説法も、ぶっちゃけ祈りの練習みたいなもんです（笑）</p>
+                <p class="small">
+                  私は「愛の集い」を作っていないと言いながら、いつも中心に座っています。<br>
+                  誰も強制していないのに、自然とそうなる。<br>
+                  そして私は、それを拒まない。<br>
+                  無自覚の中心人物。<br>
+                  それがいちばん厄介だと、最近やっと気づきました。
+                </p>
+                <div class="bible">
+                  「先頭に立とうとする者は、皆の僕になりなさい。」
+                  <div class="ref">マルコ 9:35</div>
+                </div>
               </div>
             </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">正しさへの執着</div>
+              <div class="meta">2007年2月28日</div>
+              <div class="box-b">
+                <p class="small">
+                  私は「間違っていなかった」と言いたい。<br>
+                  あの子の死と、私の言葉は無関係だったと。<br>
+                  そうであってほしい。<br>
+                  でも、その願い自体が、私の正しさへの執着です。<br>
+                  正しい牧師でありたいという願いが、誰かを追い詰めていたら、私は何を信じているのでしょう。
+                </p>
+                <div class="bible">
+                  「自分を義とする者は高ぶる。」
+                  <div class="ref">ルカ 18:9-14</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">神を盾にする</div>
+              <div class="meta">2007年3月18日</div>
+              <div class="box-b">
+                <p class="small">
+                  「これは神の御心です」と言えば、議論は終わります。<br>
+                  私も何度か、その言い方に逃げました。<br>
+                  神を盾にして、自分の判断を正当化したことが、きっとある。<br>
+                  その瞬間、私は神を信じているのではなく、利用していたのだと思います。
+                </p>
+                <div class="bible">
+                  「あなたは、主の名をみだりに唱えてはならない。」
+                  <div class="ref">出エジプト 20:7</div>
+                </div>
+              </div>
+            </div>
+
+            <div class="box column" style="margin-top:14px;">
+              <div class="box-h">それでも立ち続ける</div>
+              <div class="meta">2007年4月5日</div>
+              <div class="box-b">
+                <p class="small">
+                  ここまで書いても、私は壇上に立ちます。<br>
+                  逃げれば楽になるかもしれない。<br>
+                  でも、逃げたら、あの子の死を本当に無かったことにしてしまう気がする。<br>
+                  私は罰を受けるように、今日も同じ場所に立っています。<br>
+                  それが贖罪になるとは思っていません。ただ、立ち続けるしかないのです。
+                </p>
+                <div class="bible">
+                  「主よ、あわれみたまえ。」
+                  <div class="ref">詩編 51:1</div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ▲▲▲ 追加ここまで ▲▲▲ -->
 
           </div>
         </div>
@@ -429,7 +770,7 @@
         <div class="box entry" id="links">
           <div class="box-h"><h3>リンク</h3></div>
           <div class="box-b">
-            <p> ・<a href="chirashi.html" target="_blank"> 内在神研究サークル（配布用） </a> </p>
+            <p> ・<a href="chirashi.html" target="_blank"> 愛の集い（メモ） </a> </p>
           </div>
         </div>
 
@@ -437,10 +778,11 @@
           <div class="box-h"><h3>掲示板（工事中）</h3></div>
           <div class="box-b">
             <p>現在準備中です。（いつ完成するかは…まあ…(=^・^=)）</p>
+            <p>※今はメールも置きません。いろいろ怖いので…（汗）</p>
           </div>
         </div>
 
-        <div class="footer">© 内在神研究サークル　無断転載禁止</div>
+        <div class="footer">© 牧師こゆる　無断転載禁止</div>
       </section>
     </div>
   </div>
@@ -460,23 +802,20 @@
     const win = document.getElementById("window");
     if(!stage || !win) return;
 
-    const baseW = 1000; // CSS --basew と合わせる
+    const baseW = 1000;
     const vw = Math.max(document.documentElement.clientWidth, window.innerWidth || 0);
 
-    // ★ stageの左右padding分を引いた「実効幅」でscaleを計算
     const cs = getComputedStyle(stage);
     const padL = parseFloat(cs.paddingLeft) || 0;
     const padR = parseFloat(cs.paddingRight) || 0;
     const effective = Math.max(0, vw - (padL + padR));
 
-    // 余白ちょい（端末の丸め対策）
     const margin = 6;
     const scale = Math.min(1, (effective - margin) / baseW);
 
     window.__pcScale = scale;
     win.style.transform = `scale(${scale})`;
 
-    // transformは高さに反映されないので、ステージの高さを補正
     const rect = win.getBoundingClientRect();
     stage.style.height = Math.ceil(rect.height) + "px";
   }
