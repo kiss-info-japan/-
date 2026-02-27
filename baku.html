@@ -181,29 +181,39 @@
       min-width: 3.2em;
     }
 
-    .place-images{
+   /* デフォルト（PC）は上下=1列 */
+.place-images{
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1fr;  /* ← ここが肝：1列 */
   gap: 1rem;
-
-  /* ここが肝：カードの高さを揃える */
   align-items: stretch;
 }
 
-    .place-figure{
-  margin: 0;
-  padding: 0.8rem;
-  background: rgba(255,255,255,0.10);
-  border: 1px solid rgba(255,255,255,0.18);
-  border-radius: 18px;
-  overflow: hidden; 
-  display: flex;
-  flex-direction: column;
+/* スマホはそのままでも上下だけど、必要なら調整 */
+@media (max-width: 820px){
+  .place-images{ grid-template-columns: 1fr; }
 }
 
- .place-figure img{
+.place-figure{
+  margin: 0;
+  padding: 0;
+  background: none;
+  border: none;
+  border-radius: 0;
+  overflow: visible;
+
+  /* ✅中身を中央寄せ */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.place-figure img{
+  display: block;
+  margin: 0 auto;     /* ✅画像自体を中央へ */
   height: 280px;
-  object-fit: contain;  /* トリミングしない */
+  max-width: 100%;
+  object-fit: contain;
 }
 
     .place-figure figcaption{
@@ -326,9 +336,7 @@
     </div>
   </div>
 
-  <div class="place-images">
-    ...
-  </div>
+  
 </section>
 
       <div class="place-images">
