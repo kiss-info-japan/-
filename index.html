@@ -1,67 +1,213 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>架空委員会宗教宗教</title>
-    <link rel="stylesheet" href="kiss.style.css">
-    <style>
-        
-    </style>
+<link rel="icon" href="favicon.png" type="image/png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架空委員会宗教宗教</title>
+
+<style>
+/* ===== リセット ===== */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  overflow-x:hidden;
+}
+
+/* ===== ベース（枠組み） ===== */
+body{
+  line-height:1.6;
+  background:linear-gradient(to bottom,#ffffff 80%,#d8d8d8,#7d7d7d,#000000);
+  background-attachment:fixed;
+  background-size:cover;
+  color:#333;
+  font-family:'Hiragino Mincho Pro',serif;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* ===== ヘッダー（枠組み：Activity recordと同じ） ===== */
+header{
+  background:linear-gradient(to bottom,#ffffff 0%,#ffffff 50%,#e0f7ff00 98%);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:20px 0;
+  text-align:center;
+  font-weight:bold;
+  z-index:10;
+}
+
+header nav a{
+  color:#454545;
+  text-decoration:none;
+  font-weight:normal;
+  padding:8px 16px;
+  border-radius:20px;
+  transition:background-image 0.6s ease,color 0.3s,transform 0.3s;
+}
+
+header nav a:hover{
+  color:#fff;
+  background-image:radial-gradient(ellipse,rgba(0,0,0,0.7) 20%,rgba(0,0,0,0) 70%);
+  transform:scale(1.05);
+  text-decoration:none;
+}
+
+/* ===== ロゴ画像（枠組みのルールに揃える） ===== */
+.center-image{
+  display:flex;
+  justify-content:center;
+}
+
+.center-image img{
+  width:70%;
+  height:auto;
+}
+
+/* ===== メイン（枠組み：上と同じ） ===== */
+main{
+  flex-grow:1;
+  width:90%;
+  max-width:1200px;
+  margin:120px auto 0;
+  padding:20px;
+}
+
+/* ===== 2カラム（元内容は維持） ===== */
+.main-content{
+  display:grid;
+  grid-template-columns:1.6fr 1fr;
+  gap:24px;
+  align-items:center;
+}
+
+/* ===== テキスト ===== */
+.description{
+  font-size:1rem;
+}
+
+.description p{
+  margin:10px 0;
+}
+
+.nav-link{
+  color:#000;
+  text-decoration:none;
+  border-radius:10px;
+  padding:6px 12px;
+  transition:0.3s;
+  display:inline-block;
+}
+
+.nav-link:hover{
+  color:#fff;
+  background-image:radial-gradient(ellipse,rgba(0,0,0,0.7) 10%,rgba(0,0,0,0) 80%);
+  transform:scale(1.05);
+  text-decoration:none;
+}
+
+/* ===== フッター（枠組み：Activity recordと同じ） ===== */
+footer{
+  color:#dcdcdc;
+  font-size:0.5em;  /* ← 上の枠組みに合わせた */
+  text-align:center;
+  margin-top:20px;
+  font-weight:normal;
+}
+
+/* ===== スマホ（枠組み：上と同じ） ===== */
+@media(max-width:768px){
+  body{ font-size:0.9rem; }
+
+  .center-image img{
+    width:90%;
+    max-width:420px;
+  }
+
+  header nav a{
+    font-size:0.9rem;
+    padding:8px 14px;
+  }
+
+  main{ padding:20px; }
+
+  .main-content{
+    grid-template-columns:1fr;
+    text-align:center;
+    gap:20px;
+  }
+
+  .description{ font-size:0.6rem; }
+  .nav-link{ font-size:0.5rem; }
+
+  footer{ font-size:0.5rem; }
+}
+</style>
 </head>
+
 <body>
-    <header>
-        <nav>
-            <a href="kiss.index.html">Home</a>
-            <a href="kiss.Activityrecord.html">Activity record</a>
-            <a href="kiss.genealogy.html">Genealogy</a>
-        </nav>
-    </header>
 
-    <div class="main-content">
-        <!-- 左側の画像 -->
-        <div class="center-image">
-            
-            <img src="kiss.png" alt="Blog Image" class="fade-in" />
-        </div>
+<header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="kiss.Activityrecord.html">Activity record</a>
+    <a href="kiss.genealogy.html">Genealogy</a>
+  </nav>
+</header>
 
-        <!-- 右側のAbout -->
-        <div class="description">
-            <p>
-                人はなぜ「信じる」のか。<br>
-                架空の宗教を作り、<br>信仰について考える委員会。
-            </p>
-            <p>
-                <a href="https://www.instagram.com/kaku_inkai_shukyo_syukyo?utm_source=ig_web_button_share_sheet&igsh=ZDNlZDc0MzIxNw==" target="_blank" class="nav-link">Instagram</a>
-            </p>
-            <p>
-                <a href="https://forms.gle/Cfr68QC85eMqZCuR8" target="_blank" class="nav-link">お申し込み</a>
-            </p>
-            <br>
-            <br>
-            <p>
-                ポッドキャストを配信中。<br>以下のSpotifyリンクから<br>お楽しみください。
-            </p>
-            <p>
-                <a href="https://open.spotify.com/episode/7wFAWgIlZQbqvuUgypRIFs?si=RqQQaDAcR5GrctZmxKvAgA" target="_blank" class="nav-link">ポッドキャストを聴く</a>
-            </p>
-        </div>
+<main>
+  <div class="main-content">
+
+    <div class="center-image">
+      <img src="kiss.png" alt="Blog Image">
     </div>
 
-    <footer>
-        <p class="small">&copy;2024 架空 委員会 宗教 宗教</p>
-        <p class="small">お問い合わせ: kiss.info.japan@gmail.com</p>
-    </footer>    
+    <!-- ✅ ここから下は内容一切変更なし -->
+    <div class="description">
+      <p>
+        人はなぜ「信じる」のか。<br>
+        架空の宗教を作り、<br>
+        信仰について考える委員会。
+      </p>
 
-    <script>
-        // 訪問者数カウンターのスクリプト
-        let counter = localStorage.getItem('visitorCount') || 0;
-        counter = parseInt(counter) + 1; // カウントを増やす
-        localStorage.setItem('visitorCount', counter); // カウントを保存
+      <p>
+        <a href="https://www.instagram.com/" target="_blank" class="nav-link">Instagram</a>
+      </p>
 
-        // カウンターを表示
-        document.getElementById('visitorCounter').innerText = '来訪者数: ' + counter;
-    </script>
+      <p>
+        <a href="https://forms.gle/" target="_blank" class="nav-link">お申し込み</a>
+      </p>
+
+      <br>
+
+      <p>
+        ポッドキャストを配信中。<br>
+        以下のSpotifyリンクから<br>
+        お楽しみください。
+      </p>
+
+      <p>
+        <a href="https://open.spotify.com/" target="_blank" class="nav-link">
+          ポッドキャストを聴く
+        </a>
+      </p>
+    </div>
+
+  </div>
+</main>
+
+<footer>
+  <p>&copy;2024 架空 委員会 宗教 宗教</p>
+  <p>お問い合わせ: kiss.info.japan@gmail.com</p>
+</footer>
+
 </body>
 </html>

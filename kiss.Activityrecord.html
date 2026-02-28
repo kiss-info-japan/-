@@ -1,50 +1,241 @@
 <!DOCTYPE html>
 <html lang="ja">
 <head>
-    <link rel="icon" href="favicon.png" type="image/png">
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>架空委員会宗教宗教 活動内容</title> 
-    <link rel="stylesheet" href="restyle.css">
-    <style>
-       
-    </style>
-</head> 
+<link rel="icon" href="favicon.png" type="image/png">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>架空委員会宗教宗教 活動内容</title>
+
+<style>
+
+/* ===== リセット ===== */
+*{
+  box-sizing:border-box;
+  margin:0;
+  padding:0;
+}
+
+html,body{
+  width:100%;
+  overflow-x:hidden;
+}
+
+body{
+  line-height:1.6;
+  background:linear-gradient(to bottom,#ffffff 80%,#d8d8d8,#7d7d7d,#000000);
+  background-attachment:fixed;
+  background-size:cover;
+  color:#333;
+  font-family:'Hiragino Mincho Pro',serif;
+  display:flex;
+  flex-direction:column;
+  min-height:100vh;
+}
+
+/* ===== ヘッダー（変更なし） ===== */
+header{
+  background:linear-gradient(to bottom,#ffffff 0%,#ffffff 50%,#e0f7ff00 98%);
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  padding:20px 0;
+  text-align:center;
+  font-weight:bold;
+  z-index:10;
+}
+
+header nav a{
+  color:#454545;
+  text-decoration:none;
+  font-weight:normal;
+  padding:8px 16px;
+  border-radius:20px;
+  transition:background-image 0.6s ease,color 0.3s,transform 0.3s;
+}
+
+header nav a:hover{
+  color:#fff;
+  background-image:radial-gradient(ellipse,rgba(0,0,0,0.7) 20%,rgba(0,0,0,0) 70%);
+  transform:scale(1.05);
+}
+
+/* ===== ロゴ画像 ===== */
+.center-image{
+  display:flex;
+  justify-content:center;
+  margin-top:110px;   /* 余白を詰めた */
+  margin-bottom:10px; /* 画像下の余白削減 */
+}
+
+.center-image img{
+  width:30%;
+  height:auto;
+}
+
+/* ===== メイン（記事を上へ） ===== */
+main{
+  flex-grow:1;
+  width:90%;
+  max-width:1200px;
+  margin:10px auto 0;  /* 上に寄せた */
+  padding:20px;
+  text-align:center;
+}
+
+/* ===== 記事 ===== */
+.article{
+  width:100%;
+  padding:10px;
+  margin:5px;
+  border-radius:10px;
+  font-weight:bold;
+  font-size:0.9em;
+  transition:transform 0.3s,box-shadow 0.3s;
+}
+
+.article:hover{
+  color:#fff;
+  background-image:radial-gradient(ellipse,rgba(0,0,0,0.7) 10%,rgba(0,0,0,0) 25%);
+  transform:scale(1.05);
+}
+
+.article h2{
+  font-size:0.9em;
+  padding:10px;
+  border-radius:5px;
+  font-weight:normal;
+}
+
+/* ===== モーダル ===== */
+.modal{
+  position:fixed;
+  top:0;
+  left:0;
+  width:100%;
+  height:100%;
+  background-color:rgba(0,0,0,0.6);
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  z-index:1000;
+}
+
+.modal-content{
+  background-color:rgba(255,255,255,0.95);
+  padding:20px 40px;
+  border-radius:12px;
+
+  width:500px;
+  max-width:90vw;   /* スマホ対策 */
+
+  height:auto;      /* ← 可変 */
+  max-height:500px; /* ← 最大は今まで通り */
+  min-height:120px; /* ← 潰れすぎ防止 */
+
+  overflow-y:auto;
+  position:relative;
+  font-size:0.85em;
+  animation:fadeIn 0.3s ease;
+  box-shadow:0 4px 8px rgba(0,0,0,0.2);
+}
+
+.modal-content h2{
+  margin-bottom:20px;
+  font-size:1.4em;
+}
+
+.close{
+  position:absolute;
+  top:10px;
+  right:15px;
+  font-size:1.4em;
+  cursor:pointer;
+}
+
+.close:hover{
+  color:#999;
+}
+
+@keyframes fadeIn{
+  from{opacity:0;transform:scale(0.9);}
+  to{opacity:1;transform:scale(1);}
+}
+
+/* ===== スマホ ===== */
+@media(max-width:768px){
+
+  body{
+    font-size:0.9rem;
+  }
+
+  .center-image img{
+    width:70%;
+    max-width:420px;
+  }
+
+  .modal-content{
+    width:90%;
+    padding:20px;
+  }
+
+  main{
+    font-size: 0.7rem;
+  }
+   header nav a{
+    font-size:0.9rem;
+        padding: 8px 14px;
+
+  }
+}
+
+footer{
+  color:#dcdcdc;
+  font-size:0.5em;
+  text-align:center;
+  margin-top:20px;
+}
+
+.article img,
+#modalImage{
+  display:none !important;
+}
+
+</style>
+</head>
+
 <body>
-    <header>
-        <nav>
-            <a href="index.html">Home</a>
-            <a href="kiss.Activityrecord.html">Activity record</a>
-            <a href="kiss.genealogy.html">Genealogy</a>
-        </nav>
-    </header>
 
-    <div class="center-image">
-        <img src="kiss.png" alt="Blog Image" class="fade-in" />
-    </div>
+<header>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="kiss.Activityrecord.html">Activity record</a>
+    <a href="kiss.genealogy.html">Genealogy</a>
+  </nav>
+</header>
 
-    <main id="articles">
-        <!-- JSONから読み込まれた記事がここに挿入されます -->
-    </main>
-
-
-    <!-- モーダルウィンドウ -->
-    <!-- モーダルの構造 -->
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="modalTitle"></h2>
-        <div id="modalContent"></div>
-        <img id="modalImage" alt="記事画像">
-    </div>
+<div class="center-image">
+  <img src="kiss.png" alt="Blog Image">
 </div>
 
+<main id="articles">
+  <!-- JSONから記事が挿入される -->
+</main>
 
-    <script src="kiss.script.js"></script>
-    <footer>
-        <p class="small">&copy;2024 架空 委員会 宗教 宗教</p>
-        <p class="small">お問い合わせ: kiss.info.japan@gmail.com</p>
-    </footer>    
+<div id="myModal" class="modal">
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <h2 id="modalTitle"></h2>
+    <div id="modalContent"></div>
+  </div>
+</div>
+
+<script src="kiss.script.js"></script>
+
+<footer>
+  <p>&copy;2024 架空 委員会 宗教 宗教</p>
+  <p>お問い合わせ: kiss.info.japan@gmail.com</p>
+</footer>
 
 </body>
 </html>
